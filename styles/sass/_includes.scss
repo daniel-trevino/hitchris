@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,400italic,500,500italic,700,700italic,600,600italic);
+@import url(https://fonts.googleapis.com/css?family=Rubik:400,400italic,500,500italic,700,700italic);
+
+$font-heading: 'Rubik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-body: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$color-main: #ff4040;
+$color-grey: #3d474f;
+$color-dark-blue: #353d4d;
+
+
+/* Making the page responsive -------------------------------- */
+
+$desktop: 1400px;
+$laptop: 1200px;
+$minipc: 992px;
+$tablet: 767px;
+$smartphone: 480px;
+
+
+@mixin responsive($width) {
+	@if $width == desktop {
+		@media (max-width: $desktop) {
+			@content;
+		}
+	}
+	@else if $width == laptop {
+		@media (max-width: $laptop) {
+			@content;
+		}
+	}
+	@else if $width == minipc {
+		@media (max-width: $minipc) {
+			@content;
+		}
+	}
+	@else if $width == tablet {
+		@media (max-width: $tablet) {
+			@content;
+		}
+	}
+	@else if $width == smartphone {
+		@media (max-width: $smartphone) {
+			@content;
+		}
+	}
+}

@@ -1,0 +1,441 @@
+
+body {
+	background-color: #fff;
+}
+
+.navigation {
+	position: fixed;
+	top: 15px;
+	left: 20px;
+	z-index: 100;
+	
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	
+	.burger {
+		float: left;
+		width: 40px;
+		height: 39px;
+		position: relative;
+		cursor: pointer;
+		
+		span {
+			display: block;
+			width: 28px;
+			height: 3px;
+			background-color: $color-main;
+			position: absolute;
+			top: 18px;
+			left: 6px;
+			transition: all 0.5s ease;
+			
+			&:before {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 100%;
+				background-color: $color-main;
+				position: absolute;
+				top: -8px;
+				left: 0;
+				transition: all 0.5s ease;
+			}
+			
+			&:after {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 100%;
+				background-color: $color-main;
+				position: absolute;
+				bottom: -8px;
+				left: 0;
+				transition: all 0.5s ease;
+			}
+		}
+		
+		&:hover {
+			
+			span,
+			span:before,
+			span:after {
+				background-color: darken($color-main, 20%);
+			}
+		}
+		
+		&.active {
+			
+			span {
+				transform: translateX(-10px);
+				background-color: transparent;
+				
+				&:before {
+					transform: rotate(135deg);
+					top: 0;
+				}
+				
+				&:after {
+					transform: rotate(-135deg);
+					bottom: 0;
+				}
+			}
+		}
+	}
+	
+	@keyframes showNavigation {
+		from {
+			transform: translateX(-50px);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+	
+	ul {
+		display: none;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		float: left;
+		font-size: 1.6em;
+		line-height: 39px;
+		font-family: $font-heading;
+		animation-name: showNavigation;
+		animation-duration: 0.5s;
+		animation-fill-mode: both;
+		animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+		
+		li {
+			margin: 0;
+			float: left;
+			margin-right: 10px;
+			
+			a {
+				display: block;
+				padding: 0 12px;
+				
+				&:hover {
+					color: darken($color-main, 20%);
+				}
+			}
+		}
+	}
+}
+
+.logo {
+	display: block;
+	width: 100%;
+	max-width: 440px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 0;
+	line-height: 0;
+	color: transparent;
+	overflow: hidden;
+	
+	.svg-logo {
+		max-width: 100%;
+		height: auto;
+		
+		.letter {
+			fill: $color-main;
+		}
+	}
+}
+
+
+#header {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-color: $color-main;
+	
+	&.inner {
+		height: auto;
+		
+		.header-top {
+			padding-top: 30px;
+			
+			.logo {
+				max-width: 110px;
+				margin: 0 auto;
+				padding-bottom: 10px;
+				
+				.svg-logo {
+					max-width: 100%;
+					height: auto;
+					
+					.letter {
+						fill: #fff;
+					}
+				}
+			}
+			
+			.nav {
+				position: static;
+				display: flex;
+				justify-content: center;
+				
+				ul {
+					list-style: none;
+					padding: 0;
+					margin: 0;
+					float: left;
+					font-size: 1.6em;
+					line-height: 39px;
+					font-family: $font-heading;
+					display: flex;
+					justify-content: center;
+					
+					li {
+						margin-bottom: 0;
+						
+						a {
+							color: rgba(255,255,255,0.8);
+							display: block;
+							padding: 0 12px;
+							
+							&:hover {
+								color: #fff;
+							}
+						}
+						
+						&.active {
+							
+							a {
+								color: #fff;
+								font-weight: 500;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.page-title {
+			padding: 74px 15px 30px 15px;
+			
+			h1 {
+				font-family: $font-heading;
+				font-size: 4.8em;
+				font-weight: 400;
+				line-height: 1.2;
+				color: #fff;
+				text-align: center;
+			}
+		}
+	}
+	
+	& > div {
+		
+		&.staroftheshow {
+			flex-grow: 2;
+			flex-shrink: 3;
+			flex-basis: 68%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #fff;
+			background: url('/img/star-pic.jpg') no-repeat 50% 0;
+			background-size: cover;
+			
+			h1 {
+				color: $color-grey;
+				font-family: $font-body;
+				font-size: 3.6em;
+				font-weight: 500;
+				line-height: 1.2;
+				text-align: center;
+				
+				.logo {
+					padding: 30px 0;
+				}
+			}
+		}
+		
+		&.invitation {
+			flex-grow: 1;
+			flex-shrink: 1;
+			flex-basis: 32%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			background-color: $color-main;
+			
+			p {
+				font-size: 2.4em;
+				color: #fff;
+			}
+			
+			.calltoaction {
+				
+				a.btn {
+					font-size: 1.4em;
+					line-height: 1.2857;
+				}
+			}
+		}
+	}
+}
+
+#main {
+	position: relative;
+	height: 500vh;
+	overflow: hidden;
+	background-color: darken($color-dark-blue, 5%);
+	
+	&.inner {
+		background-color: #fff;
+		height: auto;
+		padding: 50px 20px 80px 20px;
+	}
+	
+	.map {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		background-color: darken($color-dark-blue, 5%);
+		
+		&.fix {
+			position: fixed;
+			z-index: 50;
+		}
+		
+		&.bottom {
+			bottom: 0;
+			top: auto;
+		}
+		
+		.graphics {
+			position: absolute;
+			top: -600px;
+			left: -100px;
+			
+			.polygon {
+				fill: $color-dark-blue;
+				
+				&.sweden {
+					fill: lighten($color-dark-blue, 5%);
+				}
+				
+				&.germany {
+					fill: lighten($color-dark-blue, 5%);
+				}
+				
+				&.mexico {
+					fill: lighten($color-dark-blue, 5%);
+				}
+			}
+			
+			.locator {
+				width: 10px;
+				height: 10px;
+				background-color: $color-main;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				border-radius: 50%;
+				
+				&:after {
+					content: "";
+					display: block;
+					width: 40px;
+					height: 40px;
+					border-radius: 50%;
+					position: absolute;
+					top: -15px;
+					left: -15px;
+					background-color: $color-main;
+					opacity: 0;
+					transform: scale(0);
+					transition: transform 0.25s ease, opacity 0.25s ease-in-out;
+				}
+				
+				&.active {
+					
+					&:after {
+						transform: scale(1);
+						opacity: 0.3;
+					}
+				}
+				
+				&.cuernavaca {
+					left: 688px;
+					top: 1104px;
+				}
+				
+				&.norrkoping {
+					left: 1838px;
+					top: 570px;
+				}
+				
+				&.stockholm {
+					left: 1860px;
+					top: 556px;
+				}
+				
+				&.uppsala {
+					left: 1857px;
+					top: 544px;
+				}
+				
+				&.munchen {
+					left: 1798px;
+					top: 744px;
+				}
+			}
+		}
+	}
+}
+
+#footer {
+	position: relative;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: darken($color-dark-blue, 5%);
+	
+	.logo {
+		padding-bottom: 30px;
+	}
+	
+	p {
+		font-size: 3.6em;
+		text-align: center;
+		color: $color-main;
+		max-width: 100%;
+	}
+	
+	ul {
+		padding: 0;
+		list-style: none;
+		text-align: center;
+		
+		li {
+			display: inline-block;
+			margin: 0 12px;
+			
+			a {
+				font-family: $font-heading;
+				font-weight: 400;
+				display: block;
+				color: #fff;
+				background-color: lighten($color-dark-blue, 5%);
+				padding: 0.6em 1.2em;
+				border-radius: 3px;
+				
+				&:hover {
+					background-color: lighten($color-dark-blue, 10%);
+				}
+			}
+		}
+	}
+}

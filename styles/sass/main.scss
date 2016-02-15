@@ -1,0 +1,131 @@
+html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,label,legend,p,blockquote,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;vertical-align:baseline;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}abbr,acronym{border:0;}
+
+@import "_includes";
+@import "_template";
+
+::selection { background-color: darken($color-main, 10%); color: #FFF; }
+
+body {
+	font-family: $font-body;
+	font-size: 62.5%;
+	font-weight: 400;
+	color: $color-grey;
+}
+
+/* ==== Typography
+===================================-------------- */
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-heading;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 1.2em auto 0.6em auto;
+	max-width: 700px;
+	
+	&:first-child, 
+	& + h2,
+	& + h3,
+	& + h4,
+	& + h5 {
+		margin-top: 0;
+	}
+}
+
+h1 {
+	
+}
+
+h2 {
+	
+}
+
+h3 {
+	
+}
+
+h4 {
+	
+}
+
+p {
+	font-size: 1.8em;
+	line-height: 1.5;
+	margin-bottom: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 700px;
+}
+
+ol, ul {
+	font-size: 1.8em;
+	line-height: 1.5;
+	margin-bottom: 1em;
+	list-style-position: outside;
+	padding-left: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 700px;
+	
+	li {
+		margin-bottom: 0.5em;
+	}
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+ul {
+	list-style-type: disc;
+}
+
+ol ol, ul ul, ol ul, ul ol {
+	font-size: 0.92em;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: 700;
+	font-style: inherit;
+}
+
+a {
+	text-decoration: none;
+	color: $color-main;
+	
+	&.btn {
+		display: block;
+		font-family: $font-heading;
+		font-size: 1.6em;
+		line-height: 1.125;
+		font-weight: 400;
+		color: #fff;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		padding: 1em 1.5625em;
+		border-radius: 1.5625em;
+		box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 1px 1px rgba(0,0,0,0.3);
+		box-sizing: border-box;
+		
+		&:hover {
+			background-color: lighten($color-main, 1%);
+			box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.25);
+		}
+		
+		&:active {
+			background-color: $color-main;
+			box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 0 2px rgba(0,0,0,0.15);
+		}
+	}
+}
+
+
+
