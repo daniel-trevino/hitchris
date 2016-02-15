@@ -26,6 +26,7 @@ $(document).ready(function() {
 	
 // Scrolling effects
 
+/*
 	var $animation_elements = $('.animation-element');
 	var $window = $(window);
 	
@@ -61,5 +62,6 @@ $(document).ready(function() {
 		}
 	});
 	$window.trigger('scroll');
+*/
 	
 });
