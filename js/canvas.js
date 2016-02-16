@@ -28,12 +28,12 @@ window.onload = function () {
 	
 	var difference = calcDifference(map, canvas);
 	
-	var viewPort = calcMapViewPort(difference, cuernavaca, canvas);
+	var viewPort = calcMapViewPort(difference, stockholm, canvas);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
 	  context.scale(ratio, ratio);
-	  context.drawImage(image, viewPort.x, -617);
+	  context.drawImage(image, viewPort.x, -170);
 	  console.log(viewPort.x)
 	};
 	image.src = "/img/map.svg";
