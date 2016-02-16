@@ -26,6 +26,9 @@ $(document).ready(function() {
 	
 // Scrolling effects
 
+
+/*
+	var $animation_elements = $('.animation-element');
 	var $window = $(window);
 	
 	$window.on('scroll resize', function() {
@@ -41,5 +44,6 @@ $(document).ready(function() {
 		}
 	});
 	$window.trigger('scroll');
+*/
 	
 });
