@@ -1,9 +1,9 @@
 window.onload = function () {
-	var map = {width:3600, height: 2465};
-	var cuernavaca = {x:688,y:1104};
-	var stockholm = {x:1863, y:559};
-	var norrkoping = {x:1841, y:574};
-	var munich = {x:1800, y:748};
+	var map = {width:5452, height: 3733};
+	var cuernavaca = {x:1042,y:1672};
+	var stockholm = {x:2788, y:869};
+	var norrkoping = {x:2821, y:847};
+	var munich = {x:2726, y:1133};
 	
 	var image   = new Image();
 	// Set up our canvas on the page before doing anything.
