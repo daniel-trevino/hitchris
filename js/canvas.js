@@ -1,8 +1,14 @@
 window.onload = function () {
-
+	var map = {width:3600, height: 2465};
+	var cuernavaca = {x:688,y:1104};
+	var stockholm = {x:1863, y:559};
+	var norrkoping = {x:1841, y:574};
+	var munich = {x:1800, y:748};
+	
 	var image   = new Image();
 	// Set up our canvas on the page before doing anything.
 	var canvas = document.getElementById('canvas');
+	
 	//--- Hack to remove the pixels
 	var ratio   = window.devicePixelRatio || 1;
 	
@@ -20,15 +26,128 @@ window.onload = function () {
 	canvas.width  *= ratio;
 	canvas.height *= ratio;
 	
+	var difference = calcDifference(map, canvas);
+	
+	var viewPort = calcMapViewPort(difference, cuernavaca, canvas);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
 	  context.scale(ratio, ratio);
-	  context.drawImage(image, 0, 0);
+	  context.drawImage(image, viewPort.x, viewPort.y);
 	};
 	image.src = "/img/map.svg";
-      
+    
+    var pts2 = [{x:22,y:59.45},{x:136,y:66},{x:170,y:99},{x:171,y:114},{x:183,y:125},{x:218,y:144},{x:218,y:165},{x:226,y:193},{x:254,y:195},{x:283,y:195},{x:292,y:202},{x:325,y:213},{x:341,y:134},{x:397,y:245},{x:417,y:548}];
+
+	var pts = [{x:688,y:1104},{x:1841,y:574},{x:1863,y:559},{x:1860,y:548},{x:1800,y:748}];
+	//var pts = [{x:688,y:1604},{x:1841,y:1074},{x:1863,y:1059},{x:1860,y:1048},{x:1800,y:1348}];
+
+	//mimicSvg(context, pts);
       
 	
 }
+
+var canvas = document.getElementById("canvas");
+var cs = canvas.style;
+
+function mimicSvg(context, pts){
+
+  // make caps & joins round
+  context.lineCap='round';
+  context.lineJoin='round';
+
+
+  // draw the outside line with red shadow
+  context.shadowColor='red';
+  context.shadowBlur='2';
+  context.lineWidth=25;
+  // draw multiple times to darken shadow
+  drawPolyline(context, pts);
+  drawPolyline(context, pts);
+  drawPolyline(context, pts);
+
+  // stop shadowing
+  context.shadowColor='transparent';
+
+  // refill the outside line with pink
+  context.strokeStyle='pink';
+  drawPolyline(context, pts);
+
+  // draw the inside line
+  context.lineWidth=2;
+  context.strokeStyle='blue';
+  drawPolyline(context, pts);
+
+}
+
+function drawPolyline(context, pts){
+  context.beginPath();
+  context.moveTo(pts[0].x,pts[0].y);
+  for(var i=1;i<pts.length;i++){
+    context.lineTo(pts[i].x,pts[i].y);
+  }
+  context.stroke();
+}
+
+
+// ---- 1. Calculate the difference of the map size and the canvas size
+function calcDifference(map, canvas) {
+	var values;
+	// --- It should be devided in 2 because it is just the first half that is needed
+	var valX = (map.width - canvas.width) / 2;
+	var valY = (map.height - canvas.height) / 2;
+	
+	values = {x:valX, y:valY};
+	
+	return values;
+}
+
+function calcMapViewPort(difference, place, canvas) {	
+	var values;
+	// --- Once again, dividied by 2 since we just need the first half
+	var valX, valY;
+	
+	if (place.y < (canvas.height / 2)) {
+		valX = (canvas.width / 2) - place.x;
+		valY = place.y - (canvas.height / 2);
+		
+		console.log(valY);
+		valX = valX - (difference.x * 2);
+		valY = valY - (canvas.height/2) + (difference.y * 2);
+		console.log(valY);
+	}
+	else {
+		valX = (canvas.width / 2) - place.x;
+		valY = place.y - (canvas.height / 2); //-94
+		
+		valX = valX - (difference.x * 2);
+		valY = valY - (difference.y * 2);
+	}
+	
+	values = {x:valX, y:valY};
+	
+	return values;
+}
+
+// ----- asdja
+
+/*
+function move(keyPressed) {
+  if (keyPressed === 37) {
+    setX(getX() - 3);           // update style (see helper functions below)
+  }
+  else if (keyPressed === 39) {
+    setX(getX() + 3);
+  }
+}
+
+window.addEventListener("keydown", function(e) {
+  e.preventDefault();
+  move(e.keyCode);
+});
+
+// helper functions to parse the css string, and to update it
+function getX() {return parseInt(cs.backgroundPosition.split(" ")[0], 10)}
+function setX(x) {cs.backgroundPosition = x + "px 0px"}
+*/
 
