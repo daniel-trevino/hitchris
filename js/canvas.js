@@ -33,7 +33,8 @@ window.onload = function () {
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
 	  context.scale(ratio, ratio);
-	  context.drawImage(image, viewPort.x, viewPort.y);
+	  context.drawImage(image, viewPort.x, -617);
+	  console.log(viewPort.x)
 	};
 	image.src = "/img/map.svg";
     
@@ -111,10 +112,8 @@ function calcMapViewPort(difference, place, canvas) {
 		valX = (canvas.width / 2) - place.x;
 		valY = place.y - (canvas.height / 2);
 		
-		console.log(valY);
 		valX = valX - (difference.x * 2);
 		valY = valY - (canvas.height/2) + (difference.y * 2);
-		console.log(valY);
 	}
 	else {
 		valX = (canvas.width / 2) - place.x;
