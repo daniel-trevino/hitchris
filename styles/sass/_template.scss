@@ -21,6 +21,7 @@ body {
 		height: 39px;
 		position: relative;
 		cursor: pointer;
+		transition: all 0.5s ease;
 		
 		span {
 			display: block;
@@ -85,15 +86,6 @@ body {
 		}
 	}
 	
-	@keyframes showNavigation {
-		from {
-			transform: translateX(-50px);
-		}
-		to {
-			transform: translateX(0);
-		}
-	}
-	
 	ul {
 		display: none;
 		list-style: none;
@@ -103,7 +95,7 @@ body {
 		font-size: 1.6em;
 		line-height: 39px;
 		font-family: $font-heading;
-		animation-name: showNavigation;
+		animation-name: navVisibility;
 		animation-duration: 0.5s;
 		animation-fill-mode: both;
 		animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
@@ -123,6 +115,37 @@ body {
 			}
 		}
 	}
+	
+	&.visible {
+		
+		.burger {
+			width: 0;
+			opacity: 0;
+			
+			span {
+				width: 0;
+			}
+		}
+		
+		ul {
+			display: block;
+		}
+	}
+	
+	&.end {
+		animation-name: navDisappear;
+		animation-duration: 0.5s;
+		animation-fill-mode: both;
+		animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	}
+	
+	&.scroll {
+		animation-name: navDisappear;
+		animation-duration: 0.5s;
+		animation-fill-mode: both;
+		animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+		animation-direction: reverse;
+	}
 }
 
 .logo {
@@ -134,14 +157,39 @@ body {
 	font-size: 0;
 	line-height: 0;
 	color: transparent;
-	overflow: hidden;
 	
 	.svg-logo {
 		max-width: 100%;
 		height: auto;
+		overflow: visible;
 		
 		.letter {
 			fill: $color-main;
+		}
+		
+		.left-half {
+			transform-origin: 50% 50% 0;
+			animation-name: leftFadeIn;
+			animation-duration: 2s;
+			animation-fill-mode: both;
+			animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+		}
+		
+		.right-half {
+			transform-origin: 50% 50% 0;
+			animation-name: rightFadeIn;
+			animation-duration: 2s;
+			animation-fill-mode: both;
+			animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+		}
+		
+		.the-s {
+			transform-origin: 50% 50% 0;
+			transform: rotate(-45deg);
+			animation-name: rotateFadeIn;
+			animation-duration: 2s;
+			animation-fill-mode: both;
+			animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 		}
 	}
 }
@@ -234,7 +282,7 @@ body {
 		&.staroftheshow {
 			flex-grow: 2;
 			flex-shrink: 3;
-			flex-basis: 68%;
+			flex-basis: 68vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -250,8 +298,25 @@ body {
 				line-height: 1.2;
 				text-align: center;
 				
-				.logo {
-					padding: 30px 0;
+				span {
+					display: block;
+					animation-name: fadeIn;
+					animation-timing-function: cubic-bezier(0.6,0,0.4,1);
+					animation-duration: 0.4s;
+					animation-fill-mode: forwards;
+					opacity: 0;
+					
+					&:first-child {
+						animation-delay: 0.5s;
+					}
+					
+					&.logo {
+						padding: 30px 0;
+					}
+					
+					&:last-child {
+						animation-delay: 0.7s;
+					}
 				}
 			}
 		}
@@ -259,7 +324,7 @@ body {
 		&.invitation {
 			flex-grow: 1;
 			flex-shrink: 1;
-			flex-basis: 32%;
+			flex-basis: 32vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -269,9 +334,21 @@ body {
 			p {
 				font-size: 2.4em;
 				color: #fff;
+				animation-name: fadeIn;
+				animation-timing-function: cubic-bezier(0.6,0,0.4,1);
+				animation-delay: 0.8s;
+				animation-duration: 0.4s;
+				animation-fill-mode: forwards;
+				opacity: 0;
 			}
 			
 			.calltoaction {
+				animation-name: fadeIn;
+				animation-timing-function: cubic-bezier(0.6,0,0.4,1);
+				animation-delay: 0.9s;
+				animation-duration: 0.4s;
+				animation-fill-mode: forwards;
+				opacity: 0;
 				
 				a.btn {
 					font-size: 1.4em;

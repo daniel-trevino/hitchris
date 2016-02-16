@@ -1,10 +1,10 @@
 $(document).ready(function() {	
 		
 // Show navigation
-	var navigation = $('.navigation ul');
+	var $navigation = $('.navigation');
+	
 	$('.navigation .burger').on('click', function() {
-		$(this).toggleClass('active');
-		navigation.fadeToggle(500);
+		$navigation.addClass('visible');
 	});
 
 // Smooth scroll
@@ -26,38 +26,18 @@ $(document).ready(function() {
 	
 // Scrolling effects
 
-	var $animation_elements = $('.animation-element');
 	var $window = $(window);
 	
-	function check_if_in_view() {
-	  var window_height = $window.height();
-	  var window_top_position = $window.scrollTop();
-	  var window_bottom_position = (window_top_position + window_height);
-	 
-	  $.each($animation_elements, function() {
-	    var $element = $(this);
-	    var element_height = $element.outerHeight();
-	    var element_top_position = $element.offset().top;
-	    var element_bottom_position = (element_top_position + element_height);
-	 
-	    //check to see if this current container is within viewport
-	    if ((element_bottom_position >= window_top_position) &&
-	        (element_top_position <= window_bottom_position)) {
-	      $element.addClass('in-view');
-	    } else {
-	      $element.removeClass('in-view');
-	    }
-	  });
-	}
-	
-	$window.on('scroll resize', check_if_in_view, function() {
+	$window.on('scroll resize', function() {
 		if ($window.scrollTop() >= $window.height()) {
-			$('.map').addClass('fix');
+			$navigation.addClass('visible');
 		} else {
-			$('.map').removeClass('fix');
+			$navigation.removeClass('visible');
 		}
-		if ($window.scrollTop() >= $window.height() * 5) {
-			$('.map').toggleClass('fix bottom');
+		if ($window.scrollTop() >= $window.height() * 6) {
+			$navigation.addClass('end');
+		} else {
+			$navigation.removeClass('end');
 		}
 	});
 	$window.trigger('scroll');
