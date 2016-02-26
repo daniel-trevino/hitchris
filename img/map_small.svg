@@ -1122,11 +1122,11 @@
 	</g>
 </g>
 <g id="Locations">
-	<circle id="cuernavaca" fill="none" cx="688" cy="1104" r="5"/>
-	<circle id="norrkoping" fill="none" cx="1841" cy="574" r="5"/>
-	<circle id="stockholm" fill="none" cx="1863" cy="559" r="5"/>
-	<circle id="uppsala" fill="none" cx="1860" cy="548" r="5"/>
-	<circle id="munich" fill="none" cx="1800" cy="748" r="5"/>
+	<circle id="cuernavaca" fill="#0f0" cx="688" cy="1104" r="5"/>
+	<circle id="norrkoping" fill="#0f0" cx="1841" cy="574" r="5"/>
+	<circle id="stockholm" fill="#0f0" cx="1863" cy="559" r="5"/>
+	<circle id="uppsala" fill="#0f0" cx="1860" cy="548" r="5"/>
+	<circle id="munich" fill="#0f0" cx="1800" cy="748" r="5"/>
 </g>
 <g id="Path">
 	<polyline fill="none" points="688,1104 1841,574 1863,559 1860,548 1800,748 	"/>

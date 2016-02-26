@@ -1,9 +1,9 @@
-window.onload = function () {
-	var map = {width:5452, height: 3733};
-	var cuernavaca = {x:1042,y:1672};
-	var stockholm = {x:2788, y:869};
-	var norrkoping = {x:2821, y:847};
-	var munich = {x:2726, y:1133};
+$(window).resize(function () {
+	var map = {width:3600, height: 2465};
+	var cuernavaca = {x:688,y:1104};
+	var stockholm = {x:1863, y:559};
+	var norrkoping = {x:1841, y:574};
+	var munich = {x:1800, y:748};
 	
 	var image   = new Image();
 	// Set up our canvas on the page before doing anything.
@@ -25,18 +25,19 @@ window.onload = function () {
 	// 3. Increase the canvas dimensions by the pixel ratio. Removes the pixels like magic.. don't understand it 100% yet
 	canvas.width  *= ratio;
 	canvas.height *= ratio;
+
 	
 	var difference = calcDifference(map, canvas);
 	
-	var viewPort = calcMapViewPort(difference, stockholm, canvas);
+	var viewPort = calcMapViewPort(difference, munich, canvas, map);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
 	  context.scale(ratio, ratio);
-	  context.drawImage(image, viewPort.x, -170);
-	  console.log(viewPort.x)
+	  context.drawImage(image, viewPort.x, viewPort.y);
+	  console.log("Viewport X: " + viewPort.x);
 	};
-	image.src = "/img/map.svg";
+	image.src = "/img/map_small.svg";
     
     var pts2 = [{x:22,y:59.45},{x:136,y:66},{x:170,y:99},{x:171,y:114},{x:183,y:125},{x:218,y:144},{x:218,y:165},{x:226,y:193},{x:254,y:195},{x:283,y:195},{x:292,y:202},{x:325,y:213},{x:341,y:134},{x:397,y:245},{x:417,y:548}];
 
@@ -46,7 +47,7 @@ window.onload = function () {
 	//mimicSvg(context, pts);
       
 	
-}
+});
 
 var canvas = document.getElementById("canvas");
 var cs = canvas.style;
@@ -62,6 +63,7 @@ function mimicSvg(context, pts){
   context.shadowColor='red';
   context.shadowBlur='2';
   context.lineWidth=25;
+  
   // draw multiple times to darken shadow
   drawPolyline(context, pts);
   drawPolyline(context, pts);
@@ -94,59 +96,43 @@ function drawPolyline(context, pts){
 // ---- 1. Calculate the difference of the map size and the canvas size
 function calcDifference(map, canvas) {
 	var values;
-	// --- It should be devided in 2 because it is just the first half that is needed
-	var valX = (map.width - canvas.width) / 2;
-	var valY = (map.height - canvas.height) / 2;
+	
+	var valX = (map.width - canvas.width);
+	var valY = (map.height - canvas.height);
 	
 	values = {x:valX, y:valY};
 	
 	return values;
 }
 
-function calcMapViewPort(difference, place, canvas) {	
+function calcMapViewPort(difference, place, canvas, map) {
 	var values;
-	// --- Once again, dividied by 2 since we just need the first half
 	var valX, valY;
+
+
+	valX = (canvas.width / 2) - place.x; //1440-688 = 752
+	console.log(valX);
+	valX = valX - place.x; //752 - 688 = 64
+	valX = valX / 2;
 	
-	if (place.y < (canvas.height / 2)) {
-		valX = (canvas.width / 2) - place.x;
-		valY = place.y - (canvas.height / 2);
-		
-		valX = valX - (difference.x * 2);
-		valY = valY - (canvas.height/2) + (difference.y * 2);
-	}
-	else {
-		valX = (canvas.width / 2) - place.x;
-		valY = place.y - (canvas.height / 2); //-94
-		
-		valX = valX - (difference.x * 2);
-		valY = valY - (difference.y * 2);
-	}
+	
+	valY =  place.y - (canvas.height / 2); // 1104 - 778 = 326
+	
+	//According to the formula.. The difference plus (778/2) = 715
+	valY = valY + (canvas.height / 4);
+	
+	//Make it negative
+	valY = -valY; //-715
+	
+	
+	//Rest the difference to the proportinal variable
 	
 	values = {x:valX, y:valY};
+
 	
 	return values;
 }
 
-// ----- asdja
-
-/*
-function move(keyPressed) {
-  if (keyPressed === 37) {
-    setX(getX() - 3);           // update style (see helper functions below)
-  }
-  else if (keyPressed === 39) {
-    setX(getX() + 3);
-  }
-}
-
-window.addEventListener("keydown", function(e) {
-  e.preventDefault();
-  move(e.keyCode);
+$(window).load(function () {
+	$(window).trigger("resize");
 });
-
-// helper functions to parse the css string, and to update it
-function getX() {return parseInt(cs.backgroundPosition.split(" ")[0], 10)}
-function setX(x) {cs.backgroundPosition = x + "px 0px"}
-*/
-
