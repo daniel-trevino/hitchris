@@ -39,7 +39,7 @@ $(window).resize(function () {
 	
 	var difference = calcDifference(map, canvas);
 	
-	var viewPort = calcMapViewPort(difference, cuernavaca, canvas, map);
+	var viewPort = calcMapViewPort(difference, cuernavaca, canvas);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
@@ -115,7 +115,7 @@ function calcDifference(map, canvas) {
 	return values;
 }
 
-function calcMapViewPort(difference, place, canvas, map) {
+function calcMapViewPort(difference, place, canvas) {
 	var values;
 	var valX, valY;
 
@@ -136,7 +136,6 @@ function calcMapViewPort(difference, place, canvas, map) {
 	
 	
 	//Rest the difference to the proportinal variable
-	
 	values = {x:valX, y:valY};
 
 	
