@@ -1,9 +1,19 @@
 $(window).resize(function () {
+/*
 	var map = {width:3600, height: 2465};
-	var cuernavaca = {x:688,y:1104};
+ 	var cuernavaca = {x:688,y:1104};
 	var stockholm = {x:1863, y:559};
 	var norrkoping = {x:1841, y:574};
-	var munich = {x:1800, y:748};
+ 	var munich = {x:1800, y:748};
+*/
+	
+	//---- Map HD
+	var map = {width:5452, height: 3733};
+ 	var cuernavaca = {x:1042,y:1672};
+	var norrkoping = {x:2788, y:869};
+	var stockholm = {x:2821, y:847};
+	var uppsala = {x:2817, y:830};
+ 	var munich = {x:2726, y:1133};
 	
 	var image   = new Image();
 	// Set up our canvas on the page before doing anything.
@@ -29,7 +39,7 @@ $(window).resize(function () {
 	
 	var difference = calcDifference(map, canvas);
 	
-	var viewPort = calcMapViewPort(difference, munich, canvas, map);
+	var viewPort = calcMapViewPort(difference, cuernavaca, canvas, map);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
@@ -37,7 +47,7 @@ $(window).resize(function () {
 	  context.drawImage(image, viewPort.x, viewPort.y);
 	  console.log("Viewport X: " + viewPort.x);
 	};
-	image.src = "/img/map_small.svg";
+	image.src = "/img/map.svg";
     
     var pts2 = [{x:22,y:59.45},{x:136,y:66},{x:170,y:99},{x:171,y:114},{x:183,y:125},{x:218,y:144},{x:218,y:165},{x:226,y:193},{x:254,y:195},{x:283,y:195},{x:292,y:202},{x:325,y:213},{x:341,y:134},{x:397,y:245},{x:417,y:548}];
 
