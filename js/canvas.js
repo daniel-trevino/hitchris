@@ -1,3 +1,11 @@
+//---- Map HD
+	var map = {width:5452, height: 3733};
+ 	var cuernavaca = {x:1042,y:1672};
+	var norrkoping = {x:2788, y:869};
+	var stockholm = {x:2821, y:847};
+	var uppsala = {x:2817, y:830};
+ 	var munich = {x:2726, y:1133};
+
 $(window).resize(function () {
 /*
 	var map = {width:3600, height: 2465};
@@ -7,14 +15,13 @@ $(window).resize(function () {
  	var munich = {x:1800, y:748};
 */
 	
-	//---- Map HD
-	var map = {width:5452, height: 3733};
- 	var cuernavaca = {x:1042,y:1672};
-	var norrkoping = {x:2788, y:869};
-	var stockholm = {x:2821, y:847};
-	var uppsala = {x:2817, y:830};
- 	var munich = {x:2726, y:1133};
 	
+	drawMap(cuernavaca);
+      
+	
+});
+
+function drawMap(place) {
 	var image   = new Image();
 	// Set up our canvas on the page before doing anything.
 	var canvas = document.getElementById('canvas');
@@ -39,13 +46,12 @@ $(window).resize(function () {
 	
 	var difference = calcDifference(map, canvas);
 	
-	var viewPort = calcMapViewPort(difference, cuernavaca, canvas);
+	var viewPort = calcMapViewPort(difference, place, canvas);
 	
 	image.onload = function() {
 	   // 4. Scale the context by the pixel ratio. 
 	  context.scale(ratio, ratio);
 	  context.drawImage(image, viewPort.x, viewPort.y);
-	  console.log("Viewport X: " + viewPort.x);
 	};
 	image.src = "/img/map.svg";
     
@@ -55,9 +61,7 @@ $(window).resize(function () {
 	//var pts = [{x:688,y:1604},{x:1841,y:1074},{x:1863,y:1059},{x:1860,y:1048},{x:1800,y:1348}];
 
 	//mimicSvg(context, pts);
-      
-	
-});
+}
 
 var canvas = document.getElementById("canvas");
 var cs = canvas.style;
@@ -121,7 +125,6 @@ function calcMapViewPort(difference, place, canvas) {
 
 
 	valX = (canvas.width / 2) - place.x; //1440-688 = 752
-	console.log(valX);
 	valX = valX - place.x; //752 - 688 = 64
 	valX = valX / 2;
 	
@@ -144,4 +147,57 @@ function calcMapViewPort(difference, place, canvas) {
 
 $(window).load(function () {
 	$(window).trigger("resize");
+});
+
+$(window).scroll(function () {
+	var scroll = $(window).scrollTop();
+	if (scroll < 1000) {
+		if ($("div.map").hasClass("cuernavaca")) {}
+		else {
+			$("div.map").addClass("cuernavaca");
+			drawMap(cuernavaca);	
+		}
+		
+	}
+	if (scroll > 1000 && scroll < 1200) {
+		if ($("div.map").hasClass("norrkoping")) {
+		}
+		else {
+			$("div.map").addClass("norrkoping");
+			$("div.map").removeClass("cuernavaca");
+			$("div.map").removeClass("stockholm");
+			drawMap(norrkoping);
+		}
+
+	}
+	if (scroll > 1200 && scroll < 1800) {
+		if ($("div.map").hasClass("stockholm")) {
+		}
+		else {
+			$("div.map").addClass("stockholm");
+			$("div.map").removeClass("norrkoping");
+			$("div.map").removeClass("uppsala");
+			drawMap(stockholm);
+		}
+	}
+	if (scroll > 1800 && scroll < 2400) {
+		if ($("div.map").hasClass("uppsala")) {
+		}
+		else {
+			$("div.map").addClass("uppsala");
+			$("div.map").removeClass("stockholm");
+			$("div.map").removeClass("munich");
+			drawMap(uppsala);
+		}
+	}
+	if (scroll > 2400) {
+		if ($("div.map").hasClass("munich")) {
+		}
+		else {
+			$("div.map").addClass("munich");
+			$("div.map").removeClass("uppsala");
+			drawMap(munich);
+		}
+	}
+	console.log(scroll);	
 });
