@@ -269,7 +269,7 @@ body {
 			h1 {
 				font-family: $font-heading;
 				font-size: 4.8em;
-				font-weight: 400;
+				font-weight: 300;
 				line-height: 1.2;
 				color: #fff;
 				text-align: center;
@@ -369,6 +369,8 @@ body {
 		background-color: #fff;
 		height: auto;
 		padding: 50px 20px 80px 20px;
+		max-width: 1000px;
+		margin: 0 auto;
 	}
 	
 	.map {
