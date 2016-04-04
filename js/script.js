@@ -56,6 +56,9 @@ $(document).ready(function() {
 		} else {
 			$toTopLink.fadeOut(500);
 		}
+		if ($window.scrollTop() ) {
+			
+		}
 	});
 	$window.trigger('scroll');
 	
