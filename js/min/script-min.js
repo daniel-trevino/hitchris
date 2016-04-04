@@ -1,1 +1,0 @@
-$(document).ready(function(){var n=$(".navigation");$(".navigation .burger").on("click",function(){n.addClass("visible")}),$('a[href^="#"]').on("click",function(n){n.preventDefault();var o=this.hash,i=$(o);i&&i.length>0&&$("html, body").stop().animate({scrollTop:i.offset().top},500,"swing",function(){window.location.hash=o})})});

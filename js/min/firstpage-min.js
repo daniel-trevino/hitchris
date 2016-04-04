@@ -1,0 +1,1 @@
+$(document).ready(function(){var i=$(window);i.on("scroll resize",function(){i.scrollTop()>=i.height()?$navigation.addClass("visible"):$navigation.removeClass("visible"),i.scrollTop()>=6*i.height()?$navigation.addClass("end"):$navigation.removeClass("end")}),i.trigger("scroll")});

@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,400italic,500,500italic,700,700italic,600,600italic);
-@import url(https://fonts.googleapis.com/css?family=Rubik:400,400italic,500,500italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,300italic,400,400italic,500,500italic,700,700italic);
 
 $font-heading: 'Rubik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-body: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-$color-main: #ff4040;
+$color-main: #f94949; // old #ff4040
 $color-grey: #3d474f;
 $color-dark-blue: #353d4d;
 
@@ -44,4 +44,55 @@ $smartphone: 480px;
 			@content;
 		}
 	}
+}
+
+
+/* Scale the font size -------------------------------- */
+
+@mixin scaleFont($font-size) {
+	
+	@include responsive(desktop) {
+		font-size: $font-size;
+	}
+	
+	@include responsive(laptop) {
+		font-size: $font-size * 0.98;
+	}
+	
+	@include responsive(minipc) {
+		font-size: $font-size * 0.96;
+	}
+	
+	@include responsive(tablet) {
+		font-size: $font-size * 0.9;
+	}
+	
+	@include responsive(smartphone) {
+		font-size: $font-size * 0.86;
+	}
+	
+}
+
+@mixin scaleFontManual($font-size-desktop, $font-size-laptop, $font-size-minipc, $font-size-tablet, $font-size-smartphone) {
+	
+	@include responsive(desktop) {
+		font-size: $font-size-desktop;
+	}
+	
+	@include responsive(laptop) {
+		font-size: $font-size-laptop;
+	}
+	
+	@include responsive(minipc) {
+		font-size: $font-size-minipc;
+	}
+	
+	@include responsive(tablet) {
+		font-size: $font-size-tablet;
+	}
+	
+	@include responsive(smartphone) {
+		font-size: $font-size-smartphone;
+	}
+	
 }

@@ -7,7 +7,7 @@
 		
 		.sc-item-ss {
 			position: relative;
-			margin-bottom: 1em;
+			margin-bottom: 1.2em;
 			border-radius: 2px;
 			
 			&:before {
@@ -21,6 +21,7 @@
 				left: 0;
 				right: 0;
 				bottom: 0;
+				pointer-events: none;
 			}
 		}
 		
@@ -29,12 +30,17 @@
 			margin-bottom: 1em;
 			
 			p {
+				display: inline-block;
 				font-weight: 700;
-				font-size: 1.2em;
-				color: lighten($color-grey, 25%);
+				font-size: 1.1em;
+				line-height: 1.2;
+				color: #fff;
 				text-transform: uppercase;
-				letter-spacing: 0.05em;
+				letter-spacing: 0.1em;
 				margin-bottom: 0;
+				padding: 0.5em 1em 0.4em 1em;
+				border-radius: 2em;
+				background-color: lighten($color-dark-blue, 35%);
 			}
 		}
 		
@@ -51,6 +57,65 @@
 		
 		.sc-item-more {
 			text-align: center;
+		}
+	}
+}
+
+.project-details {
+	margin-top: 4em;
+	
+	.project-header {
+		border-top: 2px solid $color-main;
+		border-radius: 1px 1px;
+		padding-top: 15px;
+		position: relative;
+		margin-bottom: 5em;
+		
+		h1 {
+			margin-right: 60px;
+			margin-bottom: 0;
+		}
+		
+		.close-project {
+			font-size: 48px;
+			line-height: 50px;
+			color: $color-main;
+			text-align: center;
+			width: 50px;
+			border-radius: 12px;
+			position: absolute;
+			top: 15px;
+			right: 0;
+			cursor: pointer;
+			
+			&:before {
+				content: "\f404";
+				font-family: 'Ionicons';
+			}
+			
+			&:hover,
+			&:focus {
+				color: darken($color-main, 10%);
+				background-color: lighten($color-grey, 70%);
+			}
+			
+			&:focus,
+			&:active {
+				color: darken($color-main, 15%);
+			}
+		}
+	}
+	
+	h2 {
+		
+		&.category-title {
+			font-size: 1.6em;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			padding-bottom: 0.2em;
+			border-bottom: 1px solid $color-main;
+			margin-bottom: 0.3em;
 		}
 	}
 }
