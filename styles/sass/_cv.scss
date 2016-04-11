@@ -1,0 +1,39 @@
+.upcoming {
+	display: inline-block;
+	padding: 3px;
+	position: relative;
+	left: -3px;
+	width: 100px;
+	overflow: hidden;
+	cursor: default;
+	
+	&:before {
+		content: "Coming soon";
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 3px;
+		border-radius: 4px;
+		background-color: lighten($color-dark-blue, 20%);
+		
+		font-size: 11px;
+		line-height: 27px;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		text-align: center;
+		color: #fff;
+		white-space: nowrap;
+		
+		transition: top 0.25s ease-in-out;
+	}
+	
+	&:hover {
+		
+		&:before {
+			top: 100%;
+		}
+	}
+}

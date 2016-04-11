@@ -85,6 +85,15 @@ p {
 	&.lead {
 		@include scaleFont(2.1em);
 	}
+	
+	&.small-label {
+		@include scaleFont(1.5em);
+		font-family: $font-heading;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-weight: 500;
+		color: lighten($color-grey, 20%);
+	}
 }
 
 ol, ul {
