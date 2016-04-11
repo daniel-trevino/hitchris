@@ -51,9 +51,7 @@ $smartphone: 480px;
 
 @mixin scaleFont($font-size) {
 	
-	@include responsive(desktop) {
-		font-size: $font-size;
-	}
+	font-size: $font-size;
 	
 	@include responsive(laptop) {
 		font-size: $font-size * 0.98;
@@ -75,9 +73,7 @@ $smartphone: 480px;
 
 @mixin scaleFontManual($font-size-desktop, $font-size-laptop, $font-size-minipc, $font-size-tablet, $font-size-smartphone) {
 	
-	@include responsive(desktop) {
-		font-size: $font-size-desktop;
-	}
+	font-size: $font-size-desktop;
 	
 	@include responsive(laptop) {
 		font-size: $font-size-laptop;

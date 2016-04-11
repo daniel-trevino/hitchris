@@ -37,3 +37,24 @@
 		}
 	}
 }
+
+.position {
+	padding: 3%;
+	border: 2px solid lighten($color-grey, 55%);
+	
+	& > div {		
+		display: table;
+		
+		.logo {
+			display: table-cell;
+			width: 25%;
+			vertical-align: middle;
+		}
+		
+		.details {
+			display: table-cell;
+			vertical-align: middle;
+			padding-left: 25px;
+		}
+	}
+}

@@ -13,7 +13,7 @@ $gutter: 3.2%;
 	&:after {
 		content:"";
 		display: table;
-		clear:both;	
+		clear:both;
 	}	
 }
 
@@ -24,6 +24,7 @@ $gutter: 3.2%;
 	/*-- our gutter -- */
 	padding-left: ($gutter / 2);
 	padding-right: ($gutter / 2);
+	margin-bottom: $gutter;
 }
 
 

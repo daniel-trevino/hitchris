@@ -92,7 +92,12 @@ p {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		font-weight: 500;
-		color: lighten($color-grey, 20%);
+		color: $color-main;
+		
+		@include responsive(smartphone) {
+			margin-top: 1.5em;
+			margin-bottom: 0.5em;
+		}
 	}
 }
 
