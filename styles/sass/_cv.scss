@@ -41,9 +41,11 @@
 .position {
 	padding: 3%;
 	border: 2px solid lighten($color-grey, 55%);
+	margin-bottom: 2em;
 	
 	& > div {		
 		display: table;
+		width: 100%;
 		
 		.logo {
 			display: table-cell;
@@ -54,7 +56,50 @@
 		.details {
 			display: table-cell;
 			vertical-align: middle;
-			padding-left: 25px;
+			padding-left: 20px;
+			
+			.header {
+				
+				.name {
+					display: inline-block;
+					
+					h1 {
+						@include scaleFont(2.6em);
+						color: $color-grey;
+						margin-bottom: 0.1em;
+						margin-right: 0.3em;
+					}
+				}
+				
+				.role {
+					display: inline-block;
+					white-space: nowrap;
+					
+					p {
+						font-family: $font-heading;
+						@include scaleFont(1.6em);
+						color: lighten($color-grey, 15%);
+						margin-bottom: 0.15em;
+					}
+				}
+				
+				.period {
+					
+					p {
+						@include scaleFont(1.4em);
+						color: lighten($color-grey, 25%);
+						font-weight: 600;
+					}
+				}
+			}
+			
+			.description {
+				
+				p {
+					@include scaleFont(1.5em);
+					margin-bottom: 0;
+				}
+			}
 		}
 	}
 }
