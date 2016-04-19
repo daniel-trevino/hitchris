@@ -69,13 +69,13 @@ $(document).ready(function() {
 	
 	
 // CV
+	$('.position .description a.showmore').parent().next().addClass('hidden');
+	
 	$('.position .description a.showmore').on('click', function(e) {
 		e.preventDefault();
 		if ($(this).parent().next().hasClass('hidden')) {
 			$(this).parent().next().slideDown('fast');
-		} else {
-			$(this).parent().next().slideUp('fast').addClass('hidden');
-		}
+		} 
 	});
 	
 	

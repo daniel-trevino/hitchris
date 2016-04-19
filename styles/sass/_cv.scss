@@ -95,6 +95,7 @@
 			}
 			
 			.description {
+				margin-top: 1.5em;
 				
 				p {
 					@include scaleFont(1.5em);
@@ -149,6 +150,16 @@
 				width: 12%;
 				
 				&.top {
+					vertical-align: top;
+				}
+			}
+		}
+		
+		&.show-details {
+			
+			& > div {
+				
+				.logo {
 					vertical-align: top;
 				}
 			}
