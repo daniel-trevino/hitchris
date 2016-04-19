@@ -66,4 +66,17 @@ $(document).ready(function() {
 		$('html, body').animate({ scrollTop: 0 }, 250);
 	});
 	
+	
+	
+// CV
+	$('.position .description a.showmore').on('click', function(e) {
+		e.preventDefault();
+		if ($(this).parent().next().hasClass('hidden')) {
+			$(this).parent().next().slideDown('fast');
+		} else {
+			$(this).parent().next().slideUp('fast').addClass('hidden');
+		}
+	});
+	
+	
 });
