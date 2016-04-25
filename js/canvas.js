@@ -289,55 +289,46 @@ $(window).scroll(function () {
 	var scroll = $(window).scrollTop();
 	$div = $("div.locator");
 	
-	if (scroll < 1000 & (!$div.hasClass("cuernavaca"))) {
+	if (scroll < 1000 && ($div.data("location") != "cuernavaca")) {
 		$div.data("location", "cuernavaca");
 		$div.removeClass("norrkoping");
-		$div.addClass("cuernavaca");
-		
 		
 		destiny = calcMapViewPort(cuernavaca);
 		speed = 10;
-		//place = cuernavaca;
-		//destiny = calcMapViewPort(cuernavaca);
 	}
 	
-	if (scroll > 1000 && scroll < 1200 & (!$div.hasClass("norrkoping"))) {
+	if (scroll > 1000 && scroll < 1200 && ($div.data("location") != "norrkoping")) {
 		$div.data("location", "norrkoping");
 		$div.removeClass("cuernavaca");
 		$div.removeClass("stockholm");
-		$div.addClass("norrkoping");
-		
 		
 		destiny = calcMapViewPort(norrkoping);
 		speed = 10;
 	}
-	if (scroll > 1200 && scroll < 1800 & (!$div.hasClass("stockholm"))) {
+
+	if (scroll > 1200 && scroll < 1800 && ($div.data("location") != "stockholm")) {
 		$div.data("location", "stockholm");
 		$div.removeClass("norrkoping");
 		$div.removeClass("munnich");
-		$div.addClass("stockholm");
-		
 		
 		destiny = calcMapViewPort(stockholm);
 		speed = 1;
 
 	}
-	if (scroll > 1800 && scroll < 2400 & (!$div.hasClass("uppsala"))) {
+	
+	if (scroll > 1800 && scroll < 2400 && ($div.data("location") != "uppsala")) {
 		console.log("enters");
 		$div.data("location", "uppsala");
 		$div.removeClass("stockholm");
 		$div.removeClass("munnich");
-		$div.addClass("uppsala");
-		
 		
 		destiny = calcMapViewPort(uppsala);
 		speed = 1;
 	}
-	if (scroll > 2400 & (!$div.hasClass("munich"))) {
+
+	if (scroll > 2400 && ($div.data("location") != "munich")) {
 		$div.data("location", "munich");
-		$div.removeClass("uppsala");
-		$div.addClass("munich");
-		
+		$div.removeClass("uppsala");		
 		
 		destiny = calcMapViewPort(munich);
 		speed = 1;
