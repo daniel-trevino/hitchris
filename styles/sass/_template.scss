@@ -465,7 +465,7 @@ body {
 	position: relative;
 	height: 500vh;
 	overflow: hidden;
-	background-color: darken($color-dark-blue, 5%);
+	background-color: darken($color-dark-blue, 15%);
 	
 	&.inner {
 		background-color: #fff;
@@ -482,10 +482,11 @@ body {
 		width: 100%;
 		height: 100vh;
 		background-color: darken($color-dark-blue, 5%);
+		transition: width 0.25s 0.2s;
 		
 		canvas {
-			width: 100%;
-			height: 100%;
+			width: 100% !important;
+			height: 100% !important;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -520,12 +521,13 @@ body {
 			width: 10px;
 			height: 10px;
 			background-color: $color-main;
-			position: absolute;
+			position: fixed;
 			top: 50%;
 			left: 50%;
 			border-radius: 50%;
-			transform: translate(-50%, -50%);
+			margin: -5px 0 0 -5px;
 			z-index: 20;
+			transition: left 0.25s 0.2s;
 			
 			&:after {
 				content: "";
@@ -550,33 +552,192 @@ body {
 				}
 			}
 			
-			/*
-			
-			&.cuernavaca {
-				left: 688px;
-				top: 1104px;
+			.morph-content {
+				transition: opacity 0.4s 0.1s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s;
+				transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+				background-color: #fff;
+				z-index: 900;
+				opacity: 0;
+				width: 10px;
+				height: 10px;
+				pointer-events: none;
+				position: fixed;
+				top: 195px;
+				right: 635px;
+				box-shadow: 0 0 16px rgba(0,0,0,0.3);
+				
+				& > div {
+					width: 100%;
+					height: 100%;
+					visibility: hidden;
+				    opacity: 0;
+				    transition: opacity 0.1s, visibility 0s 0.1s;
+				    display: flex;
+					flex-direction: column;
+					align-items: stretch;
+					position: absolute;
+					top: 0;
+					left: 0;
+					
+					&.cuernavaca {
+						
+						.header {
+							background-image: linear-gradient(lighten($color-dark-blue, 60%), $color-dark-blue 70%), url('/img/cuernavaca.jpg');
+						}
+					}
+					
+					&.norrkoping {
+						
+						.header {
+							background-image: linear-gradient(lighten($color-dark-blue, 60%), $color-dark-blue 70%), url('/img/norrkoping.jpg');
+						}
+					}
+					
+					&.stockholm {
+						
+						.header {
+							background-image: linear-gradient(lighten($color-dark-blue, 60%), $color-dark-blue 70%), url('/img/stockholm.jpg');
+						}
+					}
+					
+					&.uppsala {
+						
+						.header {
+							background-image: linear-gradient(lighten($color-dark-blue, 60%), $color-dark-blue 70%), url('/img/uppsala.jpg');
+						}
+					}
+					
+					&.munich {
+						
+						.header {
+							background-image: linear-gradient(lighten($color-dark-blue, 60%), $color-dark-blue 70%), url('/img/munich.jpg');
+						}
+					}
+				    
+				    .header {
+					    display: flex;
+					    flex-direction: column;
+					    justify-content: flex-end;
+					    flex: 0 1 40vh;
+					    width: 100%;
+						padding: 0 20px 20px 20px;
+						vertical-align: bottom;
+						background-repeat: no-repeat;
+						background-position: 50% 50%;
+						background-size: cover;
+						background-blend-mode: multiply;
+						box-sizing: border-box;
+						
+						.years {
+							color: #fff;
+							font-family: $font-heading;
+							@include scaleFont(1.6em);
+							letter-spacing: 0.1em;
+							margin:0 0 0.4em 0;
+							text-align: left;
+						}
+						
+						h2 {
+							margin: 0;
+							text-align: left;
+							color: #fff;
+							@include scaleFont(2.8em);
+						}
+				    }
+				    
+				    .location-info {
+					    flex: 2 1 auto;
+					    padding: 20px;
+					    box-sizing: border-box;
+					    
+					    p {
+						    @include scaleFont(1.5em);
+					    }
+				    }
+				    
+				    .location-footer {
+					    flex: 0 1 auto;
+					    padding: 15px 20px 20px 20px;
+					    
+					    button {
+						    display: block;
+						    width: 100%;
+						    align-self: flex-end;
+					    }
+				    }
+				}
 			}
 			
-			&.norrkoping {
-				left: 1841px;
-				top: 574px;
+			&.open {
+				left: calc(50% - 180px);
+				transition: left 0.25s;
+				
+				.morph-content {
+					top: 0 !important;
+					right: 0 !important;
+					width: 360px;
+					height: 100%;
+					overflow: auto;
+					opacity: 1;
+					pointer-events: auto;
+					-webkit-backface-visibility: hidden;
+					transition: opacity 0.3s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s;
+					
+					& > div {
+						overflow: auto;
+					}
+				}
+				
+				&.cuernavaca {
+					
+					.morph-content > div.cuernavaca {
+						visibility: visible;
+						opacity: 1;
+						transition: opacity 0.3s 0.5s;
+					}
+				}
+				
+				&.norrkoping {
+					
+					.morph-content > div.norrkoping {
+						visibility: visible;
+						opacity: 1;
+						transition: opacity 0.3s 0.5s;
+					}
+				}
+				
+				&.stockholm {
+					
+					.morph-content > div.stockholm {
+						visibility: visible;
+						opacity: 1;
+						transition: opacity 0.3s 0.5s;
+					}
+				}
+				
+				&.uppsala {
+					
+					.morph-content > div.uppsala {
+						visibility: visible;
+						opacity: 1;
+						transition: opacity 0.3s 0.5s;
+					}
+				}
+				
+				&.munich {
+					
+					.morph-content > div.munich {
+						visibility: visible;
+						opacity: 1;
+						transition: opacity 0.3s 0.5s;
+					}
+				}
 			}
-			
-			&.stockholm {
-				left: 1863px;
-				top: 559px;
-			}
-			
-			&.uppsala {
-				left: 1860px;
-				top: 548px;
-			}
-			
-			&.munchen {
-				left: 1798px;
-				top: 744px;
-			}
-			*/
+		}
+		
+		&.open {
+			width: calc(100vw - 360px);
+			transition: width 0.25s;
 		}
 	}
 }

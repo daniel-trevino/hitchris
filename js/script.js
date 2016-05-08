@@ -75,8 +75,18 @@ $(document).ready(function() {
 		e.preventDefault();
 		if ($(this).parent().next().hasClass('hidden')) {
 			$(this).parent().next().slideDown('fast');
+			$(this).parents('.position').addClass('show-details');
 		} 
 	});
 	
+	
+	
+	
+// Locator sidebar
+	$('.locator').on('click', function() {
+		$(this).toggleClass('open');
+		$(this).parent().toggleClass('open');
+	});
+
 	
 });
