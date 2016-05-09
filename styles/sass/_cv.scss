@@ -16,10 +16,9 @@
 		right: 0;
 		bottom: 0;
 		padding: 3px;
-		border-radius: 4px;
 		background-color: lighten($color-dark-blue, 20%);
 		
-		font-size: 11px;
+		font-size: 10px;
 		line-height: 27px;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
@@ -51,6 +50,10 @@
 			display: table-cell;
 			width: 25%;
 			vertical-align: middle;
+			
+			img {
+				margin: 10px 0;
+			}
 		}
 		
 		.details {
@@ -154,14 +157,14 @@
 				}
 			}
 		}
-		
-		&.show-details {
+	}
+	
+	&.show-details {
 			
-			& > div {
-				
-				.logo {
-					vertical-align: top;
-				}
+		& > div {
+			
+			.logo {
+				vertical-align: top;
 			}
 		}
 	}
