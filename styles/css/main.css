@@ -1336,9 +1336,9 @@ body {
         transform: scale(1);
         opacity: 0.3; }
       #main .map .locator .morph-content {
-        transition: opacity 0.4s 0.1s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s;
+        transition: opacity 0.4s 0.1s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s, background-color 0.4s 0.1s;
         transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-        background-color: #fff;
+        background-color: #f94949;
         z-index: 900;
         opacity: 0;
         width: 10px;
@@ -1374,9 +1374,9 @@ body {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            flex: 0 1 40vh;
+            flex: 0 0 40vh;
             width: 100%;
-            padding: 0 20px 20px 20px;
+            padding: 20px;
             vertical-align: bottom;
             background-repeat: no-repeat;
             background-position: 50% 50%;
@@ -1420,7 +1420,7 @@ body {
                 #main .map .locator .morph-content > div .header h2 {
                   font-size: 2.408em; } }
           #main .map .locator .morph-content > div .location-info {
-            flex: 2 1 auto;
+            flex: 2 0 auto;
             padding: 20px;
             box-sizing: border-box; }
             #main .map .locator .morph-content > div .location-info p {
@@ -1438,7 +1438,7 @@ body {
                 #main .map .locator .morph-content > div .location-info p {
                   font-size: 1.29em; } }
           #main .map .locator .morph-content > div .location-footer {
-            flex: 0 1 auto;
+            flex: 0 0 auto;
             padding: 15px 20px 20px 20px; }
             #main .map .locator .morph-content > div .location-footer button {
               display: block;
@@ -1454,9 +1454,10 @@ body {
           height: 100%;
           overflow: auto;
           opacity: 1;
+          background-color: #fff;
           pointer-events: auto;
           -webkit-backface-visibility: hidden;
-          transition: opacity 0.3s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s; }
+          transition: opacity 0.3s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, right 0.4s 0.1s, background-color 0.4s; }
           #main .map .locator.open .morph-content > div {
             overflow: auto; }
         #main .map .locator.open.cuernavaca .morph-content > div.cuernavaca {
