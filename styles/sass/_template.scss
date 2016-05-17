@@ -473,6 +473,10 @@ body {
 		padding: 50px 20px 80px 20px;
 		max-width: 1000px;
 		margin: 0 auto;
+		
+		@include responsive(tablet) {
+			padding: 10% 3.125%;
+		}
 	}
 	
 	.map {

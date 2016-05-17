@@ -36,7 +36,7 @@ $(document).ready(function() {
 		
 		$project.slideUp(250);
 		
-		$('.project-details' + projectID).delay(250).slideDown(250, function() {
+		$('.project-details' + projectID).delay(250).fadeIn(250, function() {
 			$('html, body').animate({ scrollTop: $(this).offset().top }, 250);
 		});
 	});
@@ -69,12 +69,11 @@ $(document).ready(function() {
 	
 	
 // CV
-	$('.position .description a.showmore').parent().next().addClass('hidden');
-	
 	$('.position .description a.showmore').on('click', function(e) {
 		e.preventDefault();
 		if ($(this).parent().next().hasClass('hidden')) {
-			$(this).parent().next().slideDown('fast');
+			
+			$(this).slideUp('fast').parent().next().slideDown('fast');
 			$(this).parents('.position').addClass('show-details');
 		} 
 	});

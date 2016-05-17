@@ -1,3 +1,13 @@
+.cv-blocks {
+	
+	@include responsive(smartphone) {
+		
+		[class*='col-'] {
+			margin-bottom: 3em;
+		}
+	}
+}
+
 .upcoming {
 	display: inline-block;
 	padding: 3px;
@@ -122,6 +132,8 @@
 					
 					h2 {
 						@include scaleFont(1.7em);
+						color: darken($color-grey, 5%);
+						font-weight: 500;
 						margin-bottom: 0;
 						margin-right: 1em;
 						display: inline-block;
@@ -130,7 +142,7 @@
 					p,
 					ul,
 					ol {
-						@include scaleFont(1.3em);
+						@include scaleFont(1.4em);
 						
 						&.period {
 							font-family: $font-heading;

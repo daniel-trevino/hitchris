@@ -10,6 +10,11 @@ html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del
 @import "_contact";
 
 ::selection { background-color: darken($color-main, 10%); color: #FFF; }
+.cf:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
 html {
 	font-size: 62.5%;
@@ -31,8 +36,7 @@ h5,
 h6 {
 	font-family: $font-heading;
 	line-height: 1.2;
-	margin: 1.2em auto 0.6em auto;
-	max-width: 700px;
+	margin: 1.2em 0 0.6em 0;
 	
 	&:first-child, 
 	& + h2,
@@ -78,9 +82,6 @@ p {
 	@include scaleFont(1.8em);
 	line-height: 1.5;
 	margin-bottom: 1em;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 700px;
 	
 	&.lead {
 		@include scaleFont(2.1em);
@@ -92,16 +93,20 @@ p {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		font-weight: 500;
+		margin-bottom: 0.6em;
 		color: $color-main;
 		
 		@include responsive(smartphone) {
-			margin-top: 1.5em;
 			margin-bottom: 0.5em;
 		}
 	}
 	
 	&:last-child {
 		margin-bottom: 0;
+	}
+	
+	a {
+		font-weight: 500;
 	}
 }
 
@@ -111,12 +116,13 @@ ol, ul {
 	margin-bottom: 1em;
 	list-style-position: outside;
 	padding-left: 1em;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 700px;
 	
 	li {
 		margin-bottom: 0.5em;
+	}
+	
+	a {
+		font-weight: 500;
 	}
 }
 
@@ -148,7 +154,7 @@ a {
 	&.btn {
 		display: inline-block;
 		font-family: $font-heading;
-		font-size: 1.6em;
+		font-size: 1.6rem;
 		line-height: 1.125;
 		font-weight: 400;
 		color: $color-main;

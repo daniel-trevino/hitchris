@@ -1,9 +1,15 @@
 .showcase-items {
+	margin-top: 2.5em;
 	padding-top: 2.5em;
-	margin-top: 4em;
 	border-top: 1px solid lighten($color-dark-blue, 65%);
 	
 	.showcase-item {
+		
+		@include responsive(smartphone) {
+			padding-bottom: 3em;
+			margin-left: -3.3%;
+			margin-right: -3.3%;
+		}
 		
 		.sc-item-ss {
 			position: relative;
@@ -32,7 +38,7 @@
 			p {
 				display: inline-block;
 				font-weight: 700;
-				font-size: 1.1em;
+				@include scaleFontManual(1.1em, 1.1em, 1em, 0.9em, 1em);
 				line-height: 1.2;
 				color: #fff;
 				text-transform: uppercase;
@@ -49,14 +55,22 @@
 			margin-bottom: 2em;
 			
 			h2 {
-				font-size: 2.1em;
+				@include scaleFontManual(2.1em, 2.1em, 1.8em, 1.6em, 2em);
 				color: $color-grey;
 				margin-bottom: 0; 
+				
+				@include responsive(smartphone) {
+					padding: 0 1em;
+				}
 			}
 		}
 		
 		.sc-item-more {
 			text-align: center;
+			
+			a.btn {
+				@include scaleFont(1.6em);	
+			}
 		}
 	}
 }
