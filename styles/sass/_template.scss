@@ -285,10 +285,10 @@ body {
 	display: flex;
 	flex-direction: column;
 	//background-color: $color-main;
-	background: linear-gradient(to bottom, lighten($color-dark-blue, 15%) 0%, $color-main 100%);
 	overflow: hidden;
 	
-	&.inner {
+/*	&.inner {
+		background: linear-gradient(to bottom, lighten($color-dark-blue, 15%) 0%, $color-main 100%);
 		height: auto;
 		
 		.header-top {
@@ -372,7 +372,7 @@ body {
 				padding-bottom: 30px;
 			}
 		}
-	}
+	} */
 	
 	& > div {
 		
@@ -466,18 +466,6 @@ body {
 	height: 750vh;
 	overflow: hidden;
 	background-color: darken($color-dark-blue, 15%);
-	
-	&.inner {
-		background-color: #fff;
-		height: auto;
-		padding: 50px 20px 80px 20px;
-		max-width: 1000px;
-		margin: 0 auto;
-		
-		@include responsive(tablet) {
-			padding: 10% 3.125%;
-		}
-	}
 	
 	.map {
 		position: absolute;
@@ -789,42 +777,6 @@ body {
 					background-color: lighten($color-dark-blue, 10%);
 				}
 			}
-		}
-	}
-}
-
-#contact-footer {
-	background-color: lighten($color-grey, 60%);
-	padding: 0 0 3em 0;
-	
-	.centered {
-		max-width: 800px;
-		margin: 0 auto;
-		
-		.given-title {
-			overflow: hidden;
-			margin-bottom: 2em;
-			box-shadow: inset 0 -4px 4px -4px rgba(0,0,0,0.1);
-			
-			h1 {
-				font-weight: 500;
-				font-size: 9.2em;
-				line-height: 1em;
-				text-transform: uppercase;
-				margin: 0;
-				position: relative;
-				top: 0.32em;
-				text-align: center;
-				
-				span {
-					position: relative;
-					top: -0.2em;
-				}
-			}
-		}
-		
-		p {
-			text-align: center;
 		}
 	}
 }
