@@ -463,7 +463,7 @@ body {
 
 #main {
 	position: relative;
-	height: 500vh;
+	height: 750vh;
 	overflow: hidden;
 	background-color: darken($color-dark-blue, 15%);
 	
@@ -480,7 +480,7 @@ body {
 	}
 	
 	.map {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;

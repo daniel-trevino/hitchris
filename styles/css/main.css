@@ -1272,7 +1272,7 @@ body {
 
 #main {
   position: relative;
-  height: 500vh;
+  height: 750vh;
   overflow: hidden;
   background-color: #161920; }
   #main.inner {
@@ -1285,7 +1285,7 @@ body {
       #main.inner {
         padding: 10% 3.125%; } }
   #main .map {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -1544,6 +1544,18 @@ body {
           top: -0.2em; }
     #contact-footer .centered p {
       text-align: center; }
+
+.chart {
+  position: relative;
+  display: inline-block;
+  margin: 20px 10px;
+  color: #999;
+  font-size: 14px;
+  text-align: center; }
+  .chart canvas {
+    position: absolute;
+    top: 0;
+    left: 0; }
 
 .showcase-items {
   margin-top: 2.5em;
