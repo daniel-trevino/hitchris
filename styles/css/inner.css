@@ -3,14 +3,63 @@
 /* Making the page responsive -------------------------------- */
 /* Scale the font size -------------------------------- */
 .wrapper.inner #header {
+  box-sizing: border-box;
   width: 400px;
   height: 100vh;
+  padding: 0 20px;
   position: fixed;
   top: 0;
   left: 0;
   background: url("/img/star-pic-tall.jpg") no-repeat 50% 100%;
   background-size: cover;
-  z-index: 3; }
+  z-index: 3;
+  overflow: visible; }
+  .wrapper.inner #header .header-top {
+    margin-top: 10vh; }
+    .wrapper.inner #header .header-top .logo {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -150px;
+      width: 300px; }
+    .wrapper.inner #header .header-top .nav {
+      position: static;
+      display: flex;
+      justify-content: left; }
+      .wrapper.inner #header .header-top .nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        float: left;
+        font-size: 1.6em;
+        line-height: 39px;
+        font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: flex;
+        justify-content: center; }
+        .wrapper.inner #header .header-top .nav ul li {
+          margin-bottom: 0;
+          margin-right: 3px; }
+          .wrapper.inner #header .header-top .nav ul li a {
+            color: #5e6e7a;
+            display: block;
+            padding: 0 8px;
+            font-weight: 400; }
+            .wrapper.inner #header .header-top .nav ul li a:hover, .wrapper.inner #header .header-top .nav ul li a:focus {
+              color: #f94949; }
+          .wrapper.inner #header .header-top .nav ul li.active a {
+            color: #3d474f;
+            font-weight: 500; }
+  .wrapper.inner #header .page-title h1 {
+    font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 5.5em;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    margin-bottom: 0; }
+.wrapper.inner #main {
+  margin: 0 0 0 400px; }
 
 #main.inner {
   background-color: #fff;

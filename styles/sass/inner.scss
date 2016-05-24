@@ -3,14 +3,90 @@
 .wrapper.inner {
 	
 	#header {
+		box-sizing: border-box;
 		width: 400px;
 		height: 100vh;
+		padding: 0 20px;
 		position: fixed;
 		top: 0;
 		left: 0;
 		background: url("/img/star-pic-tall.jpg") no-repeat 50% 100%;
 		background-size: cover;
 		z-index: 3;
+		overflow: visible;
+		
+		.header-top {
+			margin-top: 10vh;
+			
+			.logo {
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				margin-left: -150px;
+				width: 300px;
+			}
+			
+			.nav {
+				position: static;
+				display: flex;
+				justify-content: left;
+				
+				ul {
+					list-style: none;
+					padding: 0;
+					margin: 0;
+					float: left;
+					font-size: 1.6em;
+					line-height: 39px;
+					font-family: $font-heading;
+					display: flex;
+					justify-content: center;
+					
+					li {
+						margin-bottom: 0;
+						margin-right: 3px;
+						
+						a {
+							color: lighten($color-grey, 15%);
+							display: block;
+							padding: 0 8px;
+							font-weight: 400;
+							
+							&:hover,
+							&:focus {
+								color: $color-main;
+							}
+						}
+						
+						&.active {
+							
+							a {
+								color: $color-grey;
+								font-weight: 500;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.page-title {
+			
+			h1 {
+				font-family: $font-heading;
+				font-size: 5.5em;
+				font-weight: 700;
+				line-height: 1;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				position: relative;
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	#main {
+		margin: 0 0 0 400px;
 	}
 }
 
