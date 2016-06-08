@@ -2,6 +2,98 @@
 	margin-top: 2.5em;
 	
 	.showcase-item {
+		padding: 2em 1em;
+		border: 2px solid lighten($color-grey, 60%);
+		border-radius: 2px;
+		margin-bottom: 2em;
+		cursor: pointer;
+		position: relative;
+		transition: background 0.25s ease, border 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+		background-color: #fff;
+		
+		.sc-project-type {
+			position: relative;
+			text-align: center;
+			
+			p {
+				font-weight: 400;
+				@include scaleFontManual(1.6em, 1.5em, 1.5em, 1.4em, 1.4em);
+				line-height: 1.2;
+				color: lighten($color-grey, 10%);
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				margin-bottom: 0;
+				transition: color 0.25s ease;
+			}
+		}
+		
+		.sc-project-title {
+			text-align: center;
+			position: relative;
+			
+			h2 {
+				display: inline-block;
+				color: $color-grey;
+				margin-top: 0.5em;
+				margin-bottom: 0; 
+				transition: color 0.25s ease;
+			}
+		}
+		
+		.sc-item-more {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			
+			a.btn {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				font-size: 0;
+				line-height: 0;
+				box-shadow: none;
+				background: none;
+			}
+		}
+		
+		&:hover {
+			background-color: $color-main;
+			border-color: $color-main;
+			transform: translateY(-6px);
+			box-shadow: 0 20px 20px rgba(0, 0, 0, 0.15);
+			
+			.sc-project-type p {
+				color: #fff;
+			}
+			
+			.sc-project-title h2 {
+				color: #fff;
+			}
+			
+			&:before,
+			&:after {
+				background-color: $color-main;
+			}
+		}
+		
+		&:active {
+			background-color: darken($color-main, 5%);
+			border-color: darken($color-main, 5%);
+			transform: translateY(0);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+			transition: background 0.06s ease, border 0.06s ease, box-shadow 0.06s ease, transform 0.06s ease;
+		}
+	}
+}
+/*
+.showcase-items {
+	margin-top: 2.5em;
+	
+	.showcase-item {
 		box-shadow: 0 1px 2px rgba(0,0,0,0.25);
 		
 		@include responsive(smartphone) {
@@ -12,62 +104,82 @@
 		
 		.sc-item-ss {
 			position: relative;
-			margin-bottom: 1.2em;
-			border-radius: 2px;
 		}
 		
 		.sc-project-type {
+			position: relative;
 			text-align: center;
-			margin-bottom: 1em;
+			padding: 0.5em 1em 0.4em 1em;
+			margin-top: -1px;
+			border-top: 1px solid rgba(0,0,0,0.08);
+			border-bottom: 1px solid lighten($color-grey, 65%);
 			
 			p {
-				display: inline-block;
 				font-weight: 700;
 				@include scaleFontManual(1.1em, 1.1em, 1em, 0.9em, 1em);
 				line-height: 1.2;
-				color: #fff;
+				color: lighten($color-grey, 20%);
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 				margin-bottom: 0;
-				padding: 0.5em 1em 0.4em 1em;
-				border-radius: 2em;
-				background-color: lighten($color-dark-blue, 35%);
 			}
 		}
 		
 		.sc-project-title {
 			text-align: center;
-			margin-bottom: 2em;
+			position: relative;
+			height: 120px;
+			font-size: 0;
 			
 			h2 {
-				@include scaleFontManual(2.1em, 2.1em, 1.8em, 1.6em, 2em);
+				display: inline-block;
+				@include scaleFontManual(18px, 16px, 15px, 16px, 20px);
 				color: $color-grey;
 				margin-bottom: 0; 
+				padding: 1em 0;
+				vertical-align: middle;
 				
 				@include responsive(smartphone) {
 					padding: 0 1em;
 				}
 			}
+			
+			&:before {
+				content: "";
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+				margin-right: -0.25em;
+			}
 		}
 		
 		.sc-item-more {
 			text-align: center;
+			border-top: 1px solid lighten($color-grey, 65%);
+			padding: 0.8em;
 			
 			a.btn {
 				@include scaleFont(1.6em);	
+				padding-top: 0.6em;
+				padding-bottom: 0.6em;
 			}
 		}
 	}
-}
+} */
 
 .project-details {
 	margin-top: 4em;
 	display: none;
+	padding-left: 999px;
+	padding-right: 999px;
+	padding-bottom: 4em;
+	margin-left: -999px;
+	margin-right: -999px;
+	background: linear-gradient(to bottom, lighten($color-grey, 70%) 0%,#fff 8%);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
 	
 	.project-header {
-		border-top: 2px solid $color-main;
-		border-radius: 1px 1px;
-		padding-top: 15px;
+		padding-top: 3em;
 		position: relative;
 		margin-bottom: 5em;
 		
@@ -83,10 +195,8 @@
 			text-align: center;
 			width: 50px;
 			border-radius: 12px;
-			position: absolute;
-			top: 15px;
-			right: 0;
 			cursor: pointer;
+			float: right;
 			
 			&:before {
 				content: "\f404";

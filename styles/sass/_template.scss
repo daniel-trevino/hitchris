@@ -3,6 +3,10 @@ body {
 	background-color: #fff;
 }
 
+.wrapper {
+	overflow: hidden;
+}
+
 .navigation {
 	position: fixed;
 	top: 15px;
@@ -284,95 +288,7 @@ body {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	//background-color: $color-main;
 	overflow: hidden;
-	
-/*	&.inner {
-		background: linear-gradient(to bottom, lighten($color-dark-blue, 15%) 0%, $color-main 100%);
-		height: auto;
-		
-		.header-top {
-			padding-top: 30px;
-			
-			.logo {
-				display: block;
-				max-width: 110px;
-				margin: 0 auto;
-				padding-bottom: 10px;
-				
-				.svg-logo {
-					max-width: 100%;
-					height: auto;
-					
-					.letter {
-						fill: #fff;
-					}
-				}
-				
-				&:hover,
-				&:focus {
-					opacity: 0.8;
-				}
-			}
-			
-			.nav {
-				position: static;
-				display: flex;
-				justify-content: center;
-				
-				ul {
-					list-style: none;
-					padding: 0;
-					margin: 0;
-					float: left;
-					font-size: 1.6em;
-					line-height: 39px;
-					font-family: $font-heading;
-					display: flex;
-					justify-content: center;
-					
-					li {
-						margin-bottom: 0;
-						
-						a {
-							color: rgba(255,255,255,0.8);
-							display: block;
-							padding: 0 12px;
-							
-							&:hover,
-							&:focus {
-								color: #fff;
-							}
-						}
-						
-						&.active {
-							
-							a {
-								color: #fff;
-								font-weight: 500;
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		.page-title {
-			padding: 74px 15px 0 15px;
-			
-			h1 {
-				font-family: $font-heading;
-				font-size: 4.8em;
-				font-weight: 300;
-				line-height: 1.2;
-				color: #fff;
-				text-align: center;
-				position: relative;
-				margin-bottom: 0;
-				padding-bottom: 30px;
-			}
-		}
-	} */
 	
 	& > div {
 		
@@ -464,7 +380,6 @@ body {
 #main {
 	position: relative;
 	height: 750vh;
-	overflow: hidden;
 	background-color: darken($color-dark-blue, 15%);
 	
 	.map {

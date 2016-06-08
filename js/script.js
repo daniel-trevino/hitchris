@@ -7,6 +7,8 @@ $(document).ready(function() {
 		$navigation.addClass('visible');
 	});
 
+
+
 // Smooth scroll
 	$('a[href^="#"]').on('click', function (e) {
 		e.preventDefault();
@@ -22,6 +24,7 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
 	
 	
 // Project tabbing
@@ -44,6 +47,7 @@ $(document).ready(function() {
 	$project.find('.close-project').on('click', function() {
 		$(this).parents('.project-details').slideUp();
 	});
+    
     
 	
 // Back to Top
@@ -79,7 +83,8 @@ $(document).ready(function() {
 	});
 
 
-// SHowcase
+
+// Showcase
 
     $('.chart').easyPieChart({
         scaleColor: "#ecf0f1",
