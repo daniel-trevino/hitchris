@@ -1,8 +1,16 @@
 .cv-blocks {
 	
+	& > [class*='col-'] {
+		margin-bottom: 5em;
+	}
+	
 	@include responsive(smartphone) {
 		
-		[class*='col-'] {
+		& > [class*='col-'] {
+			margin-bottom: 1em;
+		}
+		
+		& > [class*='col-']:last-child {
 			margin-bottom: 3em;
 		}
 	}
@@ -10,66 +18,68 @@
 
 .upcoming {
 	display: inline-block;
-	padding: 3px;
+	padding: 0 3px;
 	position: relative;
 	left: -3px;
-	width: 100px;
-	overflow: hidden;
 	cursor: default;
 	
-	&:before {
+	&:after {
 		content: "Coming soon";
 		display: block;
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		padding: 3px;
-		background-color: lighten($color-dark-blue, 20%);
+		top: 50%;
+		left: 110%;
+		margin-top: -4px;
 		
 		font-size: 10px;
-		line-height: 27px;
+		line-height: 12px;
+		font-weight: 500;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		text-align: center;
-		color: #fff;
+		color: $color-main;
 		white-space: nowrap;
-		
-		transition: top 0.25s ease-in-out;
 	}
 	
-	&:hover {
-		
-		&:before {
-			top: 100%;
-		}
+	&:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: calc(50% + 1px);
+		left: 0;
+		height: 2px;
+		width: 100%;
+		background-color: $color-main;
 	}
 }
 
 .position {
-	padding: 3%;
-	border: 2px solid lighten($color-grey, 60%);
-	margin-bottom: 2em;
+	margin-bottom: 9%;
 	
 	& > div {		
-		display: table;
-		width: 100%;
+		display: flex;
 		
 		.logo {
-			display: table-cell;
-			width: 25%;
-			vertical-align: middle;
+			flex: 15% 1 1;
+			display: flex;
+			align-items: flex-start;
 			
 			img {
 				margin: 10px 0;
 			}
+			
+			@include responsive(smartphone) {
+				display: none;
+			}
 		}
 		
 		.details {
-			display: table-cell;
-			vertical-align: middle;
-			padding-left: 3.5%;
+			flex: 85% 1 1;
+			padding-right: 3.5%;
+			
+			@include responsive(smartphone) {
+				padding-right: 0;
+			}
 			
 			.header {
 				
@@ -87,7 +97,6 @@
 				
 				.role {
 					display: inline-block;
-					white-space: nowrap;
 					
 					p {
 						font-family: $font-heading;
@@ -118,9 +127,8 @@
 				.activity {
 					margin-top: 2em;
 					padding-top: 1.5em;
-					padding-right: 4%;
+					padding-right: 1%;
 					border-top: 1px solid lighten($color-grey, 60%);
-					margin-right: -4%;
 					
 					&:first-child {
 						margin-top: 0;
@@ -157,27 +165,21 @@
 		}
 	}
 	
-	&.education {
-		
-		& > div {
-			
-			.logo {
-				width: 12%;
-				
-				&.top {
-					vertical-align: top;
-				}
-			}
-		}
-	}
+}
+
+.chart {
+	position: relative;
+	display: inline-block;
+	margin: 20px 10px;
+	color: #999;
+	font-size: 14px;
+	text-align: center; 
 	
-	&.show-details {
-			
-		& > div {
-			
-			.logo {
-				vertical-align: top;
-			}
-		}
+	span {
+		position: absolute;
+		display: block;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
 	}
 }

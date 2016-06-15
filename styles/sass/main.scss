@@ -3,9 +3,8 @@ html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del
 @import "_includes";
 @import "_grid-system";
 @import "_template";
-@import "_skillset";
 @import "_showcase";
-@import "_cv";
+@import "_about";
 @import "_contact";
 
 ::selection { background-color: darken($color-main, 10%); color: #FFF; }
@@ -94,6 +93,7 @@ p {
 		font-weight: 500;
 		margin-bottom: 0.6em;
 		color: $color-main;
+		padding-top: 0.3em;
 		
 		@include responsive(smartphone) {
 			margin-bottom: 0.5em;
