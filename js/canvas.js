@@ -9,7 +9,7 @@ var munich = {name:"munich",x:2726, y:1133};
 
 //------- START PLACE --------
 var place = cuernavaca;
-var speed = 0;
+var speed = 0, isRunning = true;
 
 var c, ctx, reqAnimFrame, plane, destiny, viewPort;
 
@@ -50,7 +50,10 @@ $(window).load(function () {
 	plane.src = "/img/map.svg";
 	ctx.scale(ratio, ratio);
 	
-	animate();
+	animate();	
+	
+	checkStatusOfSpeed();	
+
 }); 	
 
 $(window).resize(function () {
@@ -81,6 +84,7 @@ $(window).resize(function () {
 	
 	plane = new Image();
 	plane.onload = animate;
+	loaded = true;
 	
 	viewPort = calcMapViewPort(window[$("div.locator").data("location")]);
 	
@@ -91,9 +95,12 @@ $(window).resize(function () {
 	ctx.scale(ratio, ratio);
 	
 	animate();
+	
+	checkStatusOfSpeed();
+
 });
 
-function animate(){
+function animate() {
     if (plane._x < destiny.x && speed != 0) {
 		plane._x += speed;
 		plane._y = calcY(plane._x);
@@ -118,14 +125,31 @@ function animate(){
 	    }
 	    
     }
+	draw();
 
-    draw();
-    reqAnimFrame(animate);
+	if (isRunning) {
+		checkStatusOfSpeed();
+		reqAnimFrame(animate);
+	}
+    
 }
 
 function draw(){
-    ctx.clearRect(0, 0, c.width, c.height);
+	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.drawImage(plane, plane._x, plane._y);
+    
+}
+
+//---- Avoids the over-rendering of the map,
+//---- It only renders when the speed is != 0
+function checkStatusOfSpeed() {
+	if (speed != 0 && !isRunning) {
+		isRunning = true;
+		animate();
+	}
+	else if (speed == 0 && isRunning) {
+		isRunning = false;
+	}
 }
 
 //---- Gets the ecuation between two points so it goes straight when it "travels"
@@ -221,30 +245,35 @@ function checkWhichLocation () {
 		$div.data("location", "cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
 		speed = 10;
+		checkStatusOfSpeed();
 	}
 	
 	if (scroll > 1000 && scroll < 1200 && ($div.data("location") != "norrkoping")) {
 		$div.data("location", "norrkoping");
 		destiny = calcMapViewPort(norrkoping);
 		speed = 10;
+		checkStatusOfSpeed();
 	}
 
 	if (scroll > 1200 && scroll < 1800 && ($div.data("location") != "stockholm")) {
 		$div.data("location", "stockholm");
 		destiny = calcMapViewPort(stockholm);
 		speed = 1;
+		checkStatusOfSpeed();
 	}
 	
 	if (scroll > 1800 && scroll < 2400 && ($div.data("location") != "uppsala")) {
 		$div.data("location", "uppsala");
 		destiny = calcMapViewPort(uppsala);
 		speed = 1;
+		checkStatusOfSpeed();
 	}
 
 	if (scroll > 2400 && ($div.data("location") != "munich")) {
 		$div.data("location", "munich");	
 		destiny = calcMapViewPort(munich);
 		speed = 1;
+		checkStatusOfSpeed();
 	}	
 }
 
