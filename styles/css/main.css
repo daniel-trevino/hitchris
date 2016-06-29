@@ -909,7 +909,7 @@ body {
   position: fixed;
   top: 15px;
   left: 20px;
-  z-index: 100; }
+  z-index: 1500; }
   .navigation:after {
     content: "";
     display: block;
@@ -998,7 +998,8 @@ body {
       margin-right: 10px; }
       .navigation ul li a {
         display: block;
-        padding: 0 12px; }
+        padding: 0 12px;
+        font-weight: 400; }
         .navigation ul li a:hover {
           color: #d50707; }
   .navigation.visible .burger {
@@ -1039,25 +1040,6 @@ body {
     overflow: visible; }
     .logo .svg-logo .letter {
       fill: #f94949; }
-    .logo .svg-logo .left-half {
-      transform-origin: 50% 50% 0;
-      animation-name: leftFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-    .logo .svg-logo .right-half {
-      transform-origin: 50% 50% 0;
-      animation-name: rightFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-    .logo .svg-logo .the-s {
-      transform-origin: 50% 50% 0;
-      transform: rotate(-45deg);
-      animation-name: rotateFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
 
 .back-to-top {
   display: none;
@@ -1105,7 +1087,9 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative;
+  z-index: 1000; }
   #header > div.staroftheshow {
     flex-grow: 2;
     flex-shrink: 3;
@@ -1127,17 +1111,17 @@ body {
       margin-bottom: 0; }
       #header > div.staroftheshow h1 span {
         display: block;
-        animation-name: fadeIn;
+        animation-name: fadeInUp;
         animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
         animation-duration: 0.4s;
         animation-fill-mode: forwards;
         opacity: 0; }
         #header > div.staroftheshow h1 span:first-child {
-          animation-delay: 0.5s; }
+          animation-delay: 1s; }
         #header > div.staroftheshow h1 span.logo {
           padding: 30px 0; }
         #header > div.staroftheshow h1 span:last-child {
-          animation-delay: 0.7s; }
+          animation-delay: 1.25s; }
   #header > div.invitation {
     flex-grow: 1;
     flex-shrink: 1;
@@ -1173,15 +1157,17 @@ body {
 #main {
   position: relative;
   height: 750vh;
-  background-color: #161920; }
+  z-index: 800; }
   #main .map {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #2b313e;
+    background-color: #fff;
     transition: width 0.25s 0.2s; }
+    #main .map.fixed {
+      position: fixed; }
     #main .map canvas {
       width: 100% !important;
       height: 100% !important;
@@ -1202,6 +1188,7 @@ body {
         #main .map .graphics .polygon.mexico {
           fill: #3f495c; }
     #main .map .locator {
+      display: none;
       width: 10px;
       height: 10px;
       background-color: #f94949;
@@ -1238,9 +1225,7 @@ body {
         height: 10px;
         pointer-events: none;
         position: fixed;
-        top: 195px;
-        right: 635px;
-        box-shadow: 0 0 16px rgba(0, 0, 0, 0.3); }
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.2); }
         #main .map .locator .morph-content > div {
           width: 100%;
           height: 100%;
@@ -1378,6 +1363,7 @@ body {
       transition: width 0.25s; }
 
 #footer {
+  z-index: 1000;
   position: relative;
   height: 100vh;
   display: flex;
@@ -1410,6 +1396,52 @@ body {
         #footer ul li a:hover {
           background-color: #4a556b; }
 
+.nicer-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1500;
+  background-color: #fff;
+  pointer-events: none;
+  animation-delay: 1s;
+  animation-name: splashOverlay;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; }
+  .nicer-splash .logo {
+    position: absolute;
+    display: block;
+    width: 440px;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -220px;
+    animation-delay: 0.5s;
+    animation-name: splashLogo;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; }
+    .nicer-splash .logo .svg-logo {
+      width: 100%;
+      height: auto; }
+      .nicer-splash .logo .svg-logo .letter {
+        fill: #f94949; }
+
+@keyframes splashLogo {
+  0% {
+    opacity: 1;
+    width: 440px;
+    top: 50%;
+    margin: -60px 0 0 -220px; }
+  100% {
+    opacity: 0;
+    width: 375px;
+    top: 30%;
+    margin: -51px 0 0 -187.5px; } }
+@keyframes splashOverlay {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 .showcase-items {
   margin-top: 2.5em; }
   .showcase-items .showcase-item {

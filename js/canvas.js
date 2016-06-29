@@ -1,4 +1,6 @@
 //----------- GLOBAL VARIABLES -----------
+var $window = $(window);
+
 
 //--------------- PLACES -----------------
 var cuernavaca = {name:"cuernavaca",x:1042,y:1672};
@@ -12,6 +14,197 @@ var place = cuernavaca;
 var speed = 0, isRunning = true;
 
 var c, ctx, reqAnimFrame, plane, destiny, viewPort;
+
+
+
+function preventDefault(e) {
+	e = e || window.event;
+	if (e.preventDefault) {
+    	e.preventDefault();
+    	e.returnValue = false;
+    }
+}
+
+// Calculates the center of the canvas so it positions the viewport
+function calcMapViewPort(placeVP) {
+	var values;
+	var valX, valY;
+	var element = document.getElementById('canvas');
+
+	valX = (element.width / 2) - placeVP.x; //1440-688 = 752
+	valX = valX - placeVP.x; //752 - 688 = 64
+	valX = valX / 2;
+	
+	valY =  placeVP.y - (element.height / 2); // 1104 - 778 = 326
+	
+	//According to the formula.. The difference plus (778/2) = 715
+	valY = valY + (element.height / 4);
+	
+	//Make it negative
+	valY = -valY; //-715
+	
+	//Rest the difference to the proportinal variable
+	values = {name:placeVP.name,x:valX, y:valY};
+
+	place = placeVP;
+	
+	return values;
+}
+
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function enableScroll() {
+    if (window.removeEventListener) {
+		window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    }
+    
+    window.onmousewheel = document.onmousewheel = null; 
+    window.onwheel = null; 
+    window.ontouchmove = null;  
+    document.onkeydown = null;  
+}
+
+function disableScroll() {
+	if (window.addEventListener) { // older FF
+		window.addEventListener('DOMMouseScroll', preventDefault, false);
+	}
+	
+	window.onwheel = preventDefault; // modern standard
+	window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+	window.ontouchmove  = preventDefault; // mobile
+	document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+function draw(){
+	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.drawImage(plane, plane._x, plane._y);
+    
+}
+
+
+
+function calcSlope(origin, destiny) {
+	return (origin.y-destiny.y) / (origin.x-destiny.x);
+}
+
+
+//---- Gets the ecuation between two points so it goes straight when it "travels"
+function calcY(x) {
+	//Get the slope
+	var m = calcSlope(viewPort, destiny);
+	var y;
+	
+	return y = (m * x) - (m * viewPort.x) + viewPort.y;
+}
+
+function animate() {
+    if (plane._x < destiny.x && speed !== 0) {
+		plane._x += speed;
+		plane._y = calcY(plane._x);
+
+		if (plane._x >= destiny.x && speed !== 0) {
+			//---- Make a proper stop ----
+			plane._x = destiny.x;
+			plane._y = destiny.y;
+			speed = 0; 
+			enableScroll();
+			//Sets the viewport (destiny) -- window converts the string to a variable value
+			viewPort = calcMapViewPort(window[$("div.locator").data("location")]);
+		}
+		
+    }
+    
+    else {
+	    if (speed !== 0) {
+		    disableScroll();
+			plane._x += -(speed);
+			plane._y = calcY(plane._x);
+	    }
+	    
+    }
+	draw();
+
+	if (isRunning) {
+		checkStatusOfSpeed();
+		reqAnimFrame(animate);
+	}
+    
+}
+
+//---- Avoids the over-rendering of the map,
+//---- It only renders when the speed is != 0
+function checkStatusOfSpeed() {
+	if (speed !== 0 && !isRunning) {
+		isRunning = true;
+		animate();
+	}
+	else if (speed === 0 && isRunning) {
+		isRunning = false;
+	}
+}
+
+
+function checkWhichLocation () {
+	var scroll = $(window).scrollTop();
+	var $locator = $(".locator");
+	var $map = $(".map");
+	var windowHeight = $(window).height();
+	
+	if (scroll < (windowHeight + (windowHeight / 2))) {
+		$map.removeClass("open");
+		$locator.data("location", "").removeClass("open cuernavaca");
+	}
+	
+	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 2.5) && ($locator.data("location") !== "cuernavaca")) {
+		$map.addClass("open");
+		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+		destiny = calcMapViewPort(cuernavaca);
+		speed = 10;
+		checkStatusOfSpeed();
+	}
+	
+	if (scroll > 1000 && scroll < 1200 && ($locator.data("location") !== "norrkoping")) {
+
+		$locator.data("location", "norrkoping").addClass("open norrkoping");
+		destiny = calcMapViewPort(norrkoping);
+		speed = 10;
+		checkStatusOfSpeed();
+	}
+
+	if (scroll > 1200 && scroll < 1800 && ($locator.data("location") !== "stockholm")) {
+		$locator.data("location", "stockholm");
+		destiny = calcMapViewPort(stockholm);
+		speed = 1;
+		checkStatusOfSpeed();
+	}
+	
+	if (scroll > 1800 && scroll < 2400 && ($locator.data("location") !== "uppsala")) {
+		$locator.data("location", "uppsala");
+		destiny = calcMapViewPort(uppsala);
+		speed = 1;
+		checkStatusOfSpeed();
+	}
+
+	if (scroll > 2400 && ($locator.data("location") !== "munich")) {
+		$locator.data("location", "munich");	
+		destiny = calcMapViewPort(munich);
+		speed = 1;
+		checkStatusOfSpeed();
+	}
+}
+
+$(window).scroll(function () {
+	checkWhichLocation();
+});
 
 $(window).load(function () {
 	checkWhichLocation();
@@ -100,182 +293,8 @@ $(window).resize(function () {
 
 });
 
-function animate() {
-    if (plane._x < destiny.x && speed != 0) {
-		plane._x += speed;
-		plane._y = calcY(plane._x);
-
-		if (plane._x >= destiny.x && speed != 0) {
-			//---- Make a proper stop ----
-			plane._x = destiny.x;
-			plane._y = destiny.y;
-			speed = 0; 
-			enableScroll();
-			//Sets the viewport (destiny) -- window converts the string to a variable value
-			viewPort = calcMapViewPort(window[$("div.locator").data("location")]);
-		}
-		
-    }
-    
-    else {
-	    if (speed != 0) {
-		    disableScroll();
-			plane._x += -(speed);
-			plane._y = calcY(plane._x);
-	    }
-	    
-    }
-	draw();
-
-	if (isRunning) {
-		checkStatusOfSpeed();
-		reqAnimFrame(animate);
-	}
-    
-}
-
-function draw(){
-	ctx.clearRect(0, 0, c.width, c.height);
-	ctx.drawImage(plane, plane._x, plane._y);
-    
-}
-
-//---- Avoids the over-rendering of the map,
-//---- It only renders when the speed is != 0
-function checkStatusOfSpeed() {
-	if (speed != 0 && !isRunning) {
-		isRunning = true;
-		animate();
-	}
-	else if (speed == 0 && isRunning) {
-		isRunning = false;
-	}
-}
-
-//---- Gets the ecuation between two points so it goes straight when it "travels"
-function calcY(x) {
-	//Get the slope
-	var m = calcSlope(viewPort, destiny);
-	var y;
-	
-	return y = (m * x) - (m * viewPort.x) + viewPort.y;;
-}
-
-function calcSlope(origin, destiny) {
-	return (origin.y-destiny.y) / (origin.x-destiny.x);;
-}
-
-// left: 37, up: 38, right: 39, down: 40,
-// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-
-function preventDefault(e) {
-  e = e || window.event;
-  if (e.preventDefault)
-      e.preventDefault();
-  e.returnValue = false;  
-}
-
-function preventDefaultForScrollKeys(e) {
-    if (keys[e.keyCode]) {
-        preventDefault(e);
-        return false;
-    }
-}
-
-function disableScroll() {
-	if (window.addEventListener) { // older FF
-		window.addEventListener('DOMMouseScroll', preventDefault, false);
-	}
-	
-	window.onwheel = preventDefault; // modern standard
-	window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-	window.ontouchmove  = preventDefault; // mobile
-	document.onkeydown  = preventDefaultForScrollKeys;
-}
-
-function enableScroll() {
-    if (window.removeEventListener) {
-		window.removeEventListener('DOMMouseScroll', preventDefault, false);
-    }
-    
-    window.onmousewheel = document.onmousewheel = null; 
-    window.onwheel = null; 
-    window.ontouchmove = null;  
-    document.onkeydown = null;  
-}
-
-
-// Calculates the center of the canvas so it positions the viewport
-function calcMapViewPort(placeVP) {
-	var values;
-	var valX, valY;
-	var element = document.getElementById('canvas');
-
-	valX = (element.width / 2) - placeVP.x; //1440-688 = 752
-	valX = valX - placeVP.x; //752 - 688 = 64
-	valX = valX / 2;
-	
-	valY =  placeVP.y - (element.height / 2); // 1104 - 778 = 326
-	
-	//According to the formula.. The difference plus (778/2) = 715
-	valY = valY + (element.height / 4);
-	
-	//Make it negative
-	valY = -valY; //-715
-	
-	//Rest the difference to the proportinal variable
-	values = {name:placeVP.name,x:valX, y:valY};
-
-	place = placeVP;
-	
-	return values;
-}
-
-
-$(window).scroll(function () {
-	checkWhichLocation();
-});
-
-function checkWhichLocation () {
-	var scroll = $(window).scrollTop();
-	$div = $("div.locator");
-	
-	if (scroll < 1000 && ($div.data("location") != "cuernavaca")) {
-		$div.data("location", "cuernavaca");
-		destiny = calcMapViewPort(cuernavaca);
-		speed = 10;
-		checkStatusOfSpeed();
-	}
-	
-	if (scroll > 1000 && scroll < 1200 && ($div.data("location") != "norrkoping")) {
-		$div.data("location", "norrkoping");
-		destiny = calcMapViewPort(norrkoping);
-		speed = 10;
-		checkStatusOfSpeed();
-	}
-
-	if (scroll > 1200 && scroll < 1800 && ($div.data("location") != "stockholm")) {
-		$div.data("location", "stockholm");
-		destiny = calcMapViewPort(stockholm);
-		speed = 1;
-		checkStatusOfSpeed();
-	}
-	
-	if (scroll > 1800 && scroll < 2400 && ($div.data("location") != "uppsala")) {
-		$div.data("location", "uppsala");
-		destiny = calcMapViewPort(uppsala);
-		speed = 1;
-		checkStatusOfSpeed();
-	}
-
-	if (scroll > 2400 && ($div.data("location") != "munich")) {
-		$div.data("location", "munich");	
-		destiny = calcMapViewPort(munich);
-		speed = 1;
-		checkStatusOfSpeed();
-	}	
-}
+$window.trigger("scroll");
+$window.trigger("resize");
 
 
 
