@@ -1,6 +1,7 @@
 //----------- GLOBAL VARIABLES -----------
 var $window = $(window);
-
+var $locator = $(".locator");
+var $map = $(".map");
 
 //--------------- PLACES -----------------
 var cuernavaca = {name:"cuernavaca",x:1042,y:1672};
@@ -155,25 +156,35 @@ function checkStatusOfSpeed() {
 
 function checkWhichLocation () {
 	var scroll = $(window).scrollTop();
-	var $locator = $(".locator");
-	var $map = $(".map");
+	
 	var windowHeight = $(window).height();
 	
-	if (scroll < (windowHeight + (windowHeight / 2))) {
-		$map.removeClass("open");
-		$locator.data("location", "").removeClass("open cuernavaca");
+	console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
+	
+	if (scroll < windowHeight) {
+		$locator.css("opacity", 0);
 	}
 	
-	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 2.5) && ($locator.data("location") !== "cuernavaca")) {
-		$map.addClass("open");
-		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+	if (scroll >= windowHeight) {
+		$locator.css("opacity", 1);
+	}
+	
+	if (scroll < (windowHeight * 1.5)) {
+		destiny = calcMapViewPort(cuernavaca);
+		$map.removeClass("open");
+		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");	
+	}
+	
+	if ( scroll >= (windowHeight * 1.5) && scroll <= (windowHeight * 2.5)) {
 		destiny = calcMapViewPort(cuernavaca);
 		speed = 10;
 		checkStatusOfSpeed();
+		$map.addClass("open");
+		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 	}
 	
-	if (scroll > 1000 && scroll < 1200 && ($locator.data("location") !== "norrkoping")) {
-
+	if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
+		$map.addClass("open");
 		$locator.data("location", "norrkoping").addClass("open norrkoping");
 		destiny = calcMapViewPort(norrkoping);
 		speed = 10;
@@ -207,45 +218,9 @@ $(window).scroll(function () {
 });
 
 $(window).load(function () {
-	checkWhichLocation();
-	speed = 0;	
 	
-	reqAnimFrame =
-    window.requestAnimationFrame || 
-    window.mozRequestAnimationFrame || 
-    window.webkitRequestAnimationFrame || 
-    window.msRequestAnimationFrame ||
-	window.oRequestAnimationFrame;
-    
-	c = document.getElementById('canvas');
-	ctx = c.getContext('2d');
-	var ratio = window.devicePixelRatio || 1;
-	
-	ctx.canvas.width  = window.innerWidth;
-	ctx.canvas.height = window.innerHeight;
-	
-	// 2. Ensure the element size stays the same. Basically transforms the percentage to pixels
-	c.style.width  = c.width + "px";
-	c.style.height = c.height + "px";
-	
-	// 3. Increase the canvas dimensions by the pixel ratio. Removes the pixels like magic.. don't understand it 100% yet
-	c.width  *= ratio;
-	c.height *= ratio;
-	
-	plane = new Image();
-	plane.onload = animate;
-	
-	viewPort = calcMapViewPort(window[$("div.locator").data("location")]);
-	
-	plane._x = viewPort.x;
-	plane._y = viewPort.y;
-	
-	plane.src = "/img/map.svg";
-	ctx.scale(ratio, ratio);
-	
-	animate();	
-	
-	checkStatusOfSpeed();	
+	$window.trigger("scroll");
+	$window.trigger("resize");
 
 }); 	
 
@@ -264,8 +239,11 @@ $(window).resize(function () {
 	ctx = c.getContext('2d');
 	var ratio = window.devicePixelRatio || 1;
 	
-	ctx.canvas.width  = window.innerWidth;
-	ctx.canvas.height = window.innerHeight;
+	//ctx.canvas.width  = window.innerWidth;
+	//ctx.canvas.height = window.innerHeight;
+		console.log("Canvas Width: " + $map.innerHeight + " / Canvas Height: " + $map.innerHeight );
+	ctx.canvas.width  = $map.innerWidth;
+	ctx.canvas.height = $map.innerHeight;
 	
 	// 2. Ensure the element size stays the same. Basically transforms the percentage to pixels
 	c.style.width  = c.width + "px";
@@ -292,9 +270,6 @@ $(window).resize(function () {
 	checkStatusOfSpeed();
 
 });
-
-$window.trigger("scroll");
-$window.trigger("resize");
 
 
 

@@ -14,6 +14,17 @@
 			margin-bottom: 3em;
 		}
 	}
+	
+	a {
+		border-bottom: 1px solid transparent;
+		transition: border 0.2s ease, color 0.2s ease;
+		
+		&:hover,
+		&:focus {
+			color: darken($color-main, 20%);
+			border-bottom-color: darken($color-main, 20%);
+		}
+	}
 }
 
 .upcoming {
