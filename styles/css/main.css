@@ -2201,7 +2201,12 @@ p {
   p:last-child {
     margin-bottom: 0; }
   p a {
-    font-weight: 500; }
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border 0.2s ease, color 0.2s ease; }
+    p a:hover, p a:focus {
+      color: #f94949;
+      border-bottom-color: #f94949; }
 
 ol, ul {
   font-size: 1.8em;

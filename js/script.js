@@ -61,7 +61,6 @@ $(document).ready(function() {
 
 // Showcase
 
-/*
     $('.chart').easyPieChart({
         scaleColor: "#ecf0f1",
 	    lineWidth: 20,
@@ -71,7 +70,6 @@ $(document).ready(function() {
 	    size: 160,
 	    animate: 1500
     });
-*/
 
 	
 });
