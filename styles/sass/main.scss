@@ -106,6 +106,14 @@ p {
 	
 	a {
 		font-weight: 500;
+		border-bottom: 1px solid transparent;
+		transition: border 0.2s ease, color 0.2s ease;
+		
+		&:hover,
+		&:focus {
+			color: $color-main;
+			border-bottom-color: $color-main;
+		}
 	}
 }
 

@@ -909,7 +909,7 @@ body {
   position: fixed;
   top: 15px;
   left: 20px;
-  z-index: 100; }
+  z-index: 1000; }
   .navigation:after {
     content: "";
     display: block;
@@ -998,7 +998,8 @@ body {
       margin-right: 10px; }
       .navigation ul li a {
         display: block;
-        padding: 0 12px; }
+        padding: 0 12px;
+        font-weight: 400; }
         .navigation ul li a:hover {
           color: #d50707; }
   .navigation.visible .burger {
@@ -1039,25 +1040,6 @@ body {
     overflow: visible; }
     .logo .svg-logo .letter {
       fill: #f94949; }
-    .logo .svg-logo .left-half {
-      transform-origin: 50% 50% 0;
-      animation-name: leftFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-    .logo .svg-logo .right-half {
-      transform-origin: 50% 50% 0;
-      animation-name: rightFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-    .logo .svg-logo .the-s {
-      transform-origin: 50% 50% 0;
-      transform: rotate(-45deg);
-      animation-name: rotateFadeIn;
-      animation-duration: 2s;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
 
 .back-to-top {
   display: none;
@@ -1069,7 +1051,8 @@ body {
   border-radius: 30px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: all 0.25s ease; }
+  transition: all 0.25s ease;
+  z-index: 500; }
   .back-to-top .text {
     display: block;
     font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1105,7 +1088,9 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative;
+  z-index: 750; }
   #header > div.staroftheshow {
     flex-grow: 2;
     flex-shrink: 3;
@@ -1127,17 +1112,17 @@ body {
       margin-bottom: 0; }
       #header > div.staroftheshow h1 span {
         display: block;
-        animation-name: fadeIn;
+        animation-name: fadeInUp;
         animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
         animation-duration: 0.4s;
         animation-fill-mode: forwards;
         opacity: 0; }
         #header > div.staroftheshow h1 span:first-child {
-          animation-delay: 0.5s; }
+          animation-delay: 1s; }
         #header > div.staroftheshow h1 span.logo {
           padding: 30px 0; }
         #header > div.staroftheshow h1 span:last-child {
-          animation-delay: 0.7s; }
+          animation-delay: 1.25s; }
   #header > div.invitation {
     flex-grow: 1;
     flex-shrink: 1;
@@ -1172,16 +1157,19 @@ body {
 
 #main {
   position: relative;
-  height: 750vh;
-  background-color: #161920; }
+  height: 550vh;
+  z-index: 500; }
   #main .map {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #2b313e;
-    transition: width 0.25s 0.2s; }
+    background-color: #fff;
+    transition: width 0.25s 0.2s;
+    z-index: 500; }
+    #main .map.fixed {
+      position: fixed; }
     #main .map canvas {
       width: 100% !important;
       height: 100% !important;
@@ -1202,6 +1190,7 @@ body {
         #main .map .graphics .polygon.mexico {
           fill: #3f495c; }
     #main .map .locator {
+      opacity: 0;
       width: 10px;
       height: 10px;
       background-color: #f94949;
@@ -1211,7 +1200,7 @@ body {
       border-radius: 50%;
       margin: -5px 0 0 -5px;
       z-index: 20;
-      transition: left 0.25s 0.2s; }
+      transition: left 0.25s ease, opacity 0.2s ease; }
       #main .map .locator:after {
         content: "";
         display: block;
@@ -1238,9 +1227,7 @@ body {
         height: 10px;
         pointer-events: none;
         position: fixed;
-        top: 195px;
-        right: 635px;
-        box-shadow: 0 0 16px rgba(0, 0, 0, 0.3); }
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.2); }
         #main .map .locator .morph-content > div {
           width: 100%;
           height: 100%;
@@ -1378,6 +1365,7 @@ body {
       transition: width 0.25s; }
 
 #footer {
+  z-index: 1000;
   position: relative;
   height: 100vh;
   display: flex;
@@ -1410,6 +1398,52 @@ body {
         #footer ul li a:hover {
           background-color: #4a556b; }
 
+.nicer-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1500;
+  background-color: #fff;
+  pointer-events: none;
+  animation-delay: 1s;
+  animation-name: splashOverlay;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; }
+  .nicer-splash .logo {
+    position: absolute;
+    display: block;
+    width: 440px;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -220px;
+    animation-delay: 0.5s;
+    animation-name: splashLogo;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; }
+    .nicer-splash .logo .svg-logo {
+      width: 100%;
+      height: auto; }
+      .nicer-splash .logo .svg-logo .letter {
+        fill: #f94949; }
+
+@keyframes splashLogo {
+  0% {
+    opacity: 1;
+    width: 440px;
+    top: 50%;
+    margin: -60px 0 0 -220px; }
+  100% {
+    opacity: 0;
+    width: 375px;
+    top: 30%;
+    margin: -51px 0 0 -187.5px; } }
+@keyframes splashOverlay {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 .showcase-items {
   margin-top: 2.5em; }
   .showcase-items .showcase-item {
@@ -1615,6 +1649,12 @@ body {
     margin-bottom: 1em; }
   .cv-blocks > [class*='col-']:last-child {
     margin-bottom: 3em; } }
+.cv-blocks a {
+  border-bottom: 1px solid transparent;
+  transition: border 0.2s ease, color 0.2s ease; }
+  .cv-blocks a:hover, .cv-blocks a:focus {
+    color: #d50707;
+    border-bottom-color: #d50707; }
 
 .upcoming {
   display: inline-block;
@@ -1833,6 +1873,141 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+#main.inner.contact {
+  padding-bottom: 0; }
+  #main.inner.contact > p {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px; }
+
+.contact-form {
+  padding: 40px 0 0 0;
+  margin-top: 40px;
+  background-color: #dbdfe3; }
+  .contact-form .centered {
+    max-width: 1000px;
+    padding: 0 3.125%;
+    margin: 0 auto 30px auto; }
+  .contact-form p {
+    line-height: 2.4;
+    text-align: center;
+    margin: 0 auto 2em auto;
+    max-width: 800px; }
+  .contact-form input[type="text"] {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    background: none;
+    -webkit-appearance: none;
+    border-bottom: 1px solid #a1adb7;
+    border-radius: 0;
+    padding: 0 3px;
+    margin: 0 4px; }
+    @media (max-width: 1200px) {
+      .contact-form input[type="text"] {
+        font-size: 17.64px; } }
+    @media (max-width: 992px) {
+      .contact-form input[type="text"] {
+        font-size: 17.28px; } }
+    @media (max-width: 767px) {
+      .contact-form input[type="text"] {
+        font-size: 16.2px; } }
+    @media (max-width: 480px) {
+      .contact-form input[type="text"] {
+        font-size: 15.48px; } }
+    .contact-form input[type="text"]:focus {
+      border-color: #f94949; }
+  .contact-form select {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.8;
+    background: none;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-color: #bec6cd #bec6cd #a1adb7 #bec6cd;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 0 16px 0 4px;
+    margin: 0 4px;
+    background: url("/img/select.png") no-repeat calc(100% - 4px) 50%;
+    background-image: url("/img/select.svg"), none; }
+    @media (max-width: 1200px) {
+      .contact-form select {
+        font-size: 17.64px; } }
+    @media (max-width: 992px) {
+      .contact-form select {
+        font-size: 17.28px; } }
+    @media (max-width: 767px) {
+      .contact-form select {
+        font-size: 16.2px; } }
+    @media (max-width: 480px) {
+      .contact-form select {
+        font-size: 15.48px; } }
+    .contact-form select:focus {
+      color: #f94949;
+      border-color: #f94949; }
+  .contact-form textarea {
+    width: 100%;
+    max-width: 1000px;
+    height: 30vh;
+    font-size: 21px;
+    font-weight: 600;
+    color: #a1adb7;
+    padding: 10px;
+    background: none;
+    border: 1px solid #b8c1c8;
+    box-sizing: border-box;
+    resize: vertical;
+    -webkit-appearance: none;
+    margin: 0 auto; }
+    @media (max-width: 1200px) {
+      .contact-form textarea {
+        font-size: 20.58px; } }
+    @media (max-width: 992px) {
+      .contact-form textarea {
+        font-size: 20.16px; } }
+    @media (max-width: 767px) {
+      .contact-form textarea {
+        font-size: 18.9px; } }
+    @media (max-width: 480px) {
+      .contact-form textarea {
+        font-size: 18.06px; } }
+    .contact-form textarea:hover {
+      border-color: #a1adb7; }
+    .contact-form textarea:focus {
+      color: #3d474f;
+      border-color: #f94949; }
+    .contact-form textarea.filled {
+      color: #3d474f; }
+  .contact-form input[type="submit"] {
+    padding: 50px 0;
+    margin-top: 20px;
+    background: #f94949;
+    border: none;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 2.4em;
+    color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none; }
+    @media (max-width: 1200px) {
+      .contact-form input[type="submit"] {
+        font-size: 2.352em; } }
+    @media (max-width: 992px) {
+      .contact-form input[type="submit"] {
+        font-size: 2.304em; } }
+    @media (max-width: 767px) {
+      .contact-form input[type="submit"] {
+        font-size: 2.16em; } }
+    @media (max-width: 480px) {
+      .contact-form input[type="submit"] {
+        font-size: 2.064em; } }
+    .contact-form input[type="submit"]:hover, .contact-form input[type="submit"]:focus {
+      background-color: #fa6262; }
+    .contact-form input[type="submit"]:active {
+      background-color: #f71818; }
+
 ::selection {
   background-color: #f71818;
   color: #FFF; }
@@ -2026,7 +2201,12 @@ p {
   p:last-child {
     margin-bottom: 0; }
   p a {
-    font-weight: 500; }
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border 0.2s ease, color 0.2s ease; }
+    p a:hover, p a:focus {
+      color: #f94949;
+      border-bottom-color: #f94949; }
 
 ol, ul {
   font-size: 1.8em;

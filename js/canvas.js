@@ -1,4 +1,7 @@
 //----------- GLOBAL VARIABLES -----------
+var $window = $(window);
+var $locator = $(".locator");
+var $map = $(".map");
 
 //--------------- PLACES -----------------
 var cuernavaca = {name:"cuernavaca",x:1042,y:1672};
@@ -12,23 +15,34 @@ var speed = 0, isRunning = true;
 
 var c, ctx, reqAnimFrame, plane, destiny, viewPort;
 
+function preventDefault(e) {
+	e = e || window.event;
+	if (e.preventDefault) {
+    	e.preventDefault();
+    	e.returnValue = false;
+    }
+}
+
+
 $(window).load(function () {
-	if ($("div.map").hasClass("open")) {
-		//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
-		start($("div.morph-content").width());
-	}
-	else {
-		start(0);
-	}
+	$window.trigger("scroll");
+	$window.trigger("resize");
 });
 
 $(window).ready(function () {
 	checkForChanges();
 }); 	
 
+$(window).scroll(function () {
+	checkWhichLocation();
+});
+
+
+//Every half a second checks if the map has being changed (This means, if the morph-content is open or not)
+//This needs to be done since the map should be re-drawn when the morph-content is open
 function checkForChanges() {
     if ($("div.map").hasClass("open")) {
-		console.log("entra");
+		console.log("Draws the map again since the morph-content is open");
 		//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
 		start($("div.morph-content").width());
 	}
@@ -98,6 +112,7 @@ function animate() {
 		plane._y = calcY(plane._x);
 		
 		if (plane._x >= destiny.x && speed != 0) {
+
 			//---- Make a proper stop ----
 			plane._x = destiny.x;
 			plane._y = destiny.y;
@@ -133,21 +148,10 @@ function draw(){
     
 }
 
-//---- Avoids the over-rendering of the map,
-//---- It only renders when the speed is != 0
-function checkStatusOfSpeed() {
-	if (speed != 0 && !isRunning) {
-		isRunning = true;
-		
-		//Closes the morph next to the map
-		//$("div.map").removeClass("open");
-		//$("div.locator.active").removeClass("open " + location);
-		animate();
-	}
-	else if (speed == 0 && isRunning) {
-		isRunning = false;
-	}
+function calcSlope(origin, destiny) {
+	return (origin.y-destiny.y) / (origin.x-destiny.x);
 }
+
 
 //---- Gets the ecuation between two points so it goes straight when it "travels"
 function calcY(x) {
@@ -155,30 +159,25 @@ function calcY(x) {
 	var m = calcSlope(viewPort, destiny);
 	var y;
 	
-	return y = (m * x) - (m * viewPort.x) + viewPort.y;;
+	return y = (m * x) - (m * viewPort.x) + viewPort.y;
 }
 
-function calcSlope(origin, destiny) {
-	return (origin.y-destiny.y) / (origin.x-destiny.x);;
+//---- Avoids the over-rendering of the map,
+//---- It only renders when the speed is != 0
+function checkStatusOfSpeed() {
+	if (speed !== 0 && !isRunning) {
+		isRunning = true;
+		
+		//Closes the morph next to the map
+		//$("div.map").removeClass("open");
+		//$("div.locator.active").removeClass("open " + location);
+		animate();
+	}
+	else if (speed === 0 && isRunning) {
+		isRunning = false;
+	}
 }
 
-// left: 37, up: 38, right: 39, down: 40,
-// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-
-function preventDefault(e) {
-  e = e || window.event;
-  if (e.preventDefault)
-      e.preventDefault();
-  e.returnValue = false;  
-}
-
-function preventDefaultForScrollKeys(e) {
-    if (keys[e.keyCode]) {
-        preventDefault(e);
-        return false;
-    }
-}
 
 function disableScroll() {
 	console.log("disabled");
@@ -231,57 +230,63 @@ function calcMapViewPort(placeVP) {
 	return values;
 }
 
-
-$(window).scroll(function () {
-	checkWhichLocation();
-});
-
+//If the website is loaded in the middle of the window height, then it should render the map on that specific location
 function checkWhichLocation () {
 	var scroll = $(window).scrollTop();
-	$div = $("div.locator");
 	
-	//Missing - Also check on the condition if the canvas map is visible (if they are going to start navigating on the map)
-	if (scroll < 1000 && ($div.data("location") != "cuernavaca")) {
-		$div.data("location", "cuernavaca");
-		destiny = calcMapViewPort(cuernavaca);
-		speed = 1;
-		//checkStatusOfSpeed("cuernavaca");
-		checkStatusOfSpeed();
+	var windowHeight = $(window).height();
+	
+	console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
+	
+	if (scroll < windowHeight) {
+		$locator.css("opacity", 0);
 	}
 	
-	if (scroll > 1000 && scroll < 1200 && ($div.data("location") != "norrkoping")) {
-		$div.data("location", "norrkoping");
+	if (scroll >= windowHeight) {
+		$locator.css("opacity", 1);
+	}
+	
+	if (scroll < (windowHeight * 1.5)) {
+		destiny = calcMapViewPort(cuernavaca);
+		$map.removeClass("open");
+		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");	
+	}
+	
+
+	if ( scroll >= (windowHeight * 1.5) && scroll <= (windowHeight * 2.5)) {
+		destiny = calcMapViewPort(cuernavaca);
+		speed = 10;
+		checkStatusOfSpeed();
+		$map.addClass("open");
+		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+	}
+	
+	if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
+		$map.addClass("open");
+		$locator.data("location", "norrkoping").addClass("open norrkoping");
 		destiny = calcMapViewPort(norrkoping);
 		speed = 10;
-		//checkStatusOfSpeed("norrkoping");
 		checkStatusOfSpeed();
 	}
 
-	if (scroll > 1200 && scroll < 1800 && ($div.data("location") != "stockholm")) {
-		$div.data("location", "stockholm");
+	if (scroll > 1200 && scroll < 1800 && ($locator.data("location") !== "stockholm")) {
+		$locator.data("location", "stockholm");
 		destiny = calcMapViewPort(stockholm);
 		speed = 1;
-		//checkStatusOfSpeed("stockholm");
 		checkStatusOfSpeed();
 	}
 	
-	if (scroll > 1800 && scroll < 2400 && ($div.data("location") != "uppsala")) {
-		$div.data("location", "uppsala");
+	if (scroll > 1800 && scroll < 2400 && ($locator.data("location") !== "uppsala")) {
+		$locator.data("location", "uppsala");
 		destiny = calcMapViewPort(uppsala);
 		speed = 1;
-		//checkStatusOfSpeed("uppsala");
 		checkStatusOfSpeed();		
 	}
 
-	if (scroll > 2400 && ($div.data("location") != "munich")) {
-		$div.data("location", "munich");	
+	if (scroll > 2400 && ($locator.data("location") !== "munich")) {
+		$locator.data("location", "munich");	
 		destiny = calcMapViewPort(munich);
 		speed = 1;
-		//checkStatusOfSpeed("munich");
 		checkStatusOfSpeed();
-	}	
+	}
 }
-
-
-
-

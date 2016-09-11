@@ -13,14 +13,10 @@
 				max-width: 110px;
 				margin: 0 auto;
 				padding-bottom: 10px;
-				animation-delay: 1s;
-				animation-name: fadeIn;
-				animation-fill-mode: forwards;
-				animation-duration: 1s;
 				
 				.svg-logo {
 					max-width: 100%;
-					height: auto;
+					height: 30px;
 					
 					.letter {
 						fill: $color-grey;
@@ -94,7 +90,7 @@
 #main.inner {
 	background-color: #fff;
 	height: auto;
-	padding: 50px 20px 80px 20px;
+	padding: 50px 20px;
 	max-width: 1000px;
 	margin: 0 auto;
 	
@@ -104,88 +100,37 @@
 }
 
 #contact-footer {
+	position: relative;
+	background-color: lighten($color-grey, 60%);
 	
-}
-
-.nicer-splash {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 999;
-	background-color: #fff;
-	pointer-events: none;
-	animation-delay: 1s;
-	animation-name: splashOverlay;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	
-	
-	.logo {
-		position: absolute;
-		display: block;
-		width: 440px;
-		top: 50%;
-		left: 50%;
-		margin: -60px 0 0 -220px;
-		animation-delay: 0.5s;
-		animation-name: splashLogo;
-		animation-duration: 1s;
-		animation-fill-mode: forwards;
+	h1 {
+		position: relative;
+		text-align: center;
+		@include scaleFontManual(3.6em,3.4em,3.2em,2.8em,2.4em);
+		line-height: 6;
+		color: $color-grey;
+		margin-bottom: 0;
+		font-weight: 500;
 		
-		.svg-logo {
+		a {
+			font-weight: 300;
+			position: absolute;
+			top: 100%;
+			left: 0;
 			width: 100%;
-			height: auto;
-			
-			.letter {
-				fill: $color-main;
-				transition: all 0.25s ease-in-out;
-				animation-delay: 0.5s;
-				animation-name: splashLogoColor;
-				animation-duration: 1s;
-				animation-fill-mode: forwards;
-			}
+			display: block;
+			background-color: lighten($color-grey, 50%);
+			color: $color-main;
+			transition: top 0.25s ease-in-out, background 0.25s ease-in-out, color 2s ease;
+		}
+		
+		&:hover a,
+		a:focus {
+			top: 0;
+			background-color: $color-main;
+			color: #fff;
 		}
 	}
-}
-
-
-@keyframes splashLogo {
-	
-	0% {
-		opacity: 1;
-		width: 440px;
-		top: 50%;
-		margin: -60px 0 0 -220px;
-	}
-	100% {
-		opacity: 0;
-		width: 110px;
-		top: 30px;
-		margin: -15px 0 0 -55px;
-	}
-	
-}
-
-@keyframes splashLogoColor {
-	0% {
-		fill: $color-main;
-	}
-	100% {
-		fill: $color-grey;
-	}
-}
-
-@keyframes splashOverlay {
-	
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
-	
 }
 
 

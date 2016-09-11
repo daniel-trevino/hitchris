@@ -1,30 +1,5 @@
 $(document).ready(function() {	
 		
-// Show navigation
-	var $navigation = $('.navigation');
-	
-	$('.navigation .burger').on('click', function() {
-		$navigation.addClass('visible');
-	});
-
-
-
-// Smooth scroll
-	$('a[href^="#"]').on('click', function (e) {
-		e.preventDefault();
-
-		var target = this.hash,
-	    $target = $(target);
-
-		if ($target && $target.length > 0) {
-			$('html, body').stop().animate({
-				'scrollTop': $target.offset().top
-			}, 500, 'swing', function () {
-				window.location.hash = target;
-			});
-		}
-	});
-	
 	
 	
 // Project tabbing
@@ -86,7 +61,6 @@ $(document).ready(function() {
 
 // Showcase
 
-/*
     $('.chart').easyPieChart({
         scaleColor: "#ecf0f1",
 	    lineWidth: 20,
@@ -96,15 +70,6 @@ $(document).ready(function() {
 	    size: 160,
 	    animate: 1500
     });
-*/
-	
-	
-	
-// Locator sidebar
-	$('.locator').on('click', function() {
-		$(this).toggleClass('open');
-		$(this).parent().toggleClass('open');
-	});
 
 	
 });
