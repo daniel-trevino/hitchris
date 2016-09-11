@@ -7,56 +7,48 @@ var stockholm = {name:"stockholm",x:2821, y:847};
 var uppsala = {name:"uppsala",x:2817, y:830};
 var munich = {name:"munich",x:2726, y:1133};
 
-//------- START PLACE --------
-var place = cuernavaca;
+//------- START STATUS --------
 var speed = 0, isRunning = true;
 
 var c, ctx, reqAnimFrame, plane, destiny, viewPort;
 
 $(window).load(function () {
-	checkWhichLocation();
-	speed = 0;	
-	
-	reqAnimFrame =
-    window.requestAnimationFrame || 
-    window.mozRequestAnimationFrame || 
-    window.webkitRequestAnimationFrame || 
-    window.msRequestAnimationFrame ||
-	window.oRequestAnimationFrame;
-    
-	c = document.getElementById('canvas');
-	ctx = c.getContext('2d');
-	var ratio = window.devicePixelRatio || 1;
-	
-	ctx.canvas.width  = window.innerWidth;
-	ctx.canvas.height = window.innerHeight;
-	
-	// 2. Ensure the element size stays the same. Basically transforms the percentage to pixels
-	c.style.width  = c.width + "px";
-	c.style.height = c.height + "px";
-	
-	// 3. Increase the canvas dimensions by the pixel ratio. Removes the pixels like magic.. don't understand it 100% yet
-	c.width  *= ratio;
-	c.height *= ratio;
-	
-	plane = new Image();
-	plane.onload = animate;
-	
-	viewPort = calcMapViewPort(window[$("div.locator").data("location")]);
-	
-	plane._x = viewPort.x;
-	plane._y = viewPort.y;
-	
-	plane.src = "/img/map.svg";
-	ctx.scale(ratio, ratio);
-	
-	animate();	
-	
-	checkStatusOfSpeed();	
+	if ($("div.map").hasClass("open")) {
+		//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
+		start($("div.morph-content").width());
+	}
+	else {
+		start(0);
+	}
+});
 
+$(window).ready(function () {
+	checkForChanges();
 }); 	
 
+function checkForChanges() {
+    if ($("div.map").hasClass("open")) {
+		console.log("entra");
+		//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
+		start($("div.morph-content").width());
+	}
+	else {
+		start(0);
+		setTimeout(checkForChanges, 500);
+	}
+}
+ 	
+
 $(window).resize(function () {
+	if ($("div.map").hasClass("open")) {
+		start($("div.morph-content").width());
+	}
+	else {
+		start(0);
+	}
+});
+
+function start(param) {
 	checkWhichLocation();
 	speed = 0;	
 	
@@ -71,7 +63,7 @@ $(window).resize(function () {
 	ctx = c.getContext('2d');
 	var ratio = window.devicePixelRatio || 1;
 	
-	ctx.canvas.width  = window.innerWidth;
+	ctx.canvas.width  = window.innerWidth - param;
 	ctx.canvas.height = window.innerHeight;
 	
 	// 2. Ensure the element size stays the same. Basically transforms the percentage to pixels
@@ -97,14 +89,14 @@ $(window).resize(function () {
 	animate();
 	
 	checkStatusOfSpeed();
-
-});
+}
 
 function animate() {
+	//Going backwards (norrkoping to cuernavaca)
     if (plane._x < destiny.x && speed != 0) {
 		plane._x += speed;
 		plane._y = calcY(plane._x);
-
+		
 		if (plane._x >= destiny.x && speed != 0) {
 			//---- Make a proper stop ----
 			plane._x = destiny.x;
@@ -119,9 +111,10 @@ function animate() {
     
     else {
 	    if (speed != 0) {
-		    disableScroll();
+		    //disableScroll();
 			plane._x += -(speed);
 			plane._y = calcY(plane._x);
+			console.log("Plane X: " + plane._x + " / Plane Y: " + plane._y);
 	    }
 	    
     }
@@ -145,6 +138,10 @@ function draw(){
 function checkStatusOfSpeed() {
 	if (speed != 0 && !isRunning) {
 		isRunning = true;
+		
+		//Closes the morph next to the map
+		//$("div.map").removeClass("open");
+		//$("div.locator.active").removeClass("open " + location);
 		animate();
 	}
 	else if (speed == 0 && isRunning) {
@@ -184,6 +181,7 @@ function preventDefaultForScrollKeys(e) {
 }
 
 function disableScroll() {
+	console.log("disabled");
 	if (window.addEventListener) { // older FF
 		window.addEventListener('DOMMouseScroll', preventDefault, false);
 	}
@@ -195,6 +193,7 @@ function disableScroll() {
 }
 
 function enableScroll() {
+	console.log("enabled");
     if (window.removeEventListener) {
 		window.removeEventListener('DOMMouseScroll', preventDefault, false);
     }
@@ -241,10 +240,12 @@ function checkWhichLocation () {
 	var scroll = $(window).scrollTop();
 	$div = $("div.locator");
 	
+	//Missing - Also check on the condition if the canvas map is visible (if they are going to start navigating on the map)
 	if (scroll < 1000 && ($div.data("location") != "cuernavaca")) {
 		$div.data("location", "cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
-		speed = 10;
+		speed = 1;
+		//checkStatusOfSpeed("cuernavaca");
 		checkStatusOfSpeed();
 	}
 	
@@ -252,6 +253,7 @@ function checkWhichLocation () {
 		$div.data("location", "norrkoping");
 		destiny = calcMapViewPort(norrkoping);
 		speed = 10;
+		//checkStatusOfSpeed("norrkoping");
 		checkStatusOfSpeed();
 	}
 
@@ -259,6 +261,7 @@ function checkWhichLocation () {
 		$div.data("location", "stockholm");
 		destiny = calcMapViewPort(stockholm);
 		speed = 1;
+		//checkStatusOfSpeed("stockholm");
 		checkStatusOfSpeed();
 	}
 	
@@ -266,13 +269,15 @@ function checkWhichLocation () {
 		$div.data("location", "uppsala");
 		destiny = calcMapViewPort(uppsala);
 		speed = 1;
-		checkStatusOfSpeed();
+		//checkStatusOfSpeed("uppsala");
+		checkStatusOfSpeed();		
 	}
 
 	if (scroll > 2400 && ($div.data("location") != "munich")) {
 		$div.data("location", "munich");	
 		destiny = calcMapViewPort(munich);
 		speed = 1;
+		//checkStatusOfSpeed("munich");
 		checkStatusOfSpeed();
 	}	
 }
