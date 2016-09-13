@@ -32,6 +32,11 @@ $(window).ready(function () {
 	//checkForChanges();
 }); 	
 
+//Force to start always on the top
+$(document).ready(function(){
+	window.scrollTo(0,0); //Avoids crashing when the site is loaded on the map view instead of bein on the top
+});
+
 $(window).scroll(function () {
 	checkWhichLocation();
 });
@@ -265,29 +270,28 @@ function checkWhichLocation () {
 	
 	console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
 	
+	//First view of the site (Christian's image)
 	if (scroll < windowHeight) {
 		// Default Scrollspeed
 		//jQuery.scrollSpeed(100, 800);
 		
 		$locator.css("opacity", 0);
-		$map.removeClass("open");
+		//This is just to set up a default location when the website is loaded on the first view (We need this to have the map rendered)
+		destiny = calcMapViewPort(cuernavaca);		
+		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");
+		
+		//Re-draws the map to the first state (without a morph content)
+		if ($("div.map").hasClass("open")) {
+			$map.removeClass("open loaded");
+			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
+			isRunning = true; //Enables rendering of the map
+			start(0); //The 360 is the value of the morph-content.width()
+			
+		}
+		
 	}
 	
-	if (scroll < (windowHeight * 1.5)) {
-		destiny = calcMapViewPort(cuernavaca);
-		//$map.removeClass("open");
-		$locator.data("location", "cuernavaca");
-		
-		/* Testing with the new scroll algorithm
-		if ($map.hasClass("open")) {
-			setTimeout(function() {
-				$map.addClass("loaded"); 
-			}, 2000);
-		}*/
-		
-		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");	
-	}
-	
+	//Second view of the site (Located in cuernavaca)
 	if (scroll >= windowHeight) {
 		$locator.css("opacity", 1);
 		$map.addClass("open");
@@ -297,13 +301,15 @@ function checkWhichLocation () {
 		//jQuery.scrollSpeed(100, 800);
 		
 		
-		
 		//Re-draws the map
-		/*if ($("div.map").hasClass("open")) {
-			console.log("Draws the map again since the morph-content is open");
+		if ($("div.map").hasClass("open") && $("div.morph-content").is(':visible') && !$map.hasClass("loaded")) {
+			$map.addClass("loaded");
+		
 			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
-			//start($("div.morph-content").width());
-		}*/
+			isRunning = true; //Enables rendering of the map
+			start(360); //The 360 is the value of the morph-content.width()
+			
+		}
 	}
 	
 

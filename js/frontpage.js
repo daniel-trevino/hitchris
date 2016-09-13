@@ -1,5 +1,4 @@
 $(document).ready( function() {
-	
 	var $window = $(window);
 	
 // Show navigation
@@ -8,7 +7,8 @@ $(document).ready( function() {
 	$(".navigation .burger").on("click", function() {
 		$navigation.addClass("visible");
 	});
-
+	
+	
 
 
 // Smooth scroll
