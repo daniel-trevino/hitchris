@@ -1364,7 +1364,7 @@ body {
       width: calc(100vw - 360px);
       transition: width 0.25s; }
 
-#footer {
+.index-footer {
   z-index: 1000;
   position: relative;
   height: 100vh;
@@ -1373,21 +1373,21 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #2b313e; }
-  #footer .logo {
+  .index-footer .logo {
     padding-bottom: 30px; }
-  #footer p {
+  .index-footer p {
     font-size: 3.6em;
     text-align: center;
     color: #f94949;
     max-width: 100%; }
-  #footer ul {
+  .index-footer ul {
     padding: 0;
     list-style: none;
     text-align: center; }
-    #footer ul li {
+    .index-footer ul li {
       display: inline-block;
       margin: 0 12px; }
-      #footer ul li a {
+      .index-footer ul li a {
         font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: 400;
         display: block;
@@ -1395,7 +1395,7 @@ body {
         background-color: #3f495c;
         padding: 0.6em 1.2em;
         border-radius: 3px; }
-        #footer ul li a:hover {
+        .index-footer ul li a:hover {
           background-color: #4a556b; }
 
 .nicer-splash {
@@ -1427,6 +1427,41 @@ body {
       height: auto; }
       .nicer-splash .logo .svg-logo .letter {
         fill: #f94949; }
+
+.credits {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 755; }
+  .credits .credit-toggle {
+    font-size: 1.8em;
+    line-height: 30px;
+    padding: 0;
+    width: 30px;
+    border-radius: 0;
+    box-shadow: none;
+    color: rgba(249, 73, 73, 0.5); }
+    .credits .credit-toggle:hover, .credits .credit-toggle:focus {
+      background-color: transparent;
+      color: #f94949; }
+  .credits .credit-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 1.4em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
+    .credits .credit-dropdown:active, .credits .credit-dropdown:focus {
+      display: block; }
+    .credits .credit-dropdown p {
+      font-size: 1.3em;
+      text-align: left;
+      color: #3d474f; }
+  .credits .credit-toggle:focus + .credit-dropdown {
+    display: block; }
 
 @keyframes splashLogo {
   0% {

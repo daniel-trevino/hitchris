@@ -633,7 +633,7 @@ body {
 	}
 }
 
-#footer {
+.index-footer {
 	z-index: 1000;
 	position: relative;
 	height: 100vh;
@@ -715,6 +715,56 @@ body {
 				fill: $color-main;
 			}
 		}
+	}
+}
+
+.credits {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	z-index: 755;
+	
+	.credit-toggle {
+		font-size: 1.8em;
+		line-height: 30px;
+		padding: 0;
+		width: 30px;
+		border-radius: 0;
+		box-shadow: none;
+		color: rgba($color-main, 0.5);
+		
+		&:hover,
+		&:focus {
+			background-color: transparent;
+			color: $color-main;
+		}
+	}
+	
+	.credit-dropdown {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		width: 200px;
+		background-color: #fff;
+		border-radius: 3px;
+		padding: 1.4em;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+		
+		&:active,
+		&:focus {
+			display: block;
+		}
+		
+		p {
+			font-size: 1.3em;
+			text-align: left;
+			color: $color-grey;
+		}
+	}
+	
+	.credit-toggle:focus + .credit-dropdown {
+		display: block;
 	}
 }
 
