@@ -23,14 +23,13 @@ function preventDefault(e) {
     }
 }
 
-
 $(window).load(function () {
 	$window.trigger("scroll");
 	$window.trigger("resize");
 });
 
 $(window).ready(function () {
-	checkForChanges();
+	//checkForChanges();
 }); 	
 
 $(window).scroll(function () {
@@ -47,8 +46,9 @@ function checkForChanges() {
 		start($("div.morph-content").width());
 	}
 	else {
+		console.log("The morph-content is closed, it should re-draw the map");
 		start(0);
-		setTimeout(checkForChanges, 500);
+		//setTimeout(checkForChanges, 500);
 	}
 }
  	
@@ -230,6 +230,33 @@ function calcMapViewPort(placeVP) {
 	return values;
 }
 
+//Do not touch this
+/*var lastScrollTop = 0;
+$(window).scroll(function(event){
+	var st = $(this).scrollTop();
+	if (st > lastScrollTop){
+		if ($locator.data("location") == "cuernavaca" && $map.hasClass("loaded")) {
+		   $map.removeClass("loaded");
+		   $map.addClass("open");
+		   $locator.removeClass("cuernavaca");
+		   $locator.data("location", "norrkoping").addClass("open norrkoping");
+		   destiny = calcMapViewPort(norrkoping);
+		   speed = 10;
+		   checkStatusOfSpeed();
+	   }
+	   else if ($locator.data("location") == "norrkoping" && $map.hasClass("loaded")) {
+		   setTimeout(function() {
+		   	$map.addClass("loaded"); 
+		   }, 2000);
+			console.log("Send to stockholm")
+		}
+	   // downscroll code
+	} else {
+	  // upscroll code
+	}
+	lastScrollTop = st;
+});*/
+
 //If the website is loaded in the middle of the window height, then it should render the map on that specific location
 function checkWhichLocation () {
 	var scroll = $(window).scrollTop();
@@ -239,17 +266,44 @@ function checkWhichLocation () {
 	console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
 	
 	if (scroll < windowHeight) {
+		// Default Scrollspeed
+		//jQuery.scrollSpeed(100, 800);
+		
 		$locator.css("opacity", 0);
-	}
-	
-	if (scroll >= windowHeight) {
-		$locator.css("opacity", 1);
+		$map.removeClass("open");
 	}
 	
 	if (scroll < (windowHeight * 1.5)) {
 		destiny = calcMapViewPort(cuernavaca);
-		$map.removeClass("open");
+		//$map.removeClass("open");
+		$locator.data("location", "cuernavaca");
+		
+		/* Testing with the new scroll algorithm
+		if ($map.hasClass("open")) {
+			setTimeout(function() {
+				$map.addClass("loaded"); 
+			}, 2000);
+		}*/
+		
 		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");	
+	}
+	
+	if (scroll >= windowHeight) {
+		$locator.css("opacity", 1);
+		$map.addClass("open");
+		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+		
+		// Custom Scrolling (Maybe adding custom scrolling on these cases?)
+		//jQuery.scrollSpeed(100, 800);
+		
+		
+		
+		//Re-draws the map
+		/*if ($("div.map").hasClass("open")) {
+			console.log("Draws the map again since the morph-content is open");
+			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
+			//start($("div.morph-content").width());
+		}*/
 	}
 	
 
@@ -272,21 +326,21 @@ function checkWhichLocation () {
 	if (scroll > 1200 && scroll < 1800 && ($locator.data("location") !== "stockholm")) {
 		$locator.data("location", "stockholm");
 		destiny = calcMapViewPort(stockholm);
-		speed = 1;
+		speed = 10;
 		checkStatusOfSpeed();
 	}
 	
 	if (scroll > 1800 && scroll < 2400 && ($locator.data("location") !== "uppsala")) {
 		$locator.data("location", "uppsala");
 		destiny = calcMapViewPort(uppsala);
-		speed = 1;
+		speed = 10;
 		checkStatusOfSpeed();		
 	}
 
 	if (scroll > 2400 && ($locator.data("location") !== "munich")) {
 		$locator.data("location", "munich");	
 		destiny = calcMapViewPort(munich);
-		speed = 1;
+		speed = 10;
 		checkStatusOfSpeed();
 	}
 }
