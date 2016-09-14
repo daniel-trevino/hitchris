@@ -1157,8 +1157,13 @@ body {
 
 #main {
   position: relative;
-  height: 550vh;
+  height: 500vh;
   z-index: 500; }
+  #main .scroll-target {
+    background: transparent;
+    width: 100vh;
+    height: 100vh;
+    z-index: 0; }
   #main .map {
     position: absolute;
     top: 0;
@@ -1320,7 +1325,7 @@ body {
           #main .map .locator .morph-content > div .location-footer {
             flex: 0 0 auto;
             padding: 15px 20px 20px 20px; }
-            #main .map .locator .morph-content > div .location-footer button {
+            #main .map .locator .morph-content > div .location-footer .next-location {
               display: block;
               width: 100%;
               align-self: flex-end; }
@@ -1429,12 +1434,11 @@ body {
         fill: #f94949; }
 
 .scroll-icon {
+  display: none;
   z-index: 999;
   position: fixed;
-  left: 10vw;
-  bottom: 10vw;
-  margin-left: -20px;
-  margin-bottom: -35px;
+  left: 4vw;
+  bottom: 4vw;
   width: 40px;
   height: 70px;
   box-shadow: inset 0 0 0 1px #2b313e;
