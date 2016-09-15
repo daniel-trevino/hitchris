@@ -186,11 +186,13 @@ function checkStatusOfSpeed() {
 		animate();
 	}
 	else if (speed === 0 && isRunning) {
+/*
 		if ($map.hasClass("traveling")) {
 			$map.removeClass("traveling");
 			$map.addClass("open");
 			//$locator.addClass("open " + $locator.data("location"));
 		}
+*/
 		
 		enableScroll();
 		isRunning = false;
@@ -260,6 +262,7 @@ function calcMapViewPort(placeVP) {
 }
 
 
+/*
 
 var lastScrollTop = 0;
 $(window).scroll(function(event){
@@ -285,6 +288,7 @@ $(window).scroll(function(event){
 	}
 	lastScrollTop = st;
 });
+*/
 
 
 //If the website is loaded in the middle of the window height, then it should render the map on that specific location
@@ -335,10 +339,6 @@ function checkWhichLocation () {
 			speed = 10;
 			$locator.removeClass("norrkoping");
 		}
-		
-		setTimeout(function() {
-		   $map.addClass("traveled"); 
-		}, 2000);
 		
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
