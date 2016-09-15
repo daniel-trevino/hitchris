@@ -173,6 +173,8 @@ function calcY(x) {
 function checkStatusOfSpeed() {
 	if (speed !== 0 && !isRunning) {
 		isRunning = true;
+	
+		disableScroll();
 		
 		/*if ($map.hasClass("loaded") && !$map.hasClass("traveling")) {
 			$map.addClass("traveling");
@@ -189,13 +191,14 @@ function checkStatusOfSpeed() {
 			$map.addClass("open");
 			//$locator.addClass("open " + $locator.data("location"));
 		}
+		
+		enableScroll();
 		isRunning = false;
 	}
 }
 
 
 function disableScroll() {
-	console.log("disabled");
 	if (window.addEventListener) { // older FF
 		window.addEventListener('DOMMouseScroll', preventDefault, false);
 	}
@@ -206,8 +209,19 @@ function disableScroll() {
 	document.onkeydown  = preventDefaultForScrollKeys;
 }
 
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+
 function enableScroll() {
-	//console.log("enabled");
     if (window.removeEventListener) {
 		window.removeEventListener('DOMMouseScroll', preventDefault, false);
     }
@@ -245,32 +259,33 @@ function calcMapViewPort(placeVP) {
 	return values;
 }
 
-//Do not touch this
-/*var lastScrollTop = 0;
+
+
+var lastScrollTop = 0;
 $(window).scroll(function(event){
 	var st = $(this).scrollTop();
+	// downscroll code
 	if (st > lastScrollTop){
 		if ($locator.data("location") == "cuernavaca" && $map.hasClass("loaded")) {
-		   $map.removeClass("loaded");
-		   $map.addClass("open");
-		   $locator.removeClass("cuernavaca");
-		   $locator.data("location", "norrkoping").addClass("open norrkoping");
-		   destiny = calcMapViewPort(norrkoping);
-		   speed = 10;
-		   checkStatusOfSpeed();
+			//Avoids jumping directly to norrkoping if the users go too fast on the scroll
+			if ($map.hasClass("traveled")) {
+				//enableScroll();
+				//$("div.cuernavaca").find("a.next-location").trigger("click");	
+			}
+			else {
+				//disableScroll();
+			}
 	   }
 	   else if ($locator.data("location") == "norrkoping" && $map.hasClass("loaded")) {
-		   setTimeout(function() {
-		   	$map.addClass("loaded"); 
-		   }, 2000);
-			console.log("Send to stockholm")
+		   
 		}
-	   // downscroll code
+	   
 	} else {
 	  // upscroll code
 	}
 	lastScrollTop = st;
-});*/
+});
+
 
 //If the website is loaded in the middle of the window height, then it should render the map on that specific location
 function checkWhichLocation () {
@@ -321,9 +336,13 @@ function checkWhichLocation () {
 			$locator.removeClass("norrkoping");
 		}
 		
+		setTimeout(function() {
+		   $map.addClass("traveled"); 
+		}, 2000);
+		
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
-
+				
 		checkStatusOfSpeed();
 		
 		//Re-draws the map (When the morph is opened)
