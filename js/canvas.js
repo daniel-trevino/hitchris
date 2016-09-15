@@ -111,6 +111,7 @@ function start(param) {
 }
 
 function animate() {
+	console.log("speed: " + speed);
 	//Going backwards (norrkoping to cuernavaca)
     if (plane._x < destiny.x && speed != 0) {
 		plane._x += speed;
@@ -134,7 +135,7 @@ function animate() {
 		    //disableScroll();
 			plane._x += -(speed);
 			plane._y = calcY(plane._x);
-			console.log("Plane X: " + plane._x + " / Plane Y: " + plane._y);
+			//console.log("Plane X: " + plane._x + " / Plane Y: " + plane._y);
 	    }
 	    
     }
@@ -173,12 +174,21 @@ function checkStatusOfSpeed() {
 	if (speed !== 0 && !isRunning) {
 		isRunning = true;
 		
-		//Closes the morph next to the map
-		//$("div.map").removeClass("open");
-		//$("div.locator.active").removeClass("open " + location);
+		/*if ($map.hasClass("loaded") && !$map.hasClass("traveling")) {
+			$map.addClass("traveling");
+			$map.removeClass("open loaded");
+			$locator.removeClass("open cuernavaca");
+			//start(0); (If you re-draw here, it does not animate the traveling of the locator)
+		}*/
+		
 		animate();
 	}
 	else if (speed === 0 && isRunning) {
+		if ($map.hasClass("traveling")) {
+			$map.removeClass("traveling");
+			$map.addClass("open");
+			//$locator.addClass("open " + $locator.data("location"));
+		}
 		isRunning = false;
 	}
 }
@@ -197,7 +207,7 @@ function disableScroll() {
 }
 
 function enableScroll() {
-	console.log("enabled");
+	//console.log("enabled");
     if (window.removeEventListener) {
 		window.removeEventListener('DOMMouseScroll', preventDefault, false);
     }
@@ -268,7 +278,7 @@ function checkWhichLocation () {
 	
 	var windowHeight = $(window).height();
 	
-	console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
+	//console.log("Scroll: " + scroll + " / Window Height: " + windowHeight);
 	
 	//First view of the site (Christian's image)
 	if (scroll < windowHeight) {
@@ -292,8 +302,15 @@ function checkWhichLocation () {
 	}
 	
 	//Second view of the site (Located in cuernavaca)
-	if (scroll >= windowHeight) {
+	if (scroll >= windowHeight && scroll <= (windowHeight * 1.5)) {
+		console.log("Second view");
 		$locator.css("opacity", 1);
+		
+		//If the screen is loaded, but not traveling, set the class to open
+		/*if (!$map.hasClass("traveling")) {
+			$map.addClass("open");	
+			$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+		}*/
 		$map.addClass("open");
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		
@@ -312,41 +329,92 @@ function checkWhichLocation () {
 		}
 	}
 	
-
+	//Second and half view (Helps to bring the locator back to cuernavaca)
 	if ( scroll >= (windowHeight * 1.5) && scroll <= (windowHeight * 2.5)) {
-		destiny = calcMapViewPort(cuernavaca);
-		speed = 10;
-		checkStatusOfSpeed();
-		$map.addClass("open");
-		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
-	}
+		console.log("Second and half view");
+		//Only if it comes from norrkoping
+		if ($locator.data("location") == "norrkoping") {
+			
+			if ($locator.hasClass("norrkoping")) {
+				$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+				$locator.removeClass("norrkoping");
+			}
+			
+			destiny = calcMapViewPort(cuernavaca);
+			speed = 10;
+			checkStatusOfSpeed();
+			
+			//If the screen is loaded, but not traveling, set the class to open
+			/*if (!$map.hasClass("traveling")) {
+				$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+			}*/
+		}
+		
+	}	
 	
-	if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
-		$map.addClass("open");
+	//Third view (Going to Norrkoping)
+	//if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
+	if (scroll > (windowHeight * 2.5) && scroll <= (windowHeight * 3.5)) {
+		console.log("Third View");	
+		if ($locator.hasClass("cuernavaca")) { 
+			speed = 10;
+			$locator.removeClass("cuernavaca");
+		}
+		else if ($locator.hasClass("stockholm")) { //The speed from Stockholm to Norrkoping
+			speed = 1;
+			$locator.removeClass("stockholm");
+		}
+		
 		$locator.data("location", "norrkoping").addClass("open norrkoping");
 		destiny = calcMapViewPort(norrkoping);
-		speed = 10;
-		checkStatusOfSpeed();
-	}
 
-	if (scroll > 1200 && scroll < 1800 && ($locator.data("location") !== "stockholm")) {
-		$locator.data("location", "stockholm");
-		destiny = calcMapViewPort(stockholm);
-		speed = 10;
 		checkStatusOfSpeed();
 	}
 	
-	if (scroll > 1800 && scroll < 2400 && ($locator.data("location") !== "uppsala")) {
-		$locator.data("location", "uppsala");
-		destiny = calcMapViewPort(uppsala);
-		speed = 10;
-		checkStatusOfSpeed();		
+	//Fourth view (Going to Stockholm)
+	if (scroll > (windowHeight * 3.5) && scroll <= (windowHeight * 4.5)) {
+		console.log("Fourth View");	
+		if ($locator.hasClass("norrkoping")) {
+			speed = 1;
+			$locator.removeClass("norrkoping");
+		}
+		else if ($locator.hasClass("uppsala")) {
+			speed = 0.1;
+			$locator.removeClass("uppsala");
+		}
+		
+		$locator.data("location", "stockholm").addClass("open stockholm");
+		destiny = calcMapViewPort(stockholm);
+		checkStatusOfSpeed();
 	}
-
-	if (scroll > 2400 && ($locator.data("location") !== "munich")) {
-		$locator.data("location", "munich");	
-		destiny = calcMapViewPort(munich);
-		speed = 10;
+	
+	//Fifth view (Going to Stockholm)
+	if (scroll > (windowHeight * 4.5) && scroll <= (windowHeight * 5.5)) {
+		console.log("Fifth View");	
+		if ($locator.hasClass("stockholm")) { //If it's going from stockholm to Uppsala
+			speed = 0.1;
+			$locator.removeClass("stockholm");
+		}
+		else if ($locator.hasClass("munich")) { //If it's coming from munich to Uppsala
+			speed = 1;
+			$locator.removeClass("munich");
+		}
+		
+		$locator.data("location", "uppsala").addClass("open uppsala");
+		destiny = calcMapViewPort(uppsala);		
+		checkStatusOfSpeed();
+	}
+	
+	//Sixth view (Going to Stockholm)
+	if (scroll > (windowHeight * 5.5) && scroll <= (windowHeight * 6.5)) {
+		console.log("Sixth View");	
+		if ($locator.hasClass("uppsala")) { //If it's going from stockholm to Uppsala
+			$locator.removeClass("uppsala");
+		}
+		
+		$locator.data("location", "munich").addClass("open munich");
+		destiny = calcMapViewPort(munich);		
+		speed = 1;
 		checkStatusOfSpeed();
 	}
 }
