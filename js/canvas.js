@@ -111,7 +111,7 @@ function start(param) {
 }
 
 function animate() {
-	console.log("speed: " + speed);
+	//console.log("speed: " + speed);
 	//Going backwards (norrkoping to cuernavaca)
     if (plane._x < destiny.x && speed != 0) {
 		plane._x += speed;
@@ -303,7 +303,7 @@ function checkWhichLocation () {
 	
 	//Second view of the site (Located in cuernavaca)
 	if (scroll >= windowHeight && scroll < (windowHeight * 2)) {
-		console.log("Second view");
+		//console.log("Second view");
 		$locator.css("opacity", 1);
 		$map.addClass("open");
 		
@@ -342,7 +342,7 @@ function checkWhichLocation () {
 	//Third view (Going to Norrkoping)
 	//if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
 	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 3)) {
-		console.log("Third View");	
+		//console.log("Third View");	
 		if ($locator.hasClass("cuernavaca")) { 
 			speed = 10;
 			$locator.removeClass("cuernavaca");
@@ -360,7 +360,7 @@ function checkWhichLocation () {
 	
 	//Fourth view (Going to Stockholm)
 	if (scroll >= (windowHeight * 3) && scroll < (windowHeight * 4)) {
-		console.log("Fourth View");	
+		//console.log("Fourth View");	
 		if ($locator.hasClass("norrkoping")) {
 			speed = 1;
 			$locator.removeClass("norrkoping");
@@ -377,7 +377,7 @@ function checkWhichLocation () {
 	
 	//Fifth view (Going to Uppsala)
 	if (scroll >= (windowHeight * 4) && scroll < (windowHeight * 5)) {
-		console.log("Fifth View");	
+		//console.log("Fifth View");	
 		if ($locator.hasClass("stockholm")) { //If it's going from stockholm to Uppsala
 			speed = 0.1;
 			$locator.removeClass("stockholm");
@@ -394,7 +394,7 @@ function checkWhichLocation () {
 	
 	//Sixth view (Going to Munich)
 	if (scroll >= (windowHeight * 5) && scroll <= (windowHeight * 6)) {
-		console.log("Sixth View");	
+		//console.log("Sixth View");	
 		if ($locator.hasClass("uppsala")) { //If it's going from stockholm to Uppsala
 			$locator.removeClass("uppsala");
 		}
