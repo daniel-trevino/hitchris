@@ -305,20 +305,28 @@ function checkWhichLocation () {
 	if (scroll >= windowHeight && scroll < (windowHeight * 2)) {
 		console.log("Second view");
 		$locator.css("opacity", 1);
+		$map.addClass("open");
+		
+		// Custom Scrolling (Maybe adding custom scrolling on these cases?)
+		//jQuery.scrollSpeed(100, 800);
 		
 		//If the screen is loaded, but not traveling, set the class to open
 		/*if (!$map.hasClass("traveling")) {
 			$map.addClass("open");	
 			$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		}*/
-		$map.addClass("open");
+		
+		if ($locator.hasClass("norrkoping")) { 
+			speed = 10;
+			$locator.removeClass("norrkoping");
+		}
+		
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
+		destiny = calcMapViewPort(cuernavaca);
+
+		checkStatusOfSpeed();
 		
-		// Custom Scrolling (Maybe adding custom scrolling on these cases?)
-		//jQuery.scrollSpeed(100, 800);
-		
-		
-		//Re-draws the map
+		//Re-draws the map (When the morph is opened)
 		if ($("div.map").hasClass("open") && $("div.morph-content").is(':visible') && !$map.hasClass("loaded")) {
 			$map.addClass("loaded");
 		
