@@ -302,7 +302,7 @@ function checkWhichLocation () {
 	}
 	
 	//Second view of the site (Located in cuernavaca)
-	if (scroll >= windowHeight && scroll <= (windowHeight * 1.5)) {
+	if (scroll >= windowHeight && scroll < (windowHeight * 2)) {
 		console.log("Second view");
 		$locator.css("opacity", 1);
 		
@@ -329,32 +329,11 @@ function checkWhichLocation () {
 		}
 	}
 	
-	//Second and half view (Helps to bring the locator back to cuernavaca)
-	if ( scroll >= (windowHeight * 1.5) && scroll <= (windowHeight * 2.5)) {
-		console.log("Second and half view");
-		//Only if it comes from norrkoping
-		if ($locator.data("location") == "norrkoping") {
-			
-			if ($locator.hasClass("norrkoping")) {
-				$locator.data("location", "cuernavaca").addClass("open cuernavaca");
-				$locator.removeClass("norrkoping");
-			}
-			
-			destiny = calcMapViewPort(cuernavaca);
-			speed = 10;
-			checkStatusOfSpeed();
-			
-			//If the screen is loaded, but not traveling, set the class to open
-			/*if (!$map.hasClass("traveling")) {
-				$locator.data("location", "cuernavaca").addClass("open cuernavaca");
-			}*/
-		}
-		
-	}	
+	
 	
 	//Third view (Going to Norrkoping)
 	//if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
-	if (scroll > (windowHeight * 2.5) && scroll <= (windowHeight * 3.5)) {
+	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 3)) {
 		console.log("Third View");	
 		if ($locator.hasClass("cuernavaca")) { 
 			speed = 10;
@@ -372,7 +351,7 @@ function checkWhichLocation () {
 	}
 	
 	//Fourth view (Going to Stockholm)
-	if (scroll > (windowHeight * 3.5) && scroll <= (windowHeight * 4.5)) {
+	if (scroll >= (windowHeight * 3) && scroll < (windowHeight * 4)) {
 		console.log("Fourth View");	
 		if ($locator.hasClass("norrkoping")) {
 			speed = 1;
@@ -388,8 +367,8 @@ function checkWhichLocation () {
 		checkStatusOfSpeed();
 	}
 	
-	//Fifth view (Going to Stockholm)
-	if (scroll > (windowHeight * 4.5) && scroll <= (windowHeight * 5.5)) {
+	//Fifth view (Going to Uppsala)
+	if (scroll >= (windowHeight * 4) && scroll < (windowHeight * 5)) {
 		console.log("Fifth View");	
 		if ($locator.hasClass("stockholm")) { //If it's going from stockholm to Uppsala
 			speed = 0.1;
@@ -405,8 +384,8 @@ function checkWhichLocation () {
 		checkStatusOfSpeed();
 	}
 	
-	//Sixth view (Going to Stockholm)
-	if (scroll > (windowHeight * 5.5) && scroll <= (windowHeight * 6.5)) {
+	//Sixth view (Going to Munich)
+	if (scroll >= (windowHeight * 5) && scroll <= (windowHeight * 6)) {
 		console.log("Sixth View");	
 		if ($locator.hasClass("uppsala")) { //If it's going from stockholm to Uppsala
 			$locator.removeClass("uppsala");
