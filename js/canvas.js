@@ -308,6 +308,7 @@ function checkWhichLocation () {
 		//This is just to set up a default location when the website is loaded on the first view (We need this to have the map rendered)
 		destiny = calcMapViewPort(cuernavaca);		
 		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");
+		history.pushState("", document.title, window.location.pathname + window.location.search);
 		
 		//Re-draws the map to the first state (without a morph content)
 		if ($("div.map").hasClass("open")) {
@@ -336,12 +337,13 @@ function checkWhichLocation () {
 		}*/
 		
 		if ($locator.hasClass("norrkoping")) { 
-			speed = 10;
+			speed = 20;
 			$locator.removeClass("norrkoping");
 		}
 		
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
+		window.location.hash = '#cuernavaca';
 				
 		checkStatusOfSpeed();
 		
@@ -363,7 +365,7 @@ function checkWhichLocation () {
 	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 3)) {
 		//console.log("Third View");	
 		if ($locator.hasClass("cuernavaca")) { 
-			speed = 10;
+			speed = 20;
 			$locator.removeClass("cuernavaca");
 		}
 		else if ($locator.hasClass("stockholm")) { //The speed from Stockholm to Norrkoping
@@ -373,6 +375,7 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "norrkoping").addClass("open norrkoping");
 		destiny = calcMapViewPort(norrkoping);
+		window.location.hash = '#norrkoping';
 
 		checkStatusOfSpeed();
 	}
@@ -391,6 +394,7 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "stockholm").addClass("open stockholm");
 		destiny = calcMapViewPort(stockholm);
+		window.location.hash = '#stockholm';
 		checkStatusOfSpeed();
 	}
 	
@@ -407,20 +411,26 @@ function checkWhichLocation () {
 		}
 		
 		$locator.data("location", "uppsala").addClass("open uppsala");
-		destiny = calcMapViewPort(uppsala);		
+		destiny = calcMapViewPort(uppsala);	
+		window.location.hash = '#uppsala';	
 		checkStatusOfSpeed();
 	}
 	
 	//Sixth view (Going to Munich)
-	if (scroll >= (windowHeight * 5) && scroll <= (windowHeight * 6)) {
+	if (scroll >= (windowHeight * 5) && scroll < (windowHeight * 6.5)) {
 		//console.log("Sixth View");	
 		if ($locator.hasClass("uppsala")) { //If it's going from stockholm to Uppsala
 			$locator.removeClass("uppsala");
 		}
 		
 		$locator.data("location", "munich").addClass("open munich");
-		destiny = calcMapViewPort(munich);		
-		speed = 1;
+		destiny = calcMapViewPort(munich);
+		window.location.hash = '#munich';	
+		speed = 2;
 		checkStatusOfSpeed();
+	}
+	
+	if (scroll >= (windowHeight * 6.5)) {
+		window.location.hash = '#footer';
 	}
 }
