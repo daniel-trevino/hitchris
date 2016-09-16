@@ -48,7 +48,32 @@
 			
 			<p>Hit me up for anything at all.<br>Check me out on <a href="//linkedin.com/in/chrisco89" target="_blank" class="nowrap">LinkedIn <span class="ion-android-open"></span></a>, or write to me on <a href="//twitter.com/chrisco89" target="_blank" class="nowrap">Twitter <span class="ion-android-open"></span></a>.
 			<br><br>
-			Use the form below if that is your thing. I've taken the liberty of writing the first lines for you so you don't have to think too hard <span class="ion-happy-outline"></span></p>
+			You can e-mail me at 
+			<script type="text/javascript" language="javascript">
+				<!--
+				// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+				// Random encryption key feature by Andrew Moulden, Site Engineering Ltd
+				// This code is freeware provided these four comment lines remain intact
+				// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+				{ coded = "bDII4@beONbveL.N4o"
+				  key = "B9FGLSduqhNwt45eVkP0KY3EU2rbQjOZ8DpaXnJmlzC7vRMWsx6g1AcTHoIiyf"
+				  shift=coded.length
+				  link=""
+				  for (i=0; i<coded.length; i++) {
+				    if (key.indexOf(coded.charAt(i))==-1) {
+				      ltr = coded.charAt(i)
+				      link += (ltr)
+				    }
+				    else {     
+				      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+				      link += (key.charAt(ltr))
+				    }
+				  }
+				document.write("<a href='mailto:"+link+"'>"+link+"</a>")
+				}
+				//-->
+			</script>
+			<noscript>hello(at)hitchris.com</noscript> or use the form below. I have taken the liberty of writing the first lines for you so you don't have to think too hard <span class="ion-happy-outline"></span></p>
 
 		</main>
 		
