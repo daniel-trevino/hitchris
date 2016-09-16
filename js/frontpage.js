@@ -21,10 +21,7 @@ $(document).ready( function() {
 		if ($target && $target.length > 0) {
 			$("html, body").stop().animate({
 				"scrollTop": $target.offset().top
-			}, 500, "swing", function () {
-				window.location.hash = target;
-			});
-			console.log("appears");
+			}, 500, "swing");
 		}
 	});
 	

@@ -308,7 +308,6 @@ function checkWhichLocation () {
 		//This is just to set up a default location when the website is loaded on the first view (We need this to have the map rendered)
 		destiny = calcMapViewPort(cuernavaca);		
 		$locator.data("location", "cuernavaca").removeClass("open cuernavaca");
-		history.pushState("", document.title, window.location.pathname + window.location.search);
 		
 		//Re-draws the map to the first state (without a morph content)
 		if ($("div.map").hasClass("open")) {
@@ -343,7 +342,6 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "cuernavaca").addClass("open cuernavaca");
 		destiny = calcMapViewPort(cuernavaca);
-		window.location.hash = '#cuernavaca';
 				
 		checkStatusOfSpeed();
 		
@@ -375,7 +373,6 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "norrkoping").addClass("open norrkoping");
 		destiny = calcMapViewPort(norrkoping);
-		window.location.hash = '#norrkoping';
 
 		checkStatusOfSpeed();
 	}
@@ -394,7 +391,6 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "stockholm").addClass("open stockholm");
 		destiny = calcMapViewPort(stockholm);
-		window.location.hash = '#stockholm';
 		checkStatusOfSpeed();
 	}
 	
@@ -412,7 +408,6 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "uppsala").addClass("open uppsala");
 		destiny = calcMapViewPort(uppsala);	
-		window.location.hash = '#uppsala';	
 		checkStatusOfSpeed();
 	}
 	
@@ -425,12 +420,7 @@ function checkWhichLocation () {
 		
 		$locator.data("location", "munich").addClass("open munich");
 		destiny = calcMapViewPort(munich);
-		window.location.hash = '#munich';	
 		speed = 2;
 		checkStatusOfSpeed();
-	}
-	
-	if (scroll >= (windowHeight * 6.5)) {
-		window.location.hash = '#footer';
 	}
 }
