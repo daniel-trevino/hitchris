@@ -139,6 +139,17 @@ body {
 				}
 			}
 		}
+		
+		@include responsive(minipc) {
+			
+			li {
+				margin-right: 5px;
+				
+				a {
+					padding: 0 6px;
+				}
+			}
+		}
 	}
 	
 	&.visible {
@@ -199,6 +210,14 @@ body {
 		.letter {
 			fill: $color-main;
 		}	
+	}
+	
+	@include responsive(tablet) {
+		max-width: 360px;
+	}
+	
+	@include responsive(smartphone) {
+		max-width: 290px;
 	}
 }
 
@@ -283,6 +302,14 @@ body {
 			background-size: cover;
 			overflow: hidden;
 			
+			@include responsive(tablet) {
+				background-position: 55% 0;
+			}
+			
+			@include responsive(smartphone) {
+				background-position: 68% 0;
+			}
+			
 			h1 {
 				color: $color-grey;
 				font-family: $font-body;
@@ -291,6 +318,10 @@ body {
 				line-height: 1.2;
 				text-align: center;
 				margin-bottom: 0;
+				
+				@include responsive(smartphone) {
+					font-size: 3em;
+				}
 				
 				span {
 					display: block;
@@ -306,6 +337,10 @@ body {
 					
 					&.logo {
 						padding: 30px 0;
+						
+						@include responsive(smartphone) {
+							padding: 14px 0;
+						}
 					}
 					
 					&:last-child {
@@ -334,6 +369,12 @@ body {
 				animation-duration: 0.4s;
 				animation-fill-mode: forwards;
 				opacity: 0;
+				
+				@include responsive(tablet) {
+					text-align: center;
+					font-size: 2em;
+					padding: 0 10px;
+				}
 			}
 			
 			.calltoaction {
@@ -350,6 +391,10 @@ body {
 					color: #fff;
 					text-transform: uppercase;
 					letter-spacing: 0.1em;
+					
+					@include responsive(smartphone) {
+						font-size: 1.3em;
+					}
 				}
 			}
 		}
@@ -540,6 +585,10 @@ body {
 							color: #fff;
 							@include scaleFont(2.8em);
 						}
+						
+						@include responsive(tablet) {
+							flex-basis: auto;	
+						}
 				    }
 				    
 				    .location-info {
@@ -569,6 +618,15 @@ body {
 				left: calc(50% - 180px);
 				transition: left 0.25s;
 				
+				@include responsive(minipc) {
+					left: calc(50% - 150px);	
+				}
+				
+				@include responsive(tablet) {
+					left: 50%;
+					top: calc(50% - 200px);	
+				}
+				
 				.morph-content {
 					top: 0 !important;
 					right: 0 !important;
@@ -583,6 +641,16 @@ body {
 					
 					& > div {
 						overflow: auto;
+					}
+					
+					@include responsive(minipc) {
+						width: 300px;	
+					}
+					
+					@include responsive(tablet) {
+						width: 100%;
+						height: 400px;
+						top: calc(100vh - 400px) !important;	
 					}
 				}
 				
@@ -636,6 +704,16 @@ body {
 		&.open {
 			width: calc(100vw - 360px);
 			transition: width 0.25s;
+			
+			@include responsive(minipc) {
+				width: calc(100vw - 300px);
+			}
+			
+			@include responsive(tablet) {
+				width: 100%;
+				height: calc(100vh - 400px);
+				transition: height 0.25s;
+			}
 		}
 	}
 }
@@ -659,16 +737,25 @@ body {
 		text-align: center;
 		color: $color-main;
 		max-width: 100%;
+		
+		@include responsive(tablet) {
+			font-size: 2.6em;
+		}
+		
+		@include responsive(smartphone) {
+			font-size: 1.8em;
+		}
 	}
 	
 	ul {
 		padding: 0;
 		list-style: none;
 		text-align: center;
+		margin-bottom: 0;
 		
 		li {
 			display: inline-block;
-			margin: 0 12px;
+			margin: 0 8px;
 			
 			a {
 				font-family: $font-heading;
@@ -681,6 +768,10 @@ body {
 				
 				&:hover {
 					background-color: lighten($color-dark-blue, 10%);
+				}
+				
+				@include responsive(smartphone) {
+					padding: 0.6em 1em;
 				}
 			}
 		}
@@ -713,6 +804,14 @@ body {
 		animation-name: splashLogo;
 		animation-duration: 1s;
 		animation-fill-mode: forwards;
+		
+		@include responsive(tablet) {
+			margin: -49px 0 0 -180px;
+		}
+		
+		@include responsive(smartphone) {
+			margin: -40px 0 0 -145px;
+		}
 		
 		.svg-logo {
 			width: 100%;

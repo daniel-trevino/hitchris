@@ -47,13 +47,17 @@ $(document).ready( function() {
 		if ($window.scrollTop() >= $window.height()) {
 			$navigation.addClass("visible");
 			$map.addClass("fixed");
-			$scrollIcon.fadeIn("fast");
+			if ($window.width() > 767) {
+				$scrollIcon.fadeIn("fast");
+			}
 		} else {
 			$navigation.removeClass("visible");
 			$map.removeClass("fixed");
-			$scrollIcon.fadeOut("fast");
+			if ($window.width() > 767) {
+				$scrollIcon.fadeOut("fast");
+			}
 		}
-		if ($window.scrollTop() >= $window.height() * 6) {
+		if ($window.scrollTop() >= $window.height() * 6.5) {
 			$navigation.addClass("end");
 		} else {
 			$navigation.removeClass("end");
