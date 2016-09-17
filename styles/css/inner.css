@@ -116,5 +116,10 @@
       top: 0;
       background-color: #f94949;
       color: #fff; }
+    @media (max-width: 768px) {
+      #contact-footer h1 a {
+        top: 0;
+        background-color: transparent;
+        color: transparent; } }
 
 /*# sourceMappingURL=inner.css.map */

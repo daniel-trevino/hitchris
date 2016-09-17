@@ -96,6 +96,8 @@ p {
 		padding-top: 0.3em;
 		
 		@include responsive(smartphone) {
+			font-size: 1.8em;
+			font-weight: 600;
 			margin-bottom: 0.5em;
 		}
 	}

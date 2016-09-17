@@ -910,6 +910,10 @@ body {
   top: 15px;
   left: 20px;
   z-index: 1000; }
+  @media (max-width: 480px) {
+    .navigation {
+      top: 10px;
+      left: 10px; } }
   .navigation:after {
     content: "";
     display: block;
@@ -988,6 +992,9 @@ body {
       opacity: 0;
       -webkit-transition: opacity 1s ease-in-out;
       transition: opacity 1s ease-in-out; }
+    @media (max-width: 480px) {
+      .navigation .logo {
+        display: none; } }
   .navigation ul {
     display: none;
     list-style: none;
@@ -1020,6 +1027,14 @@ body {
         margin-right: 5px; }
         .navigation ul li a {
           padding: 0 6px; } }
+    @media (max-width: 480px) {
+      .navigation ul {
+        margin-left: 0; }
+        .navigation ul li {
+          margin-right: 10px; }
+          .navigation ul li a {
+            padding: 0 8px;
+            font-weight: 500; } }
   .navigation.visible .burger {
     width: 0;
     opacity: 0; }
@@ -1247,7 +1262,7 @@ body {
         #header > div.invitation p {
           text-align: center;
           font-size: 2em;
-          padding: 0 10px; } }
+          padding: 0 20px; } }
     #header > div.invitation .calltoaction {
       -webkit-animation-name: fadeIn;
               animation-name: fadeIn;
@@ -1483,18 +1498,27 @@ body {
               @media (max-width: 480px) {
                 #main .map .locator .morph-content > div .location-info p {
                   font-size: 1.29em; } }
+            @media (max-width: 480px) {
+              #main .map .locator .morph-content > div .location-info {
+                padding: 15px; } }
           #main .map .locator .morph-content > div .location-footer {
             -webkit-box-flex: 0;
             -webkit-flex: 0 0 auto;
                 -ms-flex: 0 0 auto;
                     flex: 0 0 auto;
-            padding: 15px 20px 20px 20px; }
+            padding: 0 20px 20px 20px; }
+            @media (max-width: 480px) {
+              #main .map .locator .morph-content > div .location-footer {
+                padding: 0 15px 15px 15px; } }
             #main .map .locator .morph-content > div .location-footer .next-location {
               display: block;
               width: 100%;
               -webkit-align-self: flex-end;
                   -ms-flex-item-align: end;
                       align-self: flex-end; }
+              @media (max-width: 480px) {
+                #main .map .locator .morph-content > div .location-footer .next-location {
+                  font-weight: 500; } }
       #main .map .locator.open {
         left: calc(50% - 180px);
         -webkit-transition: left 0.25s;
@@ -1641,6 +1665,9 @@ body {
           animation-duration: 1s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards; }
+  @media (max-width: 992px) {
+    .nicer-splash {
+      display: none; } }
   .nicer-splash .logo {
     position: absolute;
     display: block;
@@ -1736,7 +1763,7 @@ body {
     border-radius: 3px;
     padding: 1.4em;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
-    .credits .credit-dropdown:active, .credits .credit-dropdown:focus {
+    .credits .credit-dropdown:hover, .credits .credit-dropdown:active, .credits .credit-dropdown:focus {
       display: block; }
     .credits .credit-dropdown p {
       font-size: 1.3em;
@@ -1744,6 +1771,9 @@ body {
       color: #3d474f; }
   .credits .credit-toggle:focus + .credit-dropdown {
     display: block; }
+  @media (max-width: 767px) {
+    .credits .credit-toggle:hover + .credit-dropdown {
+      display: block; } }
 
 @-webkit-keyframes splashLogo {
   0% {
@@ -2124,6 +2154,9 @@ body {
             font-size: 1.204em; } }
       .position > div .details .description {
         margin-top: 1.5em; }
+        @media (max-width: 480px) {
+          .position > div .details .description {
+            margin-top: 0.6em; } }
         .position > div .details .description p {
           font-size: 1.5em;
           margin-bottom: 0; }
@@ -2223,7 +2256,7 @@ body {
 .chart {
   position: relative;
   display: inline-block;
-  margin: 20px 10px;
+  margin: 20px 7px;
   color: #999;
   font-size: 14px;
   text-align: center; }
@@ -2346,6 +2379,7 @@ body {
     margin-top: 20px;
     background: #f94949;
     border: none;
+    border-radius: 0;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
@@ -2563,6 +2597,8 @@ p {
         font-size: 1.29em; } }
     @media (max-width: 480px) {
       p.small-label {
+        font-size: 1.8em;
+        font-weight: 600;
         margin-bottom: 0.5em; } }
   p:last-child {
     margin-bottom: 0; }

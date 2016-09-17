@@ -13,6 +13,11 @@ body {
 	left: 20px;
 	z-index: 1000;
 	
+	@include responsive(smartphone) {
+	    top: 10px;
+	    left: 10px;
+    }
+	
 	&:after {
 		content: "";
 		display: block;
@@ -108,6 +113,10 @@ body {
 			opacity: 0;
 			transition: opacity 1s ease-in-out;
 		}
+		
+		@include responsive(smartphone) {
+			display: none;
+		}
 	}
 	
 	ul {
@@ -150,6 +159,19 @@ body {
 				}
 			}
 		}
+		
+		@include responsive(smartphone) {
+		    margin-left: 0;
+		    
+		    li {
+			    margin-right: 10px;
+			    
+			    a {
+				    padding: 0 8px;
+				    font-weight: 500;
+			    }
+		    }
+	    }
 	}
 	
 	&.visible {
@@ -373,7 +395,7 @@ body {
 				@include responsive(tablet) {
 					text-align: center;
 					font-size: 2em;
-					padding: 0 10px;
+					padding: 0 20px;
 				}
 			}
 			
@@ -599,16 +621,28 @@ body {
 					    p {
 						    @include scaleFont(1.5em);
 					    }
+					    
+					    @include responsive(smartphone) {
+						    padding: 15px;
+					    }
 				    }
 				    
 				    .location-footer {
 					    flex: 0 0 auto;
-					    padding: 15px 20px 20px 20px;
+					    padding: 0 20px 20px 20px;
+					    
+					    @include responsive(smartphone) {
+						    padding: 0 15px 15px 15px;
+					    }
 					    
 					    .next-location {
 						    display: block;
 						    width: 100%;
 						    align-self: flex-end;
+						    
+						    @include responsive(smartphone) {
+							    font-weight: 500;
+						    }
 					    }
 				    }
 				}
@@ -793,6 +827,10 @@ body {
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 	
+	@include responsive(minipc) {
+		display: none;
+	}
+	
 	.logo {
 		position: absolute;
 		display: block;
@@ -897,6 +935,7 @@ body {
 		padding: 1.4em;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 		
+		&:hover,
 		&:active,
 		&:focus {
 			display: block;
@@ -911,6 +950,12 @@ body {
 	
 	.credit-toggle:focus + .credit-dropdown {
 		display: block;
+	}
+	
+	@include responsive(tablet) {
+		.credit-toggle:hover + .credit-dropdown {
+			display: block;
+		}
 	}
 }
 
