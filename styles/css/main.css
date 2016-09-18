@@ -2278,7 +2278,8 @@ body {
 .contact-form {
   padding: 40px 0 0 0;
   margin-top: 40px;
-  background-color: #dbdfe3; }
+  background-color: #dbdfe3;
+  position: relative; }
   .contact-form .centered {
     max-width: 1000px;
     padding: 0 3.125%;
@@ -2290,7 +2291,7 @@ body {
     max-width: 800px; }
   .contact-form input[type="text"] {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.5;
     background: none;
     -webkit-appearance: none;
@@ -2314,8 +2315,10 @@ body {
       border-color: #f94949; }
   .contact-form select {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.8;
+    height: 1.8em;
+    min-width: 15em;
     background: none;
     -webkit-appearance: none;
     border: 1px solid transparent;
@@ -2346,8 +2349,8 @@ body {
     max-width: 1000px;
     height: 30vh;
     font-size: 21px;
-    font-weight: 600;
-    color: #a1adb7;
+    font-weight: 500;
+    color: #3d474f;
     padding: 10px;
     background: none;
     border: 1px solid #b8c1c8;
@@ -2370,13 +2373,12 @@ body {
     .contact-form textarea:hover {
       border-color: #a1adb7; }
     .contact-form textarea:focus {
-      color: #3d474f;
       border-color: #f94949; }
     .contact-form textarea.filled {
       color: #3d474f; }
   .contact-form input[type="submit"] {
-    padding: 50px 0;
-    margin-top: 20px;
+    padding: 1.6em 0;
+    margin-top: 1em;
     background: #f94949;
     border: none;
     border-radius: 0;
@@ -2403,11 +2405,72 @@ body {
       background-color: #fa6262; }
     .contact-form input[type="submit"]:active {
       background-color: #f71818; }
+  .contact-form .error {
+    font-weight: 700;
+    color: #d63346;
+    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.06); }
+  .contact-form .success {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #56E39F;
+    color: #178952;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-animation-name: successAppear;
+            animation-name: successAppear;
+    -webkit-animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+            animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards; }
+    .contact-form .success p {
+      margin-bottom: 0;
+      line-height: 1.2;
+      -webkit-animation-name: fadeIn;
+              animation-name: fadeIn;
+      -webkit-animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+              animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+      -webkit-animation-delay: 0.75s;
+              animation-delay: 0.75s;
+      -webkit-animation-duration: 0.4s;
+              animation-duration: 0.4s;
+      -webkit-animation-fill-mode: forwards;
+              animation-fill-mode: forwards;
+      opacity: 0; }
+      .contact-form .success p.heading {
+        margin-bottom: 0.5em;
+        font-size: 2.6em;
+        font-weight: 500; }
 
+@-webkit-keyframes successAppear {
+  0% {
+    height: 0; }
+  100% {
+    height: 100%; } }
+
+@keyframes successAppear {
+  0% {
+    height: 0; }
+  100% {
+    height: 100%; } }
 ::-moz-selection {
   background-color: #f71818;
   color: #FFF; }
-
 ::selection {
   background-color: #f71818;
   color: #FFF; }

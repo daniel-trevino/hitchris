@@ -8,7 +8,7 @@ var cuernavaca = {name:"cuernavaca",x:1042,y:1672};
 var norrkoping = {name:"norrkoping",x:2788, y:869};
 var stockholm = {name:"stockholm",x:2821, y:847};
 var uppsala = {name:"uppsala",x:2817, y:830};
-var munich = {name:"munich",x:2726, y:1133};
+var munich = {name:"munich",x:2726, y:1130};
 
 //------- START STATUS --------
 var speed = 0, isRunning = true;

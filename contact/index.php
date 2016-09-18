@@ -79,15 +79,26 @@
 		
 		<form class="contact-form">
 			
-			<div class="centered">
-				<p><span class="nowrap">Hi, my name is</span> <input type="text"> <span class="nowrap">and I work at <input type="text">.</span> <span class="nowrap">I would very much like</span> to get in touch with you <span class="nowrap">about <select> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.</span></p>
+			<div class="centered error">
+				<p>I need you to fill out all the fields, please.</p>
 			</div>
 			
 			<div class="centered">
-				<textarea rows="10">Also, ...</textarea>
+				<p><span class="nowrap">Hi, my name is</span> <input type="text" required> <span class="nowrap">and I work at <input type="text" required>.</span> <span class="nowrap">I would very much like</span> to get in touch with you about <select> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.<br> You can reach me <span class="nowrap">at <input type="text" placeholder="e-mail or tel" required>.</span></p>
+			</div>
+			
+			<div class="centered">
+				<textarea rows="10" placeholder="Your message here..."></textarea>
 			</div>
 			
 			<input type="submit" value="Send">
+			
+			<div class="success" style="display: none">
+				<div>
+					<p class="heading">Thanks!</p>
+					<p>I'll get back to you ASAP.</p>
+				</div>
+			</div>
 		</form>
 		
 		<footer class="footer">
