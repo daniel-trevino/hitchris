@@ -8,7 +8,7 @@ var cuernavaca = {name:"cuernavaca",x:1042,y:1672};
 var norrkoping = {name:"norrkoping",x:2788, y:869};
 var stockholm = {name:"stockholm",x:2821, y:847};
 var uppsala = {name:"uppsala",x:2817, y:830};
-var munich = {name:"munich",x:2726, y:1133};
+var munich = {name:"munich",x:2726, y:1130};
 
 //------- START STATUS --------
 var speed = 0, isRunning = true;
@@ -28,10 +28,6 @@ $(window).load(function () {
 	$window.trigger("resize");
 });
 
-$(window).ready(function () {
-	//checkForChanges();
-}); 	
-
 //Force to start always on the top
 $(document).ready(function(){
 	window.scrollTo(0,0); //Avoids crashing when the site is loaded on the map view instead of bein on the top
@@ -42,32 +38,24 @@ $(window).scroll(function () {
 });
 
 
-//Every half a second checks if the map has being changed (This means, if the morph-content is open or not)
-//This needs to be done since the map should be re-drawn when the morph-content is open
-function checkForChanges() {
-    if ($("div.map").hasClass("open")) {
-		console.log("Draws the map again since the morph-content is open");
-		//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
-		start($("div.morph-content").width());
-	}
-	else {
-		console.log("The morph-content is closed, it should re-draw the map");
-		start(0);
-		//setTimeout(checkForChanges, 500);
-	}
-}
- 	
-
 $(window).resize(function () {
-	if ($("div.map").hasClass("open")) {
-		start($("div.morph-content").width());
+	//It helps to re-draw the map if it's opened on a tablet or phone (I have to add +15px to the window.width (IDK why.. but it was not working without it))
+	if (($(window).width() + 15) <= 767 && $("div.map").hasClass("open")) {
+		console.log("Enters view 1 -> " + $(window).width());
+		start(0, 325); //Half of the height of the morph-content located in the bottom
 	}
-	else {
-		start(0);
+	else if (($(window).width() + 15) >= 768 && $("div.map").hasClass("open")) {
+		console.log("Enters view 2 -> " + $(window).width());
+		start(360, 0); //The 360 is the value of the morph-content.width() located to the right
+	}
+	else if(!$("div.map").hasClass("open")) {
+		start(0,0); //Just render the map as it is (Without removing any special parameter)
 	}
 });
 
-function start(param) {
+//Param = Removes width from the canvas (If the morph is opened to the right)
+//Param2 = Removes height from the canvas (If the morph is opened on th bottom)
+function start(param, param2) {
 	checkWhichLocation();
 	speed = 0;	
 	
@@ -83,7 +71,7 @@ function start(param) {
 	var ratio = window.devicePixelRatio || 1;
 	
 	ctx.canvas.width  = window.innerWidth - param;
-	ctx.canvas.height = window.innerHeight;
+	ctx.canvas.height = window.innerHeight - param2;
 	
 	// 2. Ensure the element size stays the same. Basically transforms the percentage to pixels
 	c.style.width  = c.width + "px";
@@ -176,23 +164,9 @@ function checkStatusOfSpeed() {
 	
 		disableScroll();
 		
-		/*if ($map.hasClass("loaded") && !$map.hasClass("traveling")) {
-			$map.addClass("traveling");
-			$map.removeClass("open loaded");
-			$locator.removeClass("open cuernavaca");
-			//start(0); (If you re-draw here, it does not animate the traveling of the locator)
-		}*/
-		
 		animate();
 	}
 	else if (speed === 0 && isRunning) {
-/*
-		if ($map.hasClass("traveling")) {
-			$map.removeClass("traveling");
-			$map.addClass("open");
-			//$locator.addClass("open " + $locator.data("location"));
-		}
-*/
 		
 		enableScroll();
 		isRunning = false;
@@ -262,35 +236,6 @@ function calcMapViewPort(placeVP) {
 }
 
 
-/*
-
-var lastScrollTop = 0;
-$(window).scroll(function(event){
-	var st = $(this).scrollTop();
-	// downscroll code
-	if (st > lastScrollTop){
-		if ($locator.data("location") == "cuernavaca" && $map.hasClass("loaded")) {
-			//Avoids jumping directly to norrkoping if the users go too fast on the scroll
-			if ($map.hasClass("traveled")) {
-				//enableScroll();
-				//$("div.cuernavaca").find("a.next-location").trigger("click");	
-			}
-			else {
-				//disableScroll();
-			}
-	   }
-	   else if ($locator.data("location") == "norrkoping" && $map.hasClass("loaded")) {
-		   
-		}
-	   
-	} else {
-	  // upscroll code
-	}
-	lastScrollTop = st;
-});
-*/
-
-
 //If the website is loaded in the middle of the window height, then it should render the map on that specific location
 function checkWhichLocation () {
 	var scroll = $(window).scrollTop();
@@ -301,9 +246,7 @@ function checkWhichLocation () {
 	
 	//First view of the site (Christian's image)
 	if (scroll < windowHeight) {
-		// Default Scrollspeed
-		//jQuery.scrollSpeed(100, 800);
-		
+				
 		$locator.css("opacity", 0);
 		//This is just to set up a default location when the website is loaded on the first view (We need this to have the map rendered)
 		destiny = calcMapViewPort(cuernavaca);		
@@ -314,7 +257,7 @@ function checkWhichLocation () {
 			$map.removeClass("open loaded");
 			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
 			isRunning = true; //Enables rendering of the map
-			start(0); //The 360 is the value of the morph-content.width()
+			start(0, 0); //The 360 is the value of the morph-content.width()
 			
 		}
 		
@@ -325,18 +268,9 @@ function checkWhichLocation () {
 		//console.log("Second view");
 		$locator.css("opacity", 1);
 		$map.addClass("open");
-		
-		// Custom Scrolling (Maybe adding custom scrolling on these cases?)
-		//jQuery.scrollSpeed(100, 800);
-		
-		//If the screen is loaded, but not traveling, set the class to open
-		/*if (!$map.hasClass("traveling")) {
-			$map.addClass("open");	
-			$locator.data("location", "cuernavaca").addClass("open cuernavaca");
-		}*/
-		
+				
 		if ($locator.hasClass("norrkoping")) { 
-			speed = 10;
+			speed = 20;
 			$locator.removeClass("norrkoping");
 		}
 		
@@ -351,7 +285,13 @@ function checkWhichLocation () {
 		
 			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
 			isRunning = true; //Enables rendering of the map
-			start(360); //The 360 is the value of the morph-content.width()
+			//If it's loaded on tablet or mobile
+			if ($(window).width() <= 767) {
+				start(0, 325); //Half of the height of the morph-content
+			}
+			else {
+	   			start(360, 0); //The 360 is the value of the morph-content.width()
+			}
 			
 		}
 	}
@@ -359,11 +299,10 @@ function checkWhichLocation () {
 	
 	
 	//Third view (Going to Norrkoping)
-	//if (scroll >= (windowHeight * 3) && scroll <= (windowHeight * 4) && ($locator.data("location") !== "norrkoping")) {
 	if (scroll >= (windowHeight * 2) && scroll < (windowHeight * 3)) {
 		//console.log("Third View");	
 		if ($locator.hasClass("cuernavaca")) { 
-			speed = 10;
+			speed = 20;
 			$locator.removeClass("cuernavaca");
 		}
 		else if ($locator.hasClass("stockholm")) { //The speed from Stockholm to Norrkoping
@@ -407,20 +346,20 @@ function checkWhichLocation () {
 		}
 		
 		$locator.data("location", "uppsala").addClass("open uppsala");
-		destiny = calcMapViewPort(uppsala);		
+		destiny = calcMapViewPort(uppsala);	
 		checkStatusOfSpeed();
 	}
 	
 	//Sixth view (Going to Munich)
-	if (scroll >= (windowHeight * 5) && scroll <= (windowHeight * 6)) {
+	if (scroll >= (windowHeight * 5) && scroll < (windowHeight * 6.5)) {
 		//console.log("Sixth View");	
 		if ($locator.hasClass("uppsala")) { //If it's going from stockholm to Uppsala
 			$locator.removeClass("uppsala");
 		}
 		
 		$locator.data("location", "munich").addClass("open munich");
-		destiny = calcMapViewPort(munich);		
-		speed = 1;
+		destiny = calcMapViewPort(munich);
+		speed = 2;
 		checkStatusOfSpeed();
 	}
 }

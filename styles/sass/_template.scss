@@ -13,6 +13,11 @@ body {
 	left: 20px;
 	z-index: 1000;
 	
+	@include responsive(smartphone) {
+	    top: 10px;
+	    left: 10px;
+    }
+	
 	&:after {
 		content: "";
 		display: block;
@@ -108,6 +113,10 @@ body {
 			opacity: 0;
 			transition: opacity 1s ease-in-out;
 		}
+		
+		@include responsive(smartphone) {
+			display: none;
+		}
 	}
 	
 	ul {
@@ -139,6 +148,30 @@ body {
 				}
 			}
 		}
+		
+		@include responsive(minipc) {
+			
+			li {
+				margin-right: 5px;
+				
+				a {
+					padding: 0 6px;
+				}
+			}
+		}
+		
+		@include responsive(smartphone) {
+		    margin-left: 0;
+		    
+		    li {
+			    margin-right: 10px;
+			    
+			    a {
+				    padding: 0 8px;
+				    font-weight: 500;
+			    }
+		    }
+	    }
 	}
 	
 	&.visible {
@@ -199,6 +232,14 @@ body {
 		.letter {
 			fill: $color-main;
 		}	
+	}
+	
+	@include responsive(tablet) {
+		max-width: 360px;
+	}
+	
+	@include responsive(smartphone) {
+		max-width: 290px;
 	}
 }
 
@@ -283,6 +324,14 @@ body {
 			background-size: cover;
 			overflow: hidden;
 			
+			@include responsive(tablet) {
+				background-position: 55% 0;
+			}
+			
+			@include responsive(smartphone) {
+				background-position: 68% 0;
+			}
+			
 			h1 {
 				color: $color-grey;
 				font-family: $font-body;
@@ -291,6 +340,10 @@ body {
 				line-height: 1.2;
 				text-align: center;
 				margin-bottom: 0;
+				
+				@include responsive(smartphone) {
+					font-size: 3em;
+				}
 				
 				span {
 					display: block;
@@ -306,6 +359,10 @@ body {
 					
 					&.logo {
 						padding: 30px 0;
+						
+						@include responsive(smartphone) {
+							padding: 14px 0;
+						}
 					}
 					
 					&:last-child {
@@ -334,6 +391,12 @@ body {
 				animation-duration: 0.4s;
 				animation-fill-mode: forwards;
 				opacity: 0;
+				
+				@include responsive(tablet) {
+					text-align: center;
+					font-size: 2em;
+					padding: 0 20px;
+				}
 			}
 			
 			.calltoaction {
@@ -350,6 +413,10 @@ body {
 					color: #fff;
 					text-transform: uppercase;
 					letter-spacing: 0.1em;
+					
+					@include responsive(smartphone) {
+						font-size: 1.3em;
+					}
 				}
 			}
 		}
@@ -540,6 +607,10 @@ body {
 							color: #fff;
 							@include scaleFont(2.8em);
 						}
+						
+						@include responsive(tablet) {
+							flex-basis: auto;	
+						}
 				    }
 				    
 				    .location-info {
@@ -550,16 +621,28 @@ body {
 					    p {
 						    @include scaleFont(1.5em);
 					    }
+					    
+					    @include responsive(smartphone) {
+						    padding: 15px;
+					    }
 				    }
 				    
 				    .location-footer {
 					    flex: 0 0 auto;
-					    padding: 15px 20px 20px 20px;
+					    padding: 0 20px 20px 20px;
+					    
+					    @include responsive(smartphone) {
+						    padding: 0 15px 15px 15px;
+					    }
 					    
 					    .next-location {
 						    display: block;
 						    width: 100%;
 						    align-self: flex-end;
+						    
+						    @include responsive(smartphone) {
+							    font-weight: 500;
+						    }
 					    }
 				    }
 				}
@@ -568,6 +651,15 @@ body {
 			&.open {
 				left: calc(50% - 180px);
 				transition: left 0.25s;
+				
+				@include responsive(minipc) {
+					left: calc(50% - 150px);	
+				}
+				
+				@include responsive(tablet) {
+					left: 50%;
+					top: calc(50% - 200px);	
+				}
 				
 				.morph-content {
 					top: 0 !important;
@@ -583,6 +675,16 @@ body {
 					
 					& > div {
 						overflow: auto;
+					}
+					
+					@include responsive(minipc) {
+						width: 300px;	
+					}
+					
+					@include responsive(tablet) {
+						width: 100%;
+						height: 400px;
+						top: calc(100vh - 400px) !important;	
 					}
 				}
 				
@@ -636,6 +738,16 @@ body {
 		&.open {
 			width: calc(100vw - 360px);
 			transition: width 0.25s;
+			
+			@include responsive(minipc) {
+				width: calc(100vw - 300px);
+			}
+			
+			@include responsive(tablet) {
+				width: 100%;
+				height: calc(100vh - 400px);
+				transition: height 0.25s;
+			}
 		}
 	}
 }
@@ -659,16 +771,25 @@ body {
 		text-align: center;
 		color: $color-main;
 		max-width: 100%;
+		
+		@include responsive(tablet) {
+			font-size: 2.6em;
+		}
+		
+		@include responsive(smartphone) {
+			font-size: 1.8em;
+		}
 	}
 	
 	ul {
 		padding: 0;
 		list-style: none;
 		text-align: center;
+		margin-bottom: 0;
 		
 		li {
 			display: inline-block;
-			margin: 0 12px;
+			margin: 0 8px;
 			
 			a {
 				font-family: $font-heading;
@@ -681,6 +802,10 @@ body {
 				
 				&:hover {
 					background-color: lighten($color-dark-blue, 10%);
+				}
+				
+				@include responsive(smartphone) {
+					padding: 0.6em 1em;
 				}
 			}
 		}
@@ -702,6 +827,10 @@ body {
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 	
+	@include responsive(minipc) {
+		display: none;
+	}
+	
 	.logo {
 		position: absolute;
 		display: block;
@@ -713,6 +842,14 @@ body {
 		animation-name: splashLogo;
 		animation-duration: 1s;
 		animation-fill-mode: forwards;
+		
+		@include responsive(tablet) {
+			margin: -49px 0 0 -180px;
+		}
+		
+		@include responsive(smartphone) {
+			margin: -40px 0 0 -145px;
+		}
 		
 		.svg-logo {
 			width: 100%;
@@ -798,6 +935,7 @@ body {
 		padding: 1.4em;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 		
+		&:hover,
 		&:active,
 		&:focus {
 			display: block;
@@ -812,6 +950,12 @@ body {
 	
 	.credit-toggle:focus + .credit-dropdown {
 		display: block;
+	}
+	
+	@include responsive(tablet) {
+		.credit-toggle:hover + .credit-dropdown {
+			display: block;
+		}
 	}
 }
 

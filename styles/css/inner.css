@@ -16,6 +16,7 @@
         height: 30px; }
         .wrapper.inner #header .header-top .logo .svg-logo .letter {
           fill: #3d474f;
+          -webkit-transition: all 0.25s ease-in-out;
           transition: all 0.25s ease-in-out; }
       .wrapper.inner #header .header-top .logo:hover .svg-logo, .wrapper.inner #header .header-top .logo:focus .svg-logo {
         max-width: 100%;
@@ -24,8 +25,14 @@
           fill: #f94949; }
     .wrapper.inner #header .header-top .nav {
       position: static;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
       display: flex;
-      justify-content: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
       padding-top: 1em; }
       .wrapper.inner #header .header-top .nav ul {
         list-style: none;
@@ -35,8 +42,14 @@
         font-size: 1.6em;
         line-height: 1.2;
         font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center; }
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center; }
         .wrapper.inner #header .header-top .nav ul li {
           margin-bottom: 0;
           margin-left: 4px;
@@ -46,6 +59,7 @@
             color: #3d474f;
             display: block;
             padding: 10px 12px;
+            -webkit-transition: color 0.25s ease-in-out;
             transition: color 0.25s ease-in-out; }
             .wrapper.inner #header .header-top .nav ul li a:hover, .wrapper.inner #header .header-top .nav ul li a:focus {
               color: #f94949; }
@@ -95,9 +109,17 @@
       display: block;
       background-color: #bec6cd;
       color: #f94949;
+      -webkit-transition: top 0.25s ease-in-out, background 0.25s ease-in-out, color 2s ease;
       transition: top 0.25s ease-in-out, background 0.25s ease-in-out, color 2s ease; }
     #contact-footer h1:hover a,
     #contact-footer h1 a:focus {
       top: 0;
       background-color: #f94949;
       color: #fff; }
+    @media (max-width: 768px) {
+      #contact-footer h1 a {
+        top: 0;
+        background-color: transparent;
+        color: transparent; } }
+
+/*# sourceMappingURL=inner.css.map */

@@ -130,6 +130,15 @@
 			background-color: $color-main;
 			color: #fff;
 		}
+		
+		@media (max-width: 768px) {
+			
+			a {
+				top: 0;
+				background-color: transparent;
+				color: transparent;
+			}
+		}
 	}
 }
 

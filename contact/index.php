@@ -48,21 +48,57 @@
 			
 			<p>Hit me up for anything at all.<br>Check me out on <a href="//linkedin.com/in/chrisco89" target="_blank" class="nowrap">LinkedIn <span class="ion-android-open"></span></a>, or write to me on <a href="//twitter.com/chrisco89" target="_blank" class="nowrap">Twitter <span class="ion-android-open"></span></a>.
 			<br><br>
-			Use the form below if that is your thing. I've taken the liberty of writing the first lines for you so you don't have to think too hard <span class="ion-happy-outline"></span></p>
+			You can e-mail me at 
+			<script type="text/javascript" language="javascript">
+				<!--
+				// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+				// Random encryption key feature by Andrew Moulden, Site Engineering Ltd
+				// This code is freeware provided these four comment lines remain intact
+				// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+				{ coded = "bDII4@beONbveL.N4o"
+				  key = "B9FGLSduqhNwt45eVkP0KY3EU2rbQjOZ8DpaXnJmlzC7vRMWsx6g1AcTHoIiyf"
+				  shift=coded.length
+				  link=""
+				  for (i=0; i<coded.length; i++) {
+				    if (key.indexOf(coded.charAt(i))==-1) {
+				      ltr = coded.charAt(i)
+				      link += (ltr)
+				    }
+				    else {     
+				      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+				      link += (key.charAt(ltr))
+				    }
+				  }
+				document.write("<a href='mailto:"+link+"'>"+link+"</a>")
+				}
+				//-->
+			</script>
+			<noscript>hello(at)hitchris.com</noscript> or use the form below. I have taken the liberty of writing the first lines for you so you don't have to think too hard <span class="ion-happy-outline"></span></p>
 
 		</main>
 		
 		<form class="contact-form" action="mail.php" method="POST">
 			
-			<div class="centered">
-				<p><span class="nowrap">Hi, my name is</span> <input type="text" name="name"> <span class="nowrap">and I work at <input type="text" name="work">.</span> <span class="nowrap">I would very much like</span> to get in touch with you <span class="nowrap">about <select name="subject"> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.</span></p>
+			<div class="centered error">
+				<p>I need you to fill out all the fields, please.</p>
 			</div>
 			
 			<div class="centered">
-				<textarea rows="10" name="message">Also, ...</textarea>
+				<p><span class="nowrap">Hi, my name is</span> <input type="text" required> <span class="nowrap">and I work at <input type="text" required>.</span> <span class="nowrap">I would very much like</span> to get in touch with you about <select> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.<br> You can reach me <span class="nowrap">at <input type="text" placeholder="e-mail or tel" required>.</span></p>
+			</div>
+			
+			<div class="centered">
+				<textarea rows="10" placeholder="Your message here..."></textarea>
 			</div>
 			
 			<input type="submit" value="Send">
+			
+			<div class="success" style="display: none">
+				<div>
+					<p class="heading">Thanks!</p>
+					<p>I'll get back to you ASAP.</p>
+				</div>
+			</div>
 		</form>
 		
 		<footer class="footer">
@@ -83,13 +119,5 @@
 	
 	<script src="/js/jquery-1.12.0.min.js"></script>
 	<script src="/js/min/script.min.js"></script>
-	<script src="/js/min/skrollr.min.js"></script>
-	<script type="text/javascript">
-		
-		if ($(window).width() > 767) {
-	    	var s = skrollr.init();
-	    }
-	    
-    </script>
 </body>
 </html>

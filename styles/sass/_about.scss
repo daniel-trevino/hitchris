@@ -130,6 +130,10 @@
 			.description {
 				margin-top: 1.5em;
 				
+				@include responsive(smartphone) {
+					margin-top: 0.6em;
+				}
+				
 				p {
 					@include scaleFont(1.5em);
 					margin-bottom: 0;
@@ -181,7 +185,7 @@
 .chart {
 	position: relative;
 	display: inline-block;
-	margin: 20px 10px;
+	margin: 20px 7px;
 	color: #999;
 	font-size: 14px;
 	text-align: center; 
