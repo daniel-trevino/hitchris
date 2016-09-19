@@ -52,14 +52,14 @@
 
 		</main>
 		
-		<form class="contact-form">
+		<form class="contact-form" action="mail.php" method="POST">
 			
 			<div class="centered">
-				<p><span class="nowrap">Hi, my name is</span> <input type="text"> <span class="nowrap">and I work at <input type="text">.</span> <span class="nowrap">I would very much like</span> to get in touch with you <span class="nowrap">about <select> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.</span></p>
+				<p><span class="nowrap">Hi, my name is</span> <input type="text" name="name"> <span class="nowrap">and I work at <input type="text" name="work">.</span> <span class="nowrap">I would very much like</span> to get in touch with you <span class="nowrap">about <select name="subject"> <option>a job opportunity</option> <option>seeing more of your work</option> <option>discussing web and design</option> <option>nothing in particular</option> </select>.</span></p>
 			</div>
 			
 			<div class="centered">
-				<textarea rows="10">Also, ...</textarea>
+				<textarea rows="10" name="message">Also, ...</textarea>
 			</div>
 			
 			<input type="submit" value="Send">
