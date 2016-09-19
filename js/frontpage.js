@@ -1,5 +1,8 @@
 $(document).ready( function() {
+
+	
 	var $window = $(window);
+
 	
 // Show navigation
 	var $navigation = $(".navigation");
@@ -7,8 +10,6 @@ $(document).ready( function() {
 	$(".navigation .burger").on("click", function() {
 		$navigation.addClass("visible");
 	});
-	
-	
 
 
 // Smooth scroll
@@ -47,13 +48,13 @@ $(document).ready( function() {
 		if ($window.scrollTop() >= $window.height()) {
 			$navigation.addClass("visible");
 			$map.addClass("fixed");
-			if ($window.width() > 767) {
+			if ($window.width() > 768) {
 				$scrollIcon.fadeIn("fast");
 			}
 		} else {
 			$navigation.removeClass("visible");
 			$map.removeClass("fixed");
-			if ($window.width() > 767) {
+			if ($window.width() > 768) {
 				$scrollIcon.fadeOut("fast");
 			}
 		}

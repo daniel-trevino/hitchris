@@ -101,11 +101,11 @@ function start(param, param2) {
 function animate() {
 	//console.log("speed: " + speed);
 	//Going backwards (norrkoping to cuernavaca)
-    if (plane._x < destiny.x && speed != 0) {
+    if (plane._x < destiny.x && speed !== 0) {
 		plane._x += speed;
 		plane._y = calcY(plane._x);
 		
-		if (plane._x >= destiny.x && speed != 0) {
+		if (plane._x >= destiny.x && speed !== 0) {
 
 			//---- Make a proper stop ----
 			plane._x = destiny.x;
@@ -119,7 +119,7 @@ function animate() {
     }
     
     else {
-	    if (speed != 0) {
+	    if (speed !== 0) {
 		    //disableScroll();
 			plane._x += -(speed);
 			plane._y = calcY(plane._x);
@@ -184,6 +184,7 @@ function disableScroll() {
 	window.ontouchmove  = preventDefault; // mobile
 	document.onkeydown  = preventDefaultForScrollKeys;
 }
+
 
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -286,8 +287,12 @@ function checkWhichLocation () {
 			//Sends the width of the morph-content so it is reduced from the canvas width and re-calculated
 			isRunning = true; //Enables rendering of the map
 			//If it's loaded on tablet or mobile
-			if ($(window).width() <= 767) {
-				start(0, 325); //Half of the height of the morph-content
+			//If it's loaded on tablet or mobile
+			if ($(window).width() <= 767 && $(window).width() > 480) {
+				start(300, 0); //Tablet
+			}
+			else if ($(window).width() <= 480) {
+				start(0, 390); //Mobile
 			}
 			else {
 	   			start(360, 0); //The 360 is the value of the morph-content.width()
